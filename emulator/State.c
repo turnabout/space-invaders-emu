@@ -1,8 +1,8 @@
 #include "State.h"
 
-// Current global state of registers, PSW, etc.
+// Emulator's global state holding registers, PSW, etc.
 static struct State8080 state = {
-	0x1a, // Accumulator
+	0x00, // Accumulator
 	0x2b, // Other Registers (b-c-d-e-h-l)
 	0x3c,
 	0x4d,
@@ -18,7 +18,7 @@ static struct State8080 state = {
 
 uint8_t *Get_Reg_Address(uint8_t offset)
 {
-	if (offset == REG_M)
+	if (offset == REG_MEMORY)
 	{
 		// Unimplemented
 	}
@@ -27,9 +27,21 @@ uint8_t *Get_Reg_Address(uint8_t offset)
 	return adr + offset;
 }
 
+void PSW_Update_Zero_Bit(uint8_t opRes)
+{
+	state.psw.z = (opRes == 0)
+		? 1
+		: 0;
+}
+
 void PSW_Update_Sign_Bit(uint8_t opRes)
 {
 	state.psw.s = (opRes | 0b10000000)
 		? 1 
 		: 0;
+}
+
+State8080 *Get_State()
+{
+	return &state;
 }

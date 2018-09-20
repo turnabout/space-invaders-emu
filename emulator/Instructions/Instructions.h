@@ -5,5 +5,5 @@ void Unimplemented();
 
 // Arithmetic
 
-// ADD: Add register or memory to accumulator.
-void ADD(uint8_t *reg);
+// ADD: Add register or memory to Accumulator.
+void ADD(uint8_t reg);
