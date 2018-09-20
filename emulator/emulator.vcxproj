@@ -115,6 +115,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Instructions\Arithmetic.c" />
+    <ClCompile Include="Instructions\Instructions.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="State.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Instructions\Instructions.h" />
+    <ClInclude Include="State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
