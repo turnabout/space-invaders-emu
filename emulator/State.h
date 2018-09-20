@@ -40,7 +40,6 @@ typedef struct State8080 {
 #define PC         11
 #define REG_MEMORY 13
 
-
 // API
 
 // Get a register's address (in our emulator memory-space)
@@ -57,3 +56,6 @@ void PSW_Update_Zero_Bit(uint8_t opRes);
 
 // Test
 State8080 *Get_State();
+
+// Reset the current State8080.
+void Reset_State();
