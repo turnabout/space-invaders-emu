@@ -19,24 +19,6 @@ TEST(State, Reset_State_Test)
 	EXPECT_EQ(state->psw.z, 0);
 }
 
-TEST(State, PSW_Update_Sign_Bit)
-{
-	PSW_Update_Sign_Bit(0b10000000);
-	EXPECT_EQ(state->psw.s, 1);
-
-	PSW_Update_Sign_Bit(0b00010101);
-	EXPECT_EQ(state->psw.s, 0);
-}
-
-TEST(State, PSW_Update_Zero_Bit)
-{
-	PSW_Update_Zero_Bit(124);
-	EXPECT_EQ(state->psw.z, 0);
-
-	PSW_Update_Zero_Bit(0);
-	EXPECT_EQ(state->psw.z, 1);
-}
-
 TEST(State, Get_Reg_Address)
 {
 	state->a = 0x0a;
@@ -53,4 +35,24 @@ TEST(State, Get_Reg_Address)
 	EXPECT_EQ(*regB, 0x0b);
 	EXPECT_EQ(*regD, 0x0d);
 	EXPECT_EQ(*regL, 0x0f);
+
+	Reset_State();
+}
+
+TEST(State, PSW_Update_Sign_Bit)
+{
+	PSW_Update_Sign_Bit(0b10000000);
+	EXPECT_EQ(state->psw.s, 1);
+
+	PSW_Update_Sign_Bit(0b00010101);
+	EXPECT_EQ(state->psw.s, 0);
+}
+
+TEST(State, PSW_Update_Zero_Bit)
+{
+	PSW_Update_Zero_Bit(124);
+	EXPECT_EQ(state->psw.z, 0);
+
+	PSW_Update_Zero_Bit(0);
+	EXPECT_EQ(state->psw.z, 1);
 }
