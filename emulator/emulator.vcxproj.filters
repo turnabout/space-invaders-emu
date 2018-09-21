@@ -9,5 +9,6 @@
   <ItemGroup>
     <ClInclude Include="State.h" />
     <ClInclude Include="Instructions\Instructions.h" />
+    <ClInclude Include="Export.h" />
   </ItemGroup>
 </Project>

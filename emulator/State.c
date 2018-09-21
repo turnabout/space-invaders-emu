@@ -36,7 +36,7 @@ void PSW_Update_Zero_Bit(uint8_t opRes)
 
 void PSW_Update_Sign_Bit(uint8_t opRes)
 {
-	state.psw.s = (opRes | 0b10000000)
+	state.psw.s = (opRes & 0b10000000)
 		? 1 
 		: 0;
 }

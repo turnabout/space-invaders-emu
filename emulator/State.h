@@ -1,4 +1,7 @@
+#pragma once
+
 #include <stdint.h>
+#include "Export.h"
 
 // PSW (Program Status Word) condition bits
 typedef struct ConditionBits {
@@ -44,18 +47,17 @@ typedef struct State8080 {
 
 // Get a register's address (in our emulator memory-space)
 // Memory (M) - returns address HL is pointing to
-uint8_t *Get_Reg_Address(uint8_t offset);
-uint8_t *Get_PSW(ConditionBits *psw);
+EXPORT uint8_t *Get_Reg_Address(uint8_t offset);
 
 // Update Sign Bit: sets if operation result most significant bit is 1, else 
 // resets.
-void PSW_Update_Sign_Bit(uint8_t opRes);
+EXPORT void PSW_Update_Sign_Bit(uint8_t opRes);
 
 // Update Zero Bit: sets if operation result is = zero.
-void PSW_Update_Zero_Bit(uint8_t opRes);
+EXPORT void PSW_Update_Zero_Bit(uint8_t opRes);
 
 // Test
-State8080 *Get_State();
+EXPORT State8080 *Get_State();
 
 // Reset the current State8080.
-void Reset_State();
+EXPORT void Reset_State();

@@ -121,6 +121,7 @@
     <ClCompile Include="State.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Export.h" />
     <ClInclude Include="Instructions\Instructions.h" />
     <ClInclude Include="State.h" />
   </ItemGroup>
