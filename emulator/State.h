@@ -56,8 +56,10 @@ EXPORT void PSW_Update_Sign_Bit(uint8_t opRes);
 // Update Zero Bit: sets if operation result is = zero.
 EXPORT void PSW_Update_Zero_Bit(uint8_t opRes);
 
-// Test
 EXPORT State8080 *Get_State();
 
+// Debug only
+#ifdef _DEBUG
 // Reset the current State8080.
 EXPORT void Reset_State();
+#endif

@@ -46,6 +46,7 @@ State8080 *Get_State()
 	return &state;
 }
 
+#ifdef _DEBUG
 void Reset_State()
 {
 	state.a = 0x00;
@@ -66,3 +67,4 @@ void Reset_State()
 	state.psw.cy = 0;
 	state.psw.ac = 0;
 }
+#endif
