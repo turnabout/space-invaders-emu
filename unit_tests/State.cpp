@@ -1,10 +1,5 @@
 #include "pch.h"
-
-extern "C" {
-	#include "../emulator/State.h"
-}
-
-#pragma comment(lib, "../Debug/emulator.lib")
+#include "unit_tests.h"
 
 // Use module's State across all tests
 State8080 *state = Get_State();
