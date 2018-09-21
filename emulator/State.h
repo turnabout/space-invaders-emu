@@ -49,12 +49,21 @@ typedef struct State8080 {
 // Memory (M) - returns address HL is pointing to
 EXPORT uint8_t *Get_Reg_Address(uint8_t offset);
 
-// Update Sign Bit: sets if operation result most significant bit is 1, else 
-// resets.
+// Update Sign Bit: sets if instruction result most significant bit is 1
 EXPORT void PSW_Update_Sign_Bit(uint8_t opRes);
 
-// Update Zero Bit: sets if operation result is = zero.
+// Update Zero Bit: sets if instruction result is = zero.
 EXPORT void PSW_Update_Zero_Bit(uint8_t opRes);
+
+// Update Parity Bit: sets if instruction result has even set bits
+EXPORT void PSW_Update_Parity_Bit(uint8_t opRes);
+
+// Update Carry Bit: sets if instruction result has resulted in a carry out or 
+// borrow into the most significant bit.
+// operand: The first operand of the additon/subtraction that led to the opRes.
+// valIfOverflow: The value to update the carry bit with if there was an 
+// overflow. Additions use 1, subtractions use 0.
+EXPORT void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow);
 
 EXPORT State8080 *Get_State();
 

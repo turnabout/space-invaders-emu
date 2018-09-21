@@ -41,6 +41,17 @@ void PSW_Update_Sign_Bit(uint8_t opRes)
 		: 0;
 }
 
+void PSW_Update_Parity_Bit(uint8_t opRes)
+{
+}
+
+void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
+{
+	state.psw.cy = (opRes < operand)
+		? valIfOverflow
+		: ~valIfOverflow;
+}
+
 State8080 *Get_State()
 {
 	return &state;

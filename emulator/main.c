@@ -22,5 +22,24 @@ int main(int argc, char *argv[])
 	ADD(REG_B);
 	printf("Accum: %02x\n", state->a); // Should be 0x56
 
+
+
+	uint8_t a, b, c;
+	uint16_t full;
+
+	a = 0b00000100;
+	b = 0b00000011;
+
+	// c = a - b;
+	// c = a + (~b + 1);
+	c = a + (~b + 1);
+	full = (uint16_t)a + (uint16_t)(~b + 1);
+
+	printf("%d\n", c);
+	printf("%04x\n", c);
+
+	printf("full: %d\n", full);
+	printf("full: %04x\n", full);
+
 	getchar();
 }
