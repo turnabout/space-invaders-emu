@@ -108,4 +108,10 @@ TEST(State, PSW_Update_Carry_Bit)
 
 	PSW_Update_Carry_Bit((uint8_t)(0 - 255), 0, 0);
 	EXPECT_EQ(state->psw.cy, 1);
+
+	PSW_Update_Carry_Bit((uint8_t)(200 - 100), 200, 0);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	PSW_Update_Carry_Bit((uint8_t)(255 - 254), 255, 0);
+	EXPECT_EQ(state->psw.cy, 0);
 }

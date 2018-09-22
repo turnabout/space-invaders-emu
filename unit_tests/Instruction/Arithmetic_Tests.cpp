@@ -11,10 +11,8 @@ typedef struct AddSubFixture {
 // Test an ADD or SUB
 void Prep_Arithmetic_Test(AddSubFixture fixture, ConditionBits expectedPsw, uint8_t isAdd)
 {
-	uint8_t *reg = Get_Reg_Address(fixture.reg);
-
 	state->a = fixture.accumVal;
-	*reg = fixture.regVal;
+	*Get_Reg_Address(fixture.reg) = fixture.regVal;
 
 	if (isAdd)
 	{
@@ -130,6 +128,17 @@ TEST(Instructions_Arithmetic, SUB)
 	// B: 200 - 100 = 100
 	fixture = { REG_B, 200, 100, 100 };
 	expectedPsw = { 0, 0, 0, 0 };
+	Prep_Arithmetic_Test(fixture, expectedPsw, 0);
+
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.z, expectedPsw.z);
+	EXPECT_EQ(state->psw.s, expectedPsw.s);
+	EXPECT_EQ(state->psw.p, expectedPsw.p);
+	EXPECT_EQ(state->psw.cy, expectedPsw.cy);
+
+	// D: 10 - 5 = 0
+	fixture = { REG_D, 10, 5, 5 };
+	expectedPsw = { 0, 0, 1, 0 };
 	Prep_Arithmetic_Test(fixture, expectedPsw, 0);
 
 	EXPECT_EQ(state->a, fixture.expected);
