@@ -60,6 +60,14 @@ void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
 		: ~valIfOverflow;
 }
 
+void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
+{
+	PSW_Update_Zero_Bit(opRes);
+	PSW_Update_Sign_Bit(opRes);
+	PSW_Update_Parity_Bit(opRes);
+	PSW_Update_Carry_Bit(opRes, operand, valIfOverflow);
+}
+
 State8080 *Get_State()
 {
 	return &state;
