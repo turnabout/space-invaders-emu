@@ -65,6 +65,7 @@ EXPORT void PSW_Update_Parity_Bit(uint8_t opRes);
 // overflow. Additions use 1, subtractions use 0.
 EXPORT void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow);
 
+// Get current global 8080 state
 EXPORT State8080 *Get_State();
 
 // Debug only

@@ -43,6 +43,14 @@ void PSW_Update_Sign_Bit(uint8_t opRes)
 
 void PSW_Update_Parity_Bit(uint8_t opRes)
 {
+	// XOR all bits together then invert; if result is 1, bits are even.
+	opRes ^= opRes >> 4;
+	opRes ^= opRes >> 2;
+	opRes ^= opRes >> 1;
+
+	state.psw.p = (~opRes) & 1
+		? 1
+		: 0;
 }
 
 void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)

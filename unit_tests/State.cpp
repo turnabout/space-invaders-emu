@@ -4,7 +4,7 @@
 // Use module's State across all tests
 State8080 *state = Get_State();
 
-TEST(State, Reset_State_Test)
+TEST(State, Reset_State)
 {
 	state->a = 0xa;
 	state->h = 0xf;
@@ -67,6 +67,15 @@ TEST(State, PSW_Update_Parity_Bit)
 
 	PSW_Update_Parity_Bit(0b10101010);
 	EXPECT_EQ(state->psw.p, 1);
+
+	PSW_Update_Parity_Bit(0b11111111);
+	EXPECT_EQ(state->psw.p, 1);
+
+	PSW_Update_Parity_Bit(0b00000000);
+	EXPECT_EQ(state->psw.p, 1);
+
+	PSW_Update_Parity_Bit(0b00000001);
+	EXPECT_EQ(state->psw.p, 0);
 }
 
 TEST(State, PSW_Update_Carry_Bit)
