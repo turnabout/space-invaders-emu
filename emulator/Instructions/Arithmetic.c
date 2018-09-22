@@ -11,3 +11,8 @@ void ADD(uint8_t reg)
 	// Update PSW
 	PSW_Update_Sign_Bit(*accumulator);
 }
+
+void SUB(uint8_t reg)
+{
+
+}
