@@ -15,7 +15,7 @@ void Prep_Arithmetic_Test(AddSubFixture fixture)
 	*Get_Register(fixture.reg) = fixture.regVal;
 }
 
-TEST(Instructions_Arithmetic, ADD)
+TEST(Arithmetic, ADD)
 {
 	AddSubFixture fixture;
 	ConditionBits expectedPsw;
@@ -106,7 +106,7 @@ TEST(Instructions_Arithmetic, ADD)
 	*/
 }
 
-TEST(Instructions_Arithmetic, SUB)
+TEST(Arithmetic, SUB)
 {
 	AddSubFixture fixture;
 	ConditionBits expectedPsw;
@@ -175,7 +175,7 @@ TEST(Instructions_Arithmetic, SUB)
 	*/
 }
 
-TEST(Instructions_Arithmetic, ADC)
+TEST(Arithmetic, ADC)
 {
 	AddSubFixture fixture;
 
@@ -234,7 +234,7 @@ TEST(Instructions_Arithmetic, ADC)
 	EXPECT_EQ(state->psw.cy, 1);
 }
 
-TEST(Instructions_Arithmetic, SBB)
+TEST(Arithmetic, SBB)
 {
 	AddSubFixture fixture;
 
@@ -275,7 +275,7 @@ TEST(Instructions_Arithmetic, SBB)
 	EXPECT_EQ(state->psw.cy, 0);
 }
 
-TEST(Instructions_Arithmetic, INR)
+TEST(Arithmetic, INR)
 {
 	*Get_Register(REG_B) = 255;
 	INR(REG_B);
@@ -286,7 +286,7 @@ TEST(Instructions_Arithmetic, INR)
 	EXPECT_EQ(state->l, 6);
 }
 
-TEST(Instructions_Arithmetic, DCR)
+TEST(Arithmetic, DCR)
 {
 	*Get_Register(REG_B) = 0;
 	DCR(REG_B);
@@ -297,7 +297,7 @@ TEST(Instructions_Arithmetic, DCR)
 	EXPECT_EQ(state->l, 4);
 }
 
-TEST(Instructions_Arithmetic, ADI)
+TEST(Arithmetic, ADI)
 {
 	// 10 + 10 = 20
 	state->a = 10;
@@ -313,7 +313,7 @@ TEST(Instructions_Arithmetic, ADI)
 	EXPECT_EQ(state->psw.cy, 1);
 }
 
-TEST(Instructions_Arithmetic, SUI)
+TEST(Arithmetic, SUI)
 {
 	// 255 - 255 = 0
 	state->a = 255;
@@ -331,7 +331,7 @@ TEST(Instructions_Arithmetic, SUI)
 }
 
 // Add immediate w/ carry
-TEST(Instructions_Arithmetic, ACI)
+TEST(Arithmetic, ACI)
 {
 	// 10 + 10 + 1 = 21
 	state->a = 10;
@@ -351,7 +351,7 @@ TEST(Instructions_Arithmetic, ACI)
 }
 
 // Sub immediate w/ borrow
-TEST(Instructions_Arithmetic, SBI)
+TEST(Arithmetic, SBI)
 {
 	// 4 - 3 - 1 = 0
 	state->a = 4;
