@@ -370,6 +370,17 @@ TEST(Arithmetic, SBI)
 	EXPECT_EQ(state->psw.cy, 1);
 }
 
+/*
 TEST(Arithmetic, INX)
 {
+	// bc = 340 + 1 = 341
+	state->b = 0xaa;
+	state->c = 0xaa;
+
+	uint16_t res;
+
+	INX(REG_B);
+
+	EXPECT_EQ(state->b, 341);
 }
+*/

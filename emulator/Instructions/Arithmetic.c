@@ -120,3 +120,7 @@ void SBI(uint8_t val)
 {
 	Do_Arithmetic_With_CB(val, 0);
 }
+
+void INX(uint8_t reg)
+{
+}

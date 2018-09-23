@@ -32,7 +32,7 @@ void Get_Register_Pair(uint8_t reg, uint8_t **regs)
 	switch (reg)
 	{
 	case PSW:
-		*regs = Get_Register(PSW);
+		*regs = Get_Register(PSW); // TODO: Use &(state->psw)
 		*regs++;
 		*regs = Get_Register(REG_A);
 		break;
@@ -55,6 +55,20 @@ void Get_Register_Pair(uint8_t reg, uint8_t **regs)
 		*regs = Get_Register(REG_L);
 		break;
 	}
+}
+
+uint16_t Get_Register_Pair_Val(uint8_t reg)
+{
+	uint8_t *pair[2];
+	uint16_t res;
+
+	Get_Register_Pair(reg, pair);
+
+	res = *pair[0];
+	res <<= 8;
+	res += *pair[1];
+
+	return res;
 }
 
 uint16_t *Get_SP()

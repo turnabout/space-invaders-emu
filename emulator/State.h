@@ -51,7 +51,11 @@ EXPORT uint8_t *Get_Register(uint8_t offset);
 
 // Get specified register pair (PSW[+A], REG_B[+C], REG_D[+E], REG_H[+L])
 // Sets into given uint8_t pointer
-EXPORT void Get_Register_Pair(uint8_t reg, uint8_t **regs);
+// When SP, only one 16-bit pointer is set into regPair
+EXPORT void Get_Register_Pair(uint8_t regPair, uint8_t **regs);
+
+// Get 16-bit value stored in register pair
+EXPORT uint16_t Get_Register_Pair_Val(uint8_t regPair);
 
 // Get pointer to the current Stack Pointer value.
 EXPORT uint16_t *Get_SP();

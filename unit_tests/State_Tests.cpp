@@ -75,6 +75,29 @@ TEST(State, Get_Register_Pair)
 	EXPECT_EQ(*pair[1], 55);
 }
 
+TEST(State, Get_Register_Pair_Val)
+{
+	// bc = 0xaabb
+	state->b = 0xaa;
+	state->c = 0xbb;
+	EXPECT_EQ(Get_Register_Pair_Val(REG_B), 0xaabb);
+
+	// de = 0x1020
+	state->d = 0x10;
+	state->e = 0x20;
+	EXPECT_EQ(Get_Register_Pair_Val(REG_D), 0x1020);
+
+	// hl = 0xffff
+	state->h = 0xff;
+	state->l = 0xff;
+	EXPECT_EQ(Get_Register_Pair_Val(REG_H), 0xffff);
+
+	// bc = 0xabcd
+	state->b = 0xab;
+	state->c = 0xcd;
+	EXPECT_EQ(Get_Register_Pair_Val(REG_B), 0xabcd);
+}
+
 TEST(State, Get_SP)
 {
 	state->sp = 0xffaa;

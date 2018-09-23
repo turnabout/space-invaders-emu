@@ -39,3 +39,6 @@ EXPORT void SUI(uint8_t val);
 
 // Subtract immediate byte from the Accumulator with borrow
 EXPORT void SBI(uint8_t val);
+
+// INX: Increment 16-bit number held in specified register pair
+EXPORT void INX(uint8_t reg);
