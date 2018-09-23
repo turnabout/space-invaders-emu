@@ -114,6 +114,35 @@ TEST(State, PSW_Update_Carry_Bit)
 
 	PSW_Update_Carry_Bit((uint8_t)(255 - 254), 255, 0);
 	EXPECT_EQ(state->psw.cy, 0);
+
+	// Subtraction edge cases
+	PSW_Update_Carry_Bit((uint8_t)(255 - 1), 255, 0);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	PSW_Update_Carry_Bit((uint8_t)(0 - 0), 0, 0);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	PSW_Update_Carry_Bit((uint8_t)(5 - 0), 5, 0);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	PSW_Update_Carry_Bit((uint8_t)(255 - 0), 255, 0);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	return;
+
+	// For 255 - 1, 255 - 2 ... 255 - 255, carry should be equal to 0
+	for (int i = 0; i <= 255; i++)
+	{
+		PSW_Update_Carry_Bit((uint8_t)(255 - i), 255, 0);
+		EXPECT_EQ(state->psw.cy, 0);
+	}
+
+	// For 0 - 1, 0 - 2 ... 0 - 255, carry should be equal to 1
+	for (int i = 1; i <= 255; i++)
+	{
+		PSW_Update_Carry_Bit((uint8_t)(0 - i), 0, 0);
+		EXPECT_EQ(state->psw.cy, 1);
+	}
 }
 
 TEST(State, Get_Register_Pair)
