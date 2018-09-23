@@ -6,17 +6,15 @@
 // isAddition: Whether operation is an addition
 // carry: Include carry in arithmetic. 0 to ignore
 // Return: Result of the operation
-int Do_Arithmetic(uint8_t val, uint8_t isAddition)
+void Do_Arithmetic(uint8_t val, uint8_t isAddition)
 {
 	uint8_t *accumulator = Get_Reg_Address(REG_A);
 	uint8_t ogAccumVal = *accumulator;
 
-	uint8_t result = (*accumulator += (isAddition) ? val : -val);
+	*accumulator += (isAddition) ? val : -val;
 
 	// Update PSW
 	PSW_Update_All(*accumulator, ogAccumVal, isAddition);
-
-	return result;
 }
 
 void ADD(uint8_t reg)
@@ -31,34 +29,18 @@ void ADD(uint8_t reg)
 
 void ADC(uint8_t reg)
 {
+	State8080 *state = Get_State();
+
 	if (reg == REG_MEMORY) // TODO
 	{
 		return;
 	}
 
 	// Store carry value
-	State8080 *state = Get_State();
-
 	uint8_t cy = state->psw.cy;
 	state->psw.cy = 0;
 
-	/*
-		reg: 0
-		acc: 255
-		cy : 1
-		=
-		0
-
-
-		reg: 255
-		acc: 0
-		cy : 1
-		=
-		0
-
-	*/
-	
-	uint8_t result = Do_Arithmetic(*Get_Reg_Address(reg), 1);
+	Do_Arithmetic(*Get_Reg_Address(reg), 1);
 
 	// Add previously stored carry, if necessary
 	if (cy)
