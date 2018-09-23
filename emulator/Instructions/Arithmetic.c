@@ -93,3 +93,23 @@ void SBB(uint8_t reg)
 		}
 	}
 }
+
+void INR(uint8_t reg)
+{
+	uint8_t *regP = Get_Reg_Address(reg);
+	*regP += 1;
+
+	PSW_Update_Zero_Bit(*regP);
+	PSW_Update_Sign_Bit(*regP);
+	PSW_Update_Parity_Bit(*regP);
+}
+
+void DCR(uint8_t reg)
+{
+	uint8_t *regP = Get_Reg_Address(reg);
+	*regP -= 1;
+
+	PSW_Update_Zero_Bit(*regP);
+	PSW_Update_Sign_Bit(*regP);
+	PSW_Update_Parity_Bit(*regP);
+}

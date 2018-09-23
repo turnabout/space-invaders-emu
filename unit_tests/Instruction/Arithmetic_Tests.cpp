@@ -274,3 +274,25 @@ TEST(Instructions_Arithmetic, SBB)
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.cy, 0);
 }
+
+TEST(Instructions_Arithmetic, INR)
+{
+	*Get_Reg_Address(REG_B) = 255;
+	INR(REG_B);
+	EXPECT_EQ(state->b, 0);
+
+	*Get_Reg_Address(REG_L) = 5;
+	INR(REG_L);
+	EXPECT_EQ(state->l, 6);
+}
+
+TEST(Instructions_Arithmetic, DCR)
+{
+	*Get_Reg_Address(REG_B) = 0;
+	DCR(REG_B);
+	EXPECT_EQ(state->b, 255);
+
+	*Get_Reg_Address(REG_L) = 5;
+	DCR(REG_L);
+	EXPECT_EQ(state->l, 4);
+}

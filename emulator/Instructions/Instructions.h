@@ -21,3 +21,9 @@ EXPORT void SUB(uint8_t reg);
 
 // SBB: Subtract register or memory from accumulator with borrow
 EXPORT void SBB(uint8_t reg);
+
+// Increment register or memory. Does not affect carry bit
+EXPORT void INR(uint8_t reg);
+
+// Decrement register or memory. Does not affect carry bit
+EXPORT void DCR(uint8_t reg);
