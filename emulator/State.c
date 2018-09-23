@@ -27,6 +27,36 @@ uint8_t *Get_Register(uint8_t offset)
 	return adr + offset;
 }
 
+void Get_Register_Pair(uint8_t reg, uint8_t **regs)
+{
+	switch (reg)
+	{
+	case PSW:
+		*regs = Get_Register(PSW);
+		*regs++;
+		*regs = Get_Register(REG_A);
+		break;
+
+	case REG_B:
+		*regs = Get_Register(REG_B);
+		*regs++;
+		*regs = Get_Register(REG_C);
+		break;
+
+	case REG_D:
+		*regs = Get_Register(REG_D);
+		*regs++;
+		*regs = Get_Register(REG_E);
+		break;
+
+	case REG_H:
+		*regs = Get_Register(REG_H);
+		*regs++;
+		*regs = Get_Register(REG_L);
+		break;
+	}
+}
+
 void PSW_Update_Zero_Bit(uint8_t opRes)
 {
 	state.psw.z = (opRes == 0)
@@ -66,36 +96,6 @@ void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
 	PSW_Update_Sign_Bit(opRes);
 	PSW_Update_Parity_Bit(opRes);
 	PSW_Update_Carry_Bit(opRes, operand, valIfOverflow);
-}
-
-void Get_Register_Pair(uint8_t reg, uint8_t **regs)
-{
-	switch (reg)
-	{
-	case PSW:
-		*regs = Get_Register(PSW);
-		*regs++;
-		*regs = Get_Register(REG_A);
-		break;
-
-	case REG_B:
-		*regs = Get_Register(REG_B);
-		*regs++;
-		*regs = Get_Register(REG_C);
-		break;
-
-	case REG_D:
-		*regs = Get_Register(REG_D);
-		*regs++;
-		*regs = Get_Register(REG_E);
-		break;
-
-	case REG_H:
-		*regs = Get_Register(REG_H);
-		*regs++;
-		*regs = Get_Register(REG_L);
-		break;
-	}
 }
 
 State8080 *Get_State()
