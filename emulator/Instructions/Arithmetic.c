@@ -123,4 +123,36 @@ void SBI(uint8_t val)
 
 void INX(uint8_t reg)
 {
+	// Increment SP
+	if (reg == SP)
+	{
+		uint16_t *sp = Get_SP();
+		*sp += 1;
+		return;
+	}
+
+	// Increment register pair
+	uint16_t regPairVal = Get_Register_Pair_Val(reg);
+
+	regPairVal += 1;
+
+	Store_Register_Pair_Val(reg, regPairVal);
+}
+
+void DCX(uint8_t reg)
+{
+	// Increment SP
+	if (reg == SP)
+	{
+		uint16_t *sp = Get_SP();
+		*sp -= 1;
+		return;
+	}
+
+	// Increment register pair
+	uint16_t regPairVal = Get_Register_Pair_Val(reg);
+
+	regPairVal -= 1;
+
+	Store_Register_Pair_Val(reg, regPairVal);
 }

@@ -95,6 +95,7 @@ TEST(State, Get_Register_Pair_Val)
 	// bc = 0xabcd
 	state->b = 0xab;
 	state->c = 0xcd;
+
 	EXPECT_EQ(Get_Register_Pair_Val(REG_B), 0xabcd);
 }
 

@@ -370,16 +370,49 @@ TEST(Arithmetic, SBI)
 	EXPECT_EQ(state->psw.cy, 1);
 }
 
-/*
 TEST(Arithmetic, INX)
 {
-	// bc = 340 + 1 = 341
+	// bc = 0xaaaa + 1 = 0xaaab
 	state->b = 0xaa;
 	state->c = 0xaa;
 
-	uint16_t res;
-
 	INX(REG_B);
 
-	EXPECT_EQ(state->b, 341);
-}*/
+	EXPECT_EQ(state->b, 0xaa);
+	EXPECT_EQ(state->c, 0xab);
+
+	// sp = 0xabcd + 1 = 0xabce
+	state->sp = 0xabcd;
+
+	INX(SP);
+
+	EXPECT_EQ(state->sp, 0xabce);
+
+	// de = 0xffff + 1 = 0x0000
+	state->d = 0xff;
+	state->e = 0xff;
+
+	INX(REG_D);
+
+	EXPECT_EQ(state->d, 0x00);
+	EXPECT_EQ(state->e, 0x00);
+}
+
+TEST(Arithmetic, DCX)
+{
+	// bc = 0xaaaa - 1 = 0xaaa9
+	state->b = 0xaa;
+	state->c = 0xaa;
+
+	DCX(REG_B);
+
+	EXPECT_EQ(state->b, 0xaa);
+	EXPECT_EQ(state->c, 0xa9);
+
+	// sp = 0x0000 - 1 = 0xffff
+	state->sp = 0x0000;
+
+	DCX(SP);
+
+	EXPECT_EQ(state->sp, 0xffff);
+}

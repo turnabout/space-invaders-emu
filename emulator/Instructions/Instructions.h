@@ -42,3 +42,6 @@ EXPORT void SBI(uint8_t val);
 
 // INX: Increment 16-bit number held in specified register pair
 EXPORT void INX(uint8_t reg);
+
+// DCX: Decrement 16-bit number held in specified register pair
+EXPORT void DCX(uint8_t reg);
