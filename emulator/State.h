@@ -57,6 +57,9 @@ EXPORT void Get_Register_Pair(uint8_t regPair, uint8_t **regs);
 // Get 16-bit value stored in register pair
 EXPORT uint16_t Get_Register_Pair_Val(uint8_t regPair);
 
+// Store a 16-bit value in a register pair
+EXPORT void Store_Register_Pair_Val(uint8_t reg, uint16_t val);
+
 // Get pointer to the current Stack Pointer value.
 EXPORT uint16_t *Get_SP();
 

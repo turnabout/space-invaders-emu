@@ -382,5 +382,4 @@ TEST(Arithmetic, INX)
 	INX(REG_B);
 
 	EXPECT_EQ(state->b, 341);
-}
-*/
+}*/

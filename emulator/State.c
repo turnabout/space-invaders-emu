@@ -71,6 +71,19 @@ uint16_t Get_Register_Pair_Val(uint8_t reg)
 	return res;
 }
 
+void Store_Register_Pair_Val(uint8_t reg, uint16_t val)
+{
+	uint8_t *pair[2];
+
+	Get_Register_Pair(reg, pair);
+
+	// Store most significant byte
+	*pair[0] = val >> 8;
+
+	// Store least significant byte
+	*pair[1] = val & 0x00ff;
+}
+
 uint16_t *Get_SP()
 {
 	return &(state.sp);

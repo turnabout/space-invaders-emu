@@ -98,6 +98,36 @@ TEST(State, Get_Register_Pair_Val)
 	EXPECT_EQ(Get_Register_Pair_Val(REG_B), 0xabcd);
 }
 
+TEST(State, Store_Register_Pair_Val)
+{
+	// bc = 0xaabb
+	state->b = 0x00;
+	state->c = 0x00;
+
+	Store_Register_Pair_Val(REG_B, 0xaabb);
+
+	EXPECT_EQ(state->b, 0xaa);
+	EXPECT_EQ(state->c, 0xbb);
+
+	// de = 0xff00
+	state->d = 0x00;
+	state->e = 0x00;
+
+	Store_Register_Pair_Val(REG_D, (uint16_t)0xff00);
+
+	EXPECT_EQ(state->d, 0xff);
+	EXPECT_EQ(state->e, 0x00);
+
+	// hl = 0x0330
+	state->h = 0x00;
+	state->l = 0x00;
+
+	Store_Register_Pair_Val(REG_H, 0x0330);
+
+	EXPECT_EQ(state->h, 0x03);
+	EXPECT_EQ(state->l, 0x30);
+}
+
 TEST(State, Get_SP)
 {
 	state->sp = 0xffaa;
