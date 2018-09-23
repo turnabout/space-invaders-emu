@@ -12,6 +12,9 @@ void Unimplemented();
 // Sets the carry bit if an overflow occurs.
 EXPORT void ADD(uint8_t reg);
 
+// ADD: Add register or memory plus the contents of the carry bit to Accumulator
+EXPORT void ADC(uint8_t reg);
+
 // SUB: Subtract register or memory from accumulator
 // Sets the carry bit if NO overflow occurs.
 EXPORT void SUB(uint8_t reg);

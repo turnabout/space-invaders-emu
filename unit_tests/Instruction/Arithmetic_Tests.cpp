@@ -9,19 +9,10 @@ typedef struct AddSubFixture {
 } AddSubFixture;
 
 // Test an ADD or SUB
-void Prep_Arithmetic_Test(AddSubFixture fixture, ConditionBits expectedPsw, uint8_t isAdd)
+void Prep_Arithmetic_Test(AddSubFixture fixture)
 {
 	state->a = fixture.accumVal;
 	*Get_Reg_Address(fixture.reg) = fixture.regVal;
-
-	if (isAdd)
-	{
-		ADD(fixture.reg);
-	}
-	else
-	{
-		SUB(fixture.reg);
-	}
 }
 
 TEST(Instructions_Arithmetic, ADD)
@@ -42,7 +33,8 @@ TEST(Instructions_Arithmetic, ADD)
 		1, // Parity
 		0  // Carry
 	};
-	Prep_Arithmetic_Test(fixture, expectedPsw, 1);
+	Prep_Arithmetic_Test(fixture);
+	ADD(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -53,7 +45,8 @@ TEST(Instructions_Arithmetic, ADD)
 	// C: 10 + 100 = 110
 	fixture = {REG_C, 10, 100, 110};
 	expectedPsw = { 0, 0, 0, 0 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 1);
+	Prep_Arithmetic_Test(fixture);
+	ADD(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -64,7 +57,8 @@ TEST(Instructions_Arithmetic, ADD)
 	// D: 240 + 15 = 255
 	fixture = {REG_D, 0b11110000, 0b00001111, 0b11111111};
 	expectedPsw = { 0, 1, 1, 0 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 1);
+	Prep_Arithmetic_Test(fixture);
+	ADD(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -75,7 +69,8 @@ TEST(Instructions_Arithmetic, ADD)
 	// A: 0 + 0 = 0
 	fixture = { REG_A, 0, 0, 0 };
 	expectedPsw = { 1, 0, 1, 0 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 1);
+	Prep_Arithmetic_Test(fixture);
+	ADD(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -86,7 +81,8 @@ TEST(Instructions_Arithmetic, ADD)
 	// E: 250 + 50 = (truncated) 44
 	fixture = { REG_E, 250, 50, 44 };
 	expectedPsw = { 0, 0, 0, 1 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 1);
+	Prep_Arithmetic_Test(fixture);
+	ADD(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -97,10 +93,11 @@ TEST(Instructions_Arithmetic, ADD)
 	// Memory: 10 + 10 = 20
 	fixture = { REG_MEMORY, 10, 10, 20 };
 	expectedPsw = { 0, 0, 1, 0 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 1);
+	Prep_Arithmetic_Test(fixture);
 
 	// TODO
 	/*
+	ADD(fixture.reg);
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
 	EXPECT_EQ(state->psw.s, expectedPsw.s);
@@ -117,7 +114,8 @@ TEST(Instructions_Arithmetic, SUB)
 	// A: 10 - 10 = 0
 	fixture = { REG_A, 10, 10, 0 }; // Reg, AccumVal, RegVal, ExpectedVal
 	expectedPsw = { 1, 0, 1, 0 }; // Zero, Sign, Parity, Carry
-	Prep_Arithmetic_Test(fixture, expectedPsw, 0);
+	Prep_Arithmetic_Test(fixture);
+	SUB(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -128,7 +126,8 @@ TEST(Instructions_Arithmetic, SUB)
 	// B: 200 - 100 = 100
 	fixture = { REG_B, 200, 100, 100 };
 	expectedPsw = { 0, 0, 0, 0 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 0);
+	Prep_Arithmetic_Test(fixture);
+	SUB(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -139,7 +138,8 @@ TEST(Instructions_Arithmetic, SUB)
 	// D: 10 - 5 = 0
 	fixture = { REG_D, 10, 5, 5 };
 	expectedPsw = { 0, 0, 1, 0 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 0);
+	Prep_Arithmetic_Test(fixture);
+	SUB(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -150,7 +150,8 @@ TEST(Instructions_Arithmetic, SUB)
 	// C: 10 - 100 = 166
 	fixture = { REG_B, 10, 100, 166 };
 	expectedPsw = { 0, 1, 1, 1 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 0);
+	Prep_Arithmetic_Test(fixture);
+	SUB(fixture.reg);
 
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
@@ -161,14 +162,74 @@ TEST(Instructions_Arithmetic, SUB)
 	// M: 10 - 100 = 166
 	fixture = { REG_MEMORY, 10, 100, 166 };
 	expectedPsw = { 0, 1, 1, 1 };
-	Prep_Arithmetic_Test(fixture, expectedPsw, 0);
+	Prep_Arithmetic_Test(fixture);
 
 	// TODO
 	/*
+	SUB(fixture.reg);
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.z, expectedPsw.z);
 	EXPECT_EQ(state->psw.s, expectedPsw.s);
 	EXPECT_EQ(state->psw.p, expectedPsw.p);
 	EXPECT_EQ(state->psw.cy, expectedPsw.cy);
 	*/
+}
+
+TEST(Instructions_Arithmetic, ADC)
+{
+	AddSubFixture fixture;
+
+	// A: 10 + 10 + 1 = 21
+	fixture = { REG_A, 10, 10, 21 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 1;
+
+	ADC(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	// D: 0 + 255 + 1 = 0
+	fixture = { REG_D, 0, 255, 0 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 1;
+
+	ADC(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 1);
+
+	// L: 50 + 50 + 0 = 100
+	fixture = { REG_L, 50, 50, 100 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 0;
+
+	ADC(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	// L: 255 + 0 + 1 = 0
+	fixture = { REG_L, 255, 0, 0 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 1;
+
+	ADC(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 1);
+
+	// B: 255 + 10 + 0 = 9
+	fixture = { REG_B, 255, 10, 9 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 0;
+
+	ADC(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 1);
+
+	// C: 255 + 255 + 1 = 255
+	fixture = { REG_B, 255, 255, 255 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 1;
+
+	ADC(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 1);
 }

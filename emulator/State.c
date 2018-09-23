@@ -20,7 +20,7 @@ uint8_t *Get_Reg_Address(uint8_t offset)
 {
 	if (offset == REG_MEMORY)
 	{
-		// Unimplemented
+		// TODO
 	}
 
 	uint8_t *adr = (uint8_t *)&state;
