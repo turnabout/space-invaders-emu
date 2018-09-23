@@ -115,3 +115,42 @@ TEST(State, PSW_Update_Carry_Bit)
 	PSW_Update_Carry_Bit((uint8_t)(255 - 254), 255, 0);
 	EXPECT_EQ(state->psw.cy, 0);
 }
+
+TEST(State, Get_Register_Pair)
+{
+	uint8_t *pair[2];
+
+	// B/C
+	state->b = 5;
+	state->c = 8;
+
+	Get_Register_Pair(REG_B, pair);
+
+	EXPECT_EQ(*pair[0], 5);
+	EXPECT_EQ(*pair[1], 8);
+
+	// H/L
+	state->h = 15;
+	state->l = 255;
+
+	Get_Register_Pair(REG_H, pair);
+
+	EXPECT_EQ(*pair[0], 15);
+	EXPECT_EQ(*pair[1], 255);
+
+	// PSW/A
+	state->a = 55;
+
+	// PSW as an 8-bit integer should now look like 0000 0111 (31)
+	state->psw.pad = 0;
+	state->psw.ac = 1;
+	state->psw.cy = 1;
+	state->psw.p = 1;
+	state->psw.s = 1;
+	state->psw.z = 1;
+
+	Get_Register_Pair(PSW, pair);
+
+	EXPECT_EQ(*pair[0], 31);
+	EXPECT_EQ(*pair[1], 55);
+}

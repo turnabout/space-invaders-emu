@@ -49,6 +49,10 @@ typedef struct State8080 {
 // Memory (M) - returns address HL is pointing to
 EXPORT uint8_t *Get_Reg_Address(uint8_t offset);
 
+// Get specified register pair (PSW[+A], REG_B[+C], REG_D[+E], REG_H[+L])
+// Sets into given uint8_t pointer
+EXPORT void Get_Register_Pair(uint8_t reg, uint8_t **regs);
+
 // Update Sign Bit: sets if instruction result most significant bit is 1
 EXPORT void PSW_Update_Sign_Bit(uint8_t opRes);
 

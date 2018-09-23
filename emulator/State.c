@@ -68,6 +68,36 @@ void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
 	PSW_Update_Carry_Bit(opRes, operand, valIfOverflow);
 }
 
+void Get_Register_Pair(uint8_t reg, uint8_t **regs)
+{
+	switch (reg)
+	{
+	case PSW:
+		*regs = Get_Reg_Address(PSW);
+		*regs++;
+		*regs = Get_Reg_Address(REG_A);
+		break;
+
+	case REG_B:
+		*regs = Get_Reg_Address(REG_B);
+		*regs++;
+		*regs = Get_Reg_Address(REG_C);
+		break;
+
+	case REG_D:
+		*regs = Get_Reg_Address(REG_D);
+		*regs++;
+		*regs = Get_Reg_Address(REG_E);
+		break;
+
+	case REG_H:
+		*regs = Get_Reg_Address(REG_H);
+		*regs++;
+		*regs = Get_Reg_Address(REG_L);
+		break;
+	}
+}
+
 State8080 *Get_State()
 {
 	return &state;
