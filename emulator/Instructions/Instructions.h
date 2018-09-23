@@ -27,3 +27,15 @@ EXPORT void INR(uint8_t reg);
 
 // Decrement register or memory. Does not affect carry bit
 EXPORT void DCR(uint8_t reg);
+
+// Add immediate byte to the Accumulator
+EXPORT void ADI(uint8_t val);
+
+// Add immediate byte to the Accumulator with carry
+EXPORT void ACI(uint8_t val);
+
+// Subtract immediate byte from the Accumulator
+EXPORT void SUI(uint8_t val);
+
+// Subtract immediate byte from the Accumulator with borrow
+EXPORT void SBI(uint8_t val);

@@ -296,3 +296,76 @@ TEST(Instructions_Arithmetic, DCR)
 	DCR(REG_L);
 	EXPECT_EQ(state->l, 4);
 }
+
+TEST(Instructions_Arithmetic, ADI)
+{
+	// 10 + 10 = 20
+	state->a = 10;
+	ADI(10);
+
+	EXPECT_EQ(state->a, 20);
+
+	// 255 + 10 = 9
+	state->a = 255;
+	ADI(10);
+
+	EXPECT_EQ(state->a, 9);
+	EXPECT_EQ(state->psw.cy, 1);
+}
+
+TEST(Instructions_Arithmetic, SUI)
+{
+	// 255 - 255 = 0
+	state->a = 255;
+	SUI(255);
+
+	EXPECT_EQ(state->a, 0);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	// 10 - 200 = 66
+	state->a = 10;
+	SUI(200);
+
+	EXPECT_EQ(state->a, 66);
+	EXPECT_EQ(state->psw.cy, 1);
+}
+
+// Add immediate w/ carry
+TEST(Instructions_Arithmetic, ACI)
+{
+	// 10 + 10 + 1 = 21
+	state->a = 10;
+	state->psw.cy = 1;
+	ACI(10);
+
+	EXPECT_EQ(state->a, 21);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	// 0 + 255 + 1 = 0
+	state->a = 0;
+	state->psw.cy = 1;
+	ACI(255);
+
+	EXPECT_EQ(state->a, 0);
+	EXPECT_EQ(state->psw.cy, 1);
+}
+
+// Sub immediate w/ borrow
+TEST(Instructions_Arithmetic, SBI)
+{
+	// 4 - 3 - 1 = 0
+	state->a = 4;
+	state->psw.cy = 1;
+	SBI(3);
+
+	EXPECT_EQ(state->a, 0);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	// 255 - 255 - 1 = 255
+	state->a = 255;
+	state->psw.cy = 1;
+	SBI(255);
+
+	EXPECT_EQ(state->a, 255);
+	EXPECT_EQ(state->psw.cy, 1);
+}
