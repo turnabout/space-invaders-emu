@@ -53,6 +53,9 @@ EXPORT uint8_t *Get_Register(uint8_t offset);
 // Sets into given uint8_t pointer
 EXPORT void Get_Register_Pair(uint8_t reg, uint8_t **regs);
 
+// Get pointer to the current Stack Pointer value.
+EXPORT uint16_t *Get_SP();
+
 // Update Sign Bit: sets if instruction result most significant bit is 1
 EXPORT void PSW_Update_Sign_Bit(uint8_t opRes);
 

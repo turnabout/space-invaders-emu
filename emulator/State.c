@@ -57,6 +57,11 @@ void Get_Register_Pair(uint8_t reg, uint8_t **regs)
 	}
 }
 
+uint16_t *Get_SP()
+{
+	return &(state.sp);
+}
+
 void PSW_Update_Zero_Bit(uint8_t opRes)
 {
 	state.psw.z = (opRes == 0)

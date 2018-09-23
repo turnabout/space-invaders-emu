@@ -369,3 +369,7 @@ TEST(Arithmetic, SBI)
 	EXPECT_EQ(state->a, 255);
 	EXPECT_EQ(state->psw.cy, 1);
 }
+
+TEST(Arithmetic, INX)
+{
+}
