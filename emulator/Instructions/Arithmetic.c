@@ -38,7 +38,6 @@ void ADC(uint8_t reg)
 
 	// Store carry value
 	uint8_t cy = state->psw.cy;
-	state->psw.cy = 0;
 
 	Do_Arithmetic(*Get_Reg_Address(reg), 1);
 
@@ -46,7 +45,6 @@ void ADC(uint8_t reg)
 	if (cy)
 	{
 		uint8_t *regA = Get_Reg_Address(REG_A);
-
 		*regA += cy;
 
 		/*
@@ -68,4 +66,30 @@ void SUB(uint8_t reg)
 	}
 
 	Do_Arithmetic(*Get_Reg_Address(reg), 0);
+}
+
+void SBB(uint8_t reg)
+{
+	State8080 *state = Get_State();
+
+	if (reg == REG_MEMORY) // TODO
+	{
+		return;
+	}
+
+	// Store carry value
+	uint8_t cy = state->psw.cy;
+
+	Do_Arithmetic(*Get_Reg_Address(reg), 0);
+
+	if (cy)
+	{
+		uint8_t *regA = Get_Reg_Address(REG_A);
+		*regA -= cy;
+
+		if (*regA == 255)
+		{
+			state->psw.cy = 1;
+		}
+	}
 }

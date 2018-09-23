@@ -233,3 +233,44 @@ TEST(Instructions_Arithmetic, ADC)
 	EXPECT_EQ(state->a, fixture.expected);
 	EXPECT_EQ(state->psw.cy, 1);
 }
+
+TEST(Instructions_Arithmetic, SBB)
+{
+	AddSubFixture fixture;
+
+	// 10 - 10 - 1 = 255
+	fixture = { REG_A, 10, 10, 255 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 1;
+
+	SBB(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 1);
+
+	// 4 - 3 - 1 = 0
+	fixture = { REG_B, 4, 3, 0 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 1;
+
+	SBB(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	// 255 - 255 - 1 = 255
+	fixture = { REG_B, 255, 255, 255 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 1;
+
+	SBB(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 1);
+
+	// 10 - 5 = 5
+	fixture = { REG_B, 10, 5, 5 };
+	Prep_Arithmetic_Test(fixture);
+	state->psw.cy = 0;
+
+	SBB(fixture.reg);
+	EXPECT_EQ(state->a, fixture.expected);
+	EXPECT_EQ(state->psw.cy, 0);
+}
