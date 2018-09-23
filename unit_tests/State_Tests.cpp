@@ -16,17 +16,17 @@ TEST(State, Reset_State)
 	EXPECT_EQ(state->psw.z, 0);
 }
 
-TEST(State, Get_Reg_Address)
+TEST(State, Get_Register)
 {
 	state->a = 0x0a;
 	state->b = 0x0b;
 	state->d = 0x0d;
 	state->l = 0x0f;
 
-	uint8_t *regA = Get_Reg_Address(REG_A);
-	uint8_t *regB = Get_Reg_Address(REG_B);
-	uint8_t *regD = Get_Reg_Address(REG_D);
-	uint8_t *regL = Get_Reg_Address(REG_L);
+	uint8_t *regA = Get_Register(REG_A);
+	uint8_t *regB = Get_Register(REG_B);
+	uint8_t *regD = Get_Register(REG_D);
+	uint8_t *regL = Get_Register(REG_L);
 
 	EXPECT_EQ(*regA, 0x0a);
 	EXPECT_EQ(*regB, 0x0b);

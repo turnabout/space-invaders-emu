@@ -16,7 +16,7 @@ static struct State8080 state = {
 	0x0  // Address pointed at by registers h/l
 };
 
-uint8_t *Get_Reg_Address(uint8_t offset)
+uint8_t *Get_Register(uint8_t offset)
 {
 	if (offset == REG_MEMORY)
 	{
@@ -73,27 +73,27 @@ void Get_Register_Pair(uint8_t reg, uint8_t **regs)
 	switch (reg)
 	{
 	case PSW:
-		*regs = Get_Reg_Address(PSW);
+		*regs = Get_Register(PSW);
 		*regs++;
-		*regs = Get_Reg_Address(REG_A);
+		*regs = Get_Register(REG_A);
 		break;
 
 	case REG_B:
-		*regs = Get_Reg_Address(REG_B);
+		*regs = Get_Register(REG_B);
 		*regs++;
-		*regs = Get_Reg_Address(REG_C);
+		*regs = Get_Register(REG_C);
 		break;
 
 	case REG_D:
-		*regs = Get_Reg_Address(REG_D);
+		*regs = Get_Register(REG_D);
 		*regs++;
-		*regs = Get_Reg_Address(REG_E);
+		*regs = Get_Register(REG_E);
 		break;
 
 	case REG_H:
-		*regs = Get_Reg_Address(REG_H);
+		*regs = Get_Register(REG_H);
 		*regs++;
-		*regs = Get_Reg_Address(REG_L);
+		*regs = Get_Register(REG_L);
 		break;
 	}
 }

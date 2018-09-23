@@ -8,7 +8,7 @@
 // Return: Result of the operation
 void Do_Arithmetic(uint8_t val, uint8_t isAddition)
 {
-	uint8_t *accumulator = Get_Reg_Address(REG_A);
+	uint8_t *accumulator = Get_Register(REG_A);
 	uint8_t ogAccumVal = *accumulator;
 
 	*accumulator += (isAddition) ? val : -val;
@@ -24,7 +24,7 @@ void ADD(uint8_t reg)
 		return;
 	}
 
-	Do_Arithmetic(*Get_Reg_Address(reg), 1);
+	Do_Arithmetic(*Get_Register(reg), 1);
 }
 
 void ADC(uint8_t reg)
@@ -39,12 +39,12 @@ void ADC(uint8_t reg)
 	// Store carry value
 	uint8_t cy = state->psw.cy;
 
-	Do_Arithmetic(*Get_Reg_Address(reg), 1);
+	Do_Arithmetic(*Get_Register(reg), 1);
 
 	// Add previously stored carry, if necessary
 	if (cy)
 	{
-		uint8_t *regA = Get_Reg_Address(REG_A);
+		uint8_t *regA = Get_Register(REG_A);
 		*regA += cy;
 
 		/*
@@ -65,7 +65,7 @@ void SUB(uint8_t reg)
 		return;
 	}
 
-	Do_Arithmetic(*Get_Reg_Address(reg), 0);
+	Do_Arithmetic(*Get_Register(reg), 0);
 }
 
 void SBB(uint8_t reg)
@@ -80,11 +80,11 @@ void SBB(uint8_t reg)
 	// Store carry value
 	uint8_t cy = state->psw.cy;
 
-	Do_Arithmetic(*Get_Reg_Address(reg), 0);
+	Do_Arithmetic(*Get_Register(reg), 0);
 
 	if (cy)
 	{
-		uint8_t *regA = Get_Reg_Address(REG_A);
+		uint8_t *regA = Get_Register(REG_A);
 		*regA -= cy;
 
 		if (*regA == 255)
@@ -96,7 +96,7 @@ void SBB(uint8_t reg)
 
 void INR(uint8_t reg)
 {
-	uint8_t *regP = Get_Reg_Address(reg);
+	uint8_t *regP = Get_Register(reg);
 	*regP += 1;
 
 	PSW_Update_Zero_Bit(*regP);
@@ -106,7 +106,7 @@ void INR(uint8_t reg)
 
 void DCR(uint8_t reg)
 {
-	uint8_t *regP = Get_Reg_Address(reg);
+	uint8_t *regP = Get_Register(reg);
 	*regP -= 1;
 
 	PSW_Update_Zero_Bit(*regP);

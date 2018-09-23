@@ -45,9 +45,9 @@ typedef struct State8080 {
 
 // API
 
-// Get a register's address (in our emulator memory-space)
+// Get pointer to a register (in our emulator memory-space)
 // Memory (M) - returns address HL is pointing to
-EXPORT uint8_t *Get_Reg_Address(uint8_t offset);
+EXPORT uint8_t *Get_Register(uint8_t offset);
 
 // Get specified register pair (PSW[+A], REG_B[+C], REG_D[+E], REG_H[+L])
 // Sets into given uint8_t pointer
