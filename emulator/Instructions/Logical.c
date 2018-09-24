@@ -76,8 +76,10 @@ void RAR()
 
 void CMC()
 {
+	state.psw.cy = ~state.psw.cy;
 }
 
 void STC()
 {
+	state.psw.cy = 1;
 }
