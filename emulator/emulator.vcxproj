@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="Instructions\Arithmetic.c" />
     <ClCompile Include="Instructions\Instructions.c" />
+    <ClCompile Include="Instructions\Logical.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="State.c" />
   </ItemGroup>

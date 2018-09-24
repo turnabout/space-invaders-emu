@@ -5,6 +5,7 @@
     <ClCompile Include="State.c" />
     <ClCompile Include="Instructions\Arithmetic.c" />
     <ClCompile Include="Instructions\Instructions.c" />
+    <ClCompile Include="Instructions\Logical.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h" />

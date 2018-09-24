@@ -51,3 +51,41 @@ EXPORT void DCX(uint8_t reg);
 // DAD: The 16-bit number in the specified register pair is added to the 
 // 16-bit number in HL
 EXPORT void DAD(uint8_t reg);
+
+
+//
+// Logical
+//
+
+// ANA: AND register or memory with accumulator
+EXPORT void ANA(uint8_t reg);
+
+// ORA: OR register or memory with accumulator
+EXPORT void ORA(uint8_t reg);
+
+// XRA: XOR register or memory with accumulator
+EXPORT void XRA(uint8_t reg);
+
+// CMP: Compare register or memory with accumulator
+EXPORT void CMP(uint8_t reg);
+
+// CMA: Complement accumulator (A = ~A)
+EXPORT void CMA();
+
+// RLC: Rotate accumulator left
+EXPORT void RLC();
+
+// RRC: Rotate accumulator right
+EXPORT void RRC();
+
+// RAL: Rotate accumulator left through carry
+EXPORT void RAL();
+
+// RAR: Rotate accumulator right through carry
+EXPORT void RAR();
+
+// CMC: Complement carry flag (cy = ~cy)
+EXPORT void CMC();
+
+// STC: Set carry flag to 1
+EXPORT void STC();
