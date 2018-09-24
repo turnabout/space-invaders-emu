@@ -26,7 +26,7 @@ typedef struct State8080 {
 	uint8_t int_enable; // Interrupt
 	uint16_t sp;        // Stack pointer
 	uint16_t pc;        // Program counter
-	uint8_t *memory;    // Address pointed at by registers h/l
+	uint8_t *memory;    // Address space?
 } State8080;
 
 // Offset in memory bytes for each of the State8080 struct members
