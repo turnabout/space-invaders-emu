@@ -143,12 +143,12 @@ void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
 	PSW_Update_Carry_Bit(opRes, operand, valIfOverflow);
 }
 
+#ifdef _DEBUG
 State8080 *Get_State()
 {
 	return &state;
 }
 
-#ifdef _DEBUG
 void Reset_State()
 {
 	state.a = 0x00;
