@@ -1,7 +1,5 @@
 #include "Instructions.h"
-#include <stdio.h>
 
-void Unimplemented()
+void NOP()
 {
-	printf("Error: unimplemented instruction\n");
 }

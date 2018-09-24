@@ -3,7 +3,34 @@
 #include <stdint.h>
 #include "../Export.h"
 
-void Unimplemented();
+
+//
+// Instructions List
+//
+
+// Represents a function called by an 8080 Instruction
+typedef union {
+  void (*No_Args)();
+  void (*One_Arg)(uint8_t val);
+  void (*Two_Args)(uint8_t val, uint8_t val2);
+  void (*Three_Args)(uint8_t val, uint8_t val2, uint8_t val3);
+} InstructionFunc8080;
+
+// Represents a 8080 instruction
+// Mnemonic is the operation mnemonic only (LXI, MV, RST, etc).
+// Size is how many bytes are taken up by the instruction in total.
+// Func is the function called by the instruction.
+// Arg is an optional, first argument used by the called function, normally 
+// used to specify a register.
+// Note: Arg MUST be set to -1 if no optional arg is included.
+typedef struct Instruction8080 {
+	char *mnemonic;
+	int size;
+	InstructionFunc8080 func;
+	uint8_t arg;
+} Instruction8080;
+
+struct Instruction8080 *GetInstruction(int instruction);
 
 
 //
@@ -98,3 +125,10 @@ EXPORT void CMC();
 
 // STC: Set carry flag to 1
 EXPORT void STC();
+
+
+// 
+// Special
+//
+
+void NOP();

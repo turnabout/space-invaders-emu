@@ -76,6 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -115,13 +116,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Emulator\Emulator.c" />
+    <ClCompile Include="Emulator\Memory.c" />
     <ClCompile Include="Instructions\Arithmetic.c" />
     <ClCompile Include="Instructions\Instructions.c" />
+    <ClCompile Include="Instructions\List.c" />
     <ClCompile Include="Instructions\Logical.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="State.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Emulator\Emulator.h" />
     <ClInclude Include="Export.h" />
     <ClInclude Include="Instructions\Instructions.h" />
     <ClInclude Include="State.h" />

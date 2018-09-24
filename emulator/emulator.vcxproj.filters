@@ -6,10 +6,14 @@
     <ClCompile Include="Instructions\Arithmetic.c" />
     <ClCompile Include="Instructions\Instructions.c" />
     <ClCompile Include="Instructions\Logical.c" />
+    <ClCompile Include="Instructions\List.c" />
+    <ClCompile Include="Emulator\Emulator.c" />
+    <ClCompile Include="Emulator\Memory.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h" />
     <ClInclude Include="Instructions\Instructions.h" />
     <ClInclude Include="Export.h" />
+    <ClInclude Include="Emulator\Emulator.h" />
   </ItemGroup>
 </Project>
