@@ -12,7 +12,7 @@ static uint8_t *rom;
 void Load_Rom(char *romPath)
 {
 	// Allocate memory
-	rom = malloc((sizeof(uint8_t)) * 0x2000 + 1);
+	rom = malloc((sizeof(uint8_t)) * ROM_SIZE);
 
 	// Attempt getting file to work with
 	FILE *f;
@@ -24,7 +24,7 @@ void Load_Rom(char *romPath)
 	}
 
 	// Gather all data into rom buffer
-	fread(rom, sizeof(uint8_t), 0x2000, f);
+	fread(rom, sizeof(uint8_t), ROM_SIZE, f);
 	fclose(f);
 }
 

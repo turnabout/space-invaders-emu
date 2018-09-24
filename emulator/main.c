@@ -8,11 +8,15 @@ extern struct State8080 state;
 
 int main(int argc, char *argv[])
 {
-	Init_Memory("../../invaders/invaders");
+	// Initialize
+	Init_Memory("../../invaders/invaderstest");
 
-	uint8_t a = Get_Rom_Byte(0x1FF0);
+	state.b = 0x00;
 
-	printf("%02x\n", a);
+	// Fetch/execute instructions
+	// Execute_Instruction(Fetch_Next_Instruction());
+	// printf("%s\n", Fetch_Next_Instruction()->mnemonic);
+	// printf("a: 0x%02x\n", state.a);
 
 	getchar();
 }

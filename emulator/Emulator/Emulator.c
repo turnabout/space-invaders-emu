@@ -4,8 +4,14 @@
 
 extern struct State8080 state;
 
+// Fetch the next instruction in ROM pointed at by current program counter
+Instruction8080 *Fetch_Next_Instruction()
+{
+	return Get_Instruction(Get_Rom_Byte(state.pc));
+}
+
 // Read and execute the given instruction
-void ExecuteInstruction(Instruction8080 *inst)
+void Execute_Instruction(Instruction8080 *inst)
 {
 	// Given args will always be unsigned 8-bit integers
 	uint8_t args[3];
@@ -38,13 +44,13 @@ void ExecuteInstruction(Instruction8080 *inst)
 		inst->func.No_Args();
 		break;
 	case 1:
-		inst->func.One_Arg(args[0]);
+		inst->func.One_Arg((uint8_t)args[0]);
 		break;
 	case 2:
-		inst->func.Two_Args(args[0], args[1]);
+		inst->func.Two_Args((uint8_t)args[0], (uint8_t)args[1]);
 		break;
 	case 3:
-		inst->func.Three_Args(args[0], args[1], args[2]);
+		inst->func.Three_Args((uint8_t)args[0], (uint8_t)args[1], (uint8_t)args[2]);
 		break;
 	}
 }

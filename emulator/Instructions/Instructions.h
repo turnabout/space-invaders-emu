@@ -27,10 +27,10 @@ typedef struct Instruction8080 {
 	char *mnemonic;
 	int size;
 	InstructionFunc8080 func;
-	uint8_t arg;
+	int8_t arg;
 } Instruction8080;
 
-struct Instruction8080 *GetInstruction(int instruction);
+Instruction8080 *Get_Instruction(uint8_t instruction);
 
 
 //
