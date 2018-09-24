@@ -40,6 +40,38 @@ TEST(Logical, ORA)
 
 TEST(Logical, CMP)
 {
+	// a > b
+	state->a = 0x0a;
+	state->b = 0x05;
+
+	CMP(REG_B);
+
+	// Carry bit reset - indicating b < a
+	EXPECT_EQ(state->psw.cy, 0);
+
+	// Zero bit reset - indicating b != a
+	EXPECT_EQ(state->psw.z, 0);
+
+	EXPECT_EQ(state->psw.s, 0);
+	EXPECT_EQ(state->psw.p, 1);
+
+	// a == c
+	state->a = 0x0;
+	state->c = 0x0;
+
+	CMP(REG_C);
+
+	EXPECT_EQ(state->psw.cy, 0);
+	EXPECT_EQ(state->psw.z, 1);
+
+	// a < d
+	state->a = 0x1;
+	state->d = 0x2;
+
+	CMP(REG_D);
+
+	EXPECT_EQ(state->psw.cy, 1);
+	EXPECT_EQ(state->psw.z, 0);
 }
 
 TEST(Logical, CMA)

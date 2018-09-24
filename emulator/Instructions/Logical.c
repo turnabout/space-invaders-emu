@@ -49,6 +49,8 @@ void XRA(uint8_t reg)
 
 void CMP(uint8_t reg)
 {
+	uint8_t res = state.a - *Get_Register(reg);
+	PSW_Update_All(res, state.a, 0);
 }
 
 void CMA()
