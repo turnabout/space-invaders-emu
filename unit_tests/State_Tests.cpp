@@ -129,15 +129,6 @@ TEST(State, Store_Register_Pair_Val)
 	EXPECT_EQ(state->l, 0x30);
 }
 
-TEST(State, Get_SP)
-{
-	state->sp = 0xffaa;
-
-	uint16_t *spP = Get_SP();
-
-	EXPECT_EQ(*spP, 0xffaa);
-}
-
 TEST(State, PSW_Update_Zero_Bit)
 {
 	PSW_Update_Zero_Bit(124);

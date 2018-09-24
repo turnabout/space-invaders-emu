@@ -78,11 +78,6 @@ void Store_Register_Pair_Val(uint8_t reg, uint16_t val)
 	*pair[1] = val & 0x00ff;
 }
 
-uint16_t *Get_SP()
-{
-	return &(state.sp);
-}
-
 void PSW_Update_Zero_Bit(uint8_t opRes)
 {
 	state.psw.z = (opRes == 0)

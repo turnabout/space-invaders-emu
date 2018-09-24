@@ -62,9 +62,6 @@ EXPORT uint16_t Get_Register_Pair_Val(uint8_t regPair);
 // Store a 16-bit value in a register pair
 EXPORT void Store_Register_Pair_Val(uint8_t reg, uint16_t val);
 
-// Get pointer to the current Stack Pointer value.
-EXPORT uint16_t *Get_SP();
-
 // Update Sign Bit: sets if instruction result most significant bit is 1
 EXPORT void PSW_Update_Sign_Bit(uint8_t opRes);
 
