@@ -41,5 +41,13 @@ int main(int argc, char *argv[])
 	printf("full: %d\n", full);
 	printf("full: %04x\n", full);
 
+	state->psw.z = 1;
+	state->psw.s = 1;
+	state->psw.p = 1;
+	state->psw.cy = 1;
+	state->psw.ac = 1;
+
+	printf("blaaa: %d\n", state->psw.cy << 7);
+
 	getchar();
 }

@@ -87,18 +87,44 @@ TEST(Logical, CMA)
 	EXPECT_EQ(state->a, 0b10101010);
 }
 
+// Rotate accumulator left
 TEST(Logical, RLC)
 {
+	state->a = 0b11110010;
+	RLC();
+
+	EXPECT_EQ(state->a, 0b11100101);
+	EXPECT_EQ(state->psw.cy, 1);
 }
 
+// Rotate accumulator right
 TEST(Logical, RRC)
 {
+	state->a = 0b11110010;
+	RRC();
+
+	EXPECT_EQ(state->a, 0b01111001);
+	EXPECT_EQ(state->psw.cy, 0);
 }
 
+// Rotate accumulator left through carry
 TEST(Logical, RAL)
 {
+	state->a = 0b10110101;
+	state->psw.cy = 0;
+	RAL();
+
+	EXPECT_EQ(state->a, 0b01101010);
+	EXPECT_EQ(state->psw.cy, 1);
 }
 
+// Rotate accumulator right through carry
 TEST(Logical, RAR)
 {
+	state->a = 0b01101010;
+	state->psw.cy = 1;
+	RAR();
+
+	EXPECT_EQ(state->a, 0b10110101);
+	EXPECT_EQ(state->psw.cy, 0);
 }

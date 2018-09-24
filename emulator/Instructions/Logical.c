@@ -58,20 +58,57 @@ void CMA()
 	state.a = ~state.a;
 }
 
+// Rotate accumulator left
+// * Shift accumulator left
+// * LSB = previous MSB
+// * CY = previous MSB
 void RLC()
 {
+	uint8_t msb = (state.a & (1 << 7)) >> 7;
+
+	state.a <<= 1;
+	state.a |= msb; // Set lsb to previous msb
+	state.psw.cy = msb;
 }
 
+// Rotate accumulator right
+// * Shift accumulator right
+// * MSB = previous LSB
+// * CY = previous LSB
 void RRC()
 {
+	uint8_t lsb = state.a & 1;
+
+	state.a >>= 1;
+	state.a |= (lsb << 7); // Set msb to previous lsb
+	state.psw.cy = lsb;
 }
 
+
+// Rotate accumulator left through carry
+// * Shift accumulator left
+// * LSB = previous CY
+// * CY = previous MSB
 void RAL()
 {
+	uint8_t msb = (state.a & (1 << 7)) >> 7;
+
+	state.a <<= 1;
+	state.a |= state.psw.cy; // Set lsb to previous cy
+	state.psw.cy = msb;
 }
 
+// Rotate accumulator right through carry
+// * Shift accumulator right
+// * MSB = previous CY
+// * CY = previous LSB
 void RAR()
 {
+	uint8_t lsb = state.a & 1;
+
+	state.a >>= 1;
+	state.a |= (state.psw.cy << 7); // Set msb to previous cy
+	state.psw.cy = lsb;
 }
 
 void CMC()
