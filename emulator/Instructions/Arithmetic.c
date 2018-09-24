@@ -141,7 +141,7 @@ void INX(uint8_t reg)
 
 void DCX(uint8_t reg)
 {
-	// Increment SP
+	// Decrement SP
 	if (reg == SP)
 	{
 		uint16_t *sp = Get_SP();
@@ -149,10 +149,22 @@ void DCX(uint8_t reg)
 		return;
 	}
 
-	// Increment register pair
+	// Decrement register pair
 	uint16_t regPairVal = Get_Register_Pair_Val(reg);
 
 	regPairVal -= 1;
 
 	Store_Register_Pair_Val(reg, regPairVal);
+}
+
+void DAD(uint8_t reg)
+{
+	uint16_t hlVal = Get_Register_Pair_Val(REG_H);
+
+	uint16_t addedVal = (reg == SP)
+		? *Get_SP()
+		: Get_Register_Pair_Val(reg);
+
+	Store_Register_Pair_Val(REG_H, hlVal + addedVal);
+	PSW_Update_Carry_Bit_16(hlVal + addedVal, hlVal, 1);
 }

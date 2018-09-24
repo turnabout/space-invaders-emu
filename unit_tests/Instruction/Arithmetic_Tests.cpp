@@ -416,3 +416,29 @@ TEST(Arithmetic, DCX)
 
 	EXPECT_EQ(state->sp, 0xffff);
 }
+
+TEST(Arithmetic, DAD)
+{
+	// HL += BC: 0x8899 + 0x1122 = 0x99bb
+	state->b = 0x88;
+	state->c = 0x99;
+
+	state->h = 0x11;
+	state->l = 0x22;
+
+	DAD(REG_B);
+	EXPECT_EQ(state->h, 0x99);
+	EXPECT_EQ(state->l, 0xbb);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	// HL += SP: 0x9999 + 0x9999 = 0x3332; carry = 1
+	state->sp = 0x9999;
+
+	state->h = 0x99;
+	state->l = 0x99;
+	DAD(SP);
+
+	EXPECT_EQ(state->h, 0x33);
+	EXPECT_EQ(state->l, 0x32);
+	EXPECT_EQ(state->psw.cy, 1);
+}

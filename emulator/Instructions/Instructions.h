@@ -6,7 +6,9 @@
 void Unimplemented();
 
 
+//
 // Arithmetic
+//
 
 // ADD: Add register or memory to Accumulator.
 // Sets the carry bit if an overflow occurs.
@@ -45,3 +47,7 @@ EXPORT void INX(uint8_t reg);
 
 // DCX: Decrement 16-bit number held in specified register pair
 EXPORT void DCX(uint8_t reg);
+
+// DAD: The 16-bit number in the specified register pair is added to the 
+// 16-bit number in HL
+EXPORT void DAD(uint8_t reg);

@@ -246,3 +246,15 @@ TEST(State, PSW_Update_Carry_Bit)
 		EXPECT_EQ(state->psw.cy, 1);
 	}
 }
+
+TEST(State, PSW_Update_Carry_Bit_16)
+{
+	PSW_Update_Carry_Bit_16((0x1100 + 0x1100), 0x1100, 1);
+	EXPECT_EQ(state->psw.cy, 0);
+
+	PSW_Update_Carry_Bit_16(0xFFFF + 0x0001, 0xFFFF, 1);
+	EXPECT_EQ(state->psw.cy, 1);
+
+	PSW_Update_Carry_Bit_16((0x9999 + 0x9999), 0x9999, 1);
+	EXPECT_EQ(state->psw.cy, 1);
+}

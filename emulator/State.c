@@ -124,6 +124,17 @@ void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand1, uint8_t isAddition)
 	state.psw.cy = ((uint8_t)(operand1 - opRes) > operand1) ? 1 : 0;
 }
 
+void PSW_Update_Carry_Bit_16(uint16_t opRes, uint16_t operand1, uint8_t isAddition)
+{
+	if (isAddition)
+	{
+		state.psw.cy = (opRes < operand1) ? 1 : 0;
+		return;
+	}
+
+	state.psw.cy = ((uint16_t)(operand1 - opRes) > operand1) ? 1 : 0;
+}
+
 void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
 {
 	PSW_Update_Zero_Bit(opRes);

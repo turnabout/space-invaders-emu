@@ -79,6 +79,10 @@ EXPORT void PSW_Update_Parity_Bit(uint8_t opRes);
 // overflow. Additions use 1, subtractions use 0.
 EXPORT void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow);
 
+// Update Carry Bit 16: same as PSW_Update_Carry_Bit, but checks the result
+// of a 16-bit operation.
+EXPORT void PSW_Update_Carry_Bit_16(uint16_t opRes, uint16_t operand, uint8_t valIfOverflow);
+
 // Update all PSW bits
 EXPORT void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow);
 
