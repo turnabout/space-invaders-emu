@@ -43,6 +43,8 @@ typedef struct State8080 {
 #define PC         11
 #define REG_MEMORY 13
 
+// Global 8008 State
+
 // API
 
 // Get pointer to a register (in our emulator memory-space)

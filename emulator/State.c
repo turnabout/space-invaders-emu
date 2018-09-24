@@ -1,7 +1,7 @@
 #include "State.h"
 
 // Emulator's global state holding registers, PSW, etc.
-static struct State8080 state = {
+struct State8080 state = {
 	0x00, // Accumulator
 	0x00, // Other Registers (b-c-d-e-h-l)
 	0x00,

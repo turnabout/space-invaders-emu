@@ -66,6 +66,15 @@ EXPORT void ORA(uint8_t reg);
 // XRA: XOR register or memory with accumulator
 EXPORT void XRA(uint8_t reg);
 
+// ANA: AND immediate byte with accumulator
+EXPORT void ANI(uint8_t val);
+
+// ORA: OR immediate byte with accumulator
+EXPORT void ORI(uint8_t val);
+
+// XRA: XOR immediate byte with accumulator
+EXPORT void XRI(uint8_t val);
+
 // CMP: Compare register or memory with accumulator
 EXPORT void CMP(uint8_t reg);
 
