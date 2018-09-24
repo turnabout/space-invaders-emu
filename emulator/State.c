@@ -143,6 +143,11 @@ void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
 	PSW_Update_Carry_Bit(opRes, operand, valIfOverflow);
 }
 
+uint16_t Get_HL_Address()
+{
+	return ((uint16_t)state.h << 8) + state.l;
+}
+
 #ifdef _DEBUG
 State8080 *Get_State()
 {

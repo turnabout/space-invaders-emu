@@ -88,6 +88,9 @@ EXPORT void PSW_Update_Carry_Bit_16(uint16_t opRes, uint16_t operand, uint8_t va
 // Update all PSW bits
 EXPORT void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow);
 
+// Get the address pointed at by HL
+EXPORT uint16_t Get_HL_Address();
+
 // Debug only
 #ifdef _DEBUG
 // Get current global 8080 state
