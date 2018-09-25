@@ -11,6 +11,7 @@
     <ClCompile Include="Emulator\Memory.c" />
     <ClCompile Include="State_Helpers\PSW_Helpers.c" />
     <ClCompile Include="State_Helpers\Register_Helpers.c" />
+    <ClCompile Include="Instructions\Data_Transfer.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h" />

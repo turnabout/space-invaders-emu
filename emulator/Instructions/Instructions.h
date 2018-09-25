@@ -129,15 +129,16 @@ EXPORT void STC();
 
 
 // 
-// Special
+// Data Transfer
 //
 
 // MVI: Move immediate data into register/memory
-void MVI(uint8_t reg);
+EXPORT void MVI(uint8_t reg, uint8_t data);
 
 // MOV: Move one byte of data from the register specified by the first args, 
 // to the register specified by the second args.
-void MOV(uint8_t regSrc, uint8_t regDst);
+EXPORT void MOV(uint8_t regSrc, uint8_t regDst);
+
 
 // 
 // Special

@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Instruction\Arithmetic_Tests.cpp" />
+    <ClCompile Include="Instruction\Data_Transfer_Tests.cpp" />
     <ClCompile Include="Instruction\Logical_Tests.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="State_Tests.cpp" />
