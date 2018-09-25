@@ -83,7 +83,10 @@ void SBB(uint8_t reg)
 
 void INR(uint8_t reg)
 {
-	uint8_t *regP = Get_Register(reg);
+	uint8_t *regP = (reg == REG_M)
+		? Get_HL_Pointer()
+		: Get_Register(reg);
+
 	*regP += 1;
 
 	// Does not update carry
@@ -94,7 +97,10 @@ void INR(uint8_t reg)
 
 void DCR(uint8_t reg)
 {
-	uint8_t *regP = Get_Register(reg);
+	uint8_t *regP = (reg == REG_M)
+		? Get_HL_Pointer()
+		: Get_Register(reg);
+
 	*regP -= 1;
 
 	// Does not update carry

@@ -23,12 +23,20 @@ int main(int argc, char *argv[])
 	*hlP = 0xaa; // (hl) = 0xaa
 
 	ADD(REG_M);
-
 	printf("a (should have 0xaa): 0x%02x\n", state.a);
 
 	SUB(REG_M);
-
 	printf("a (should have 0x00): 0x%02x\n", state.a);
+
+
+	INR(REG_M);
+	printf("(hl) (should have 0xab): 0x%02x\n", *hlP);
+	DCR(REG_M);
+	printf("(hl) (should have 0xaa): 0x%02x\n", *hlP);
+
+	*hlP = 0x00;
+	DCR(REG_M);
+	printf("(hl) (should have 0xff): 0x%02x\n", *hlP);
 
 
 
