@@ -1,4 +1,5 @@
 #include "State_Helpers.h"
+#include "../Emulator/Emulator.h"
 
 extern State8080 state;
 
@@ -67,4 +68,9 @@ void Store_Register_Pair_Val(uint8_t reg, uint16_t val)
 uint16_t Get_HL_Address()
 {
 	return ((uint16_t)state.h << 8) + state.l;
+}
+
+uint8_t *Get_HL_Pointer()
+{
+	return Get_Mem_Byte_P(Get_HL_Address());
 }

@@ -45,7 +45,7 @@ void Do_Arithmetic_With_CB(uint8_t val, uint8_t isAddition)
 uint8_t Get_Instruction_Reg_Val(uint8_t reg)
 {
 	return (reg == REG_M)
-		? *Get_Mem_Byte_P(Get_HL_Address())
+		? *Get_HL_Pointer()
 		: *Get_Register(reg);
 }
 

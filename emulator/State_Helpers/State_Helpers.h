@@ -25,6 +25,9 @@ EXPORT void Store_Register_Pair_Val(uint8_t reg, uint16_t val);
 // Get the address pointed at by HL
 EXPORT uint16_t Get_HL_Address();
 
+// Get actual pointer in emulated memory, pointed at by (HL)
+EXPORT uint8_t *Get_HL_Pointer();
+
 //
 // PSW
 //
