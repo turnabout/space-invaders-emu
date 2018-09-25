@@ -4,7 +4,7 @@
 #include "Emulator/Emulator.h"
 #include "Instructions/Instructions.h"
 
-extern struct State8080 state;
+extern State8080 state;
 
 int main(int argc, char *argv[])
 {

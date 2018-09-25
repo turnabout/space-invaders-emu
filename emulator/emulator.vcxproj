@@ -118,6 +118,8 @@
   <ItemGroup>
     <ClCompile Include="Emulator\Emulator.c" />
     <ClCompile Include="Emulator\Memory.c" />
+    <ClCompile Include="State_Helpers\PSW_Helpers.c" />
+    <ClCompile Include="State_Helpers\Register_Helpers.c" />
     <ClCompile Include="Instructions\Arithmetic.c" />
     <ClCompile Include="Instructions\Instructions.c" />
     <ClCompile Include="Instructions\List.c" />
@@ -128,6 +130,7 @@
   <ItemGroup>
     <ClInclude Include="Emulator\Emulator.h" />
     <ClInclude Include="Export.h" />
+    <ClInclude Include="State_Helpers\State_Helpers.h" />
     <ClInclude Include="Instructions\Instructions.h" />
     <ClInclude Include="State.h" />
   </ItemGroup>

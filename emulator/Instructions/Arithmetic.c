@@ -1,7 +1,8 @@
 #include "Instructions.h"
 #include "../State.h"
+#include "../State_Helpers/State_Helpers.h"
 
-extern struct State8080 state;
+extern State8080 state;
 
 // Do an arithmetic operation on Accumulator
 // val: Value to apply

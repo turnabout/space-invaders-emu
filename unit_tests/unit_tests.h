@@ -7,6 +7,9 @@ extern "C" {
 	// State
 	#include "../emulator/State.h"
 
+	// Helpers
+	#include "../emulator/State_Helpers/State_Helpers.h"
+
 	// Instructions
 	#include "../emulator/Instructions/Instructions.h"
 }

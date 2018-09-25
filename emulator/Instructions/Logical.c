@@ -1,7 +1,8 @@
 #include "Instructions.h"
 #include "../State.h"
+#include "../State_Helpers/State_Helpers.h"
 
-extern struct State8080 state;
+extern State8080 state;
 
 // Set PSW from a bitwise operation result
 void Set_PSW_Bitwise_Op(uint8_t result)

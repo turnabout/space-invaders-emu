@@ -1,7 +1,7 @@
 #include "State.h"
 
 // Emulator's global state holding registers, PSW, etc.
-struct State8080 state = {
+State8080 state = {
 	0x00, // Accumulator
 	0x00, // Other Registers (b-c-d-e-h-l)
 	0x00,
@@ -15,133 +15,6 @@ struct State8080 state = {
 	0x0, // Program counter
 	0x0  // Address pointed at by registers h/l
 };
-
-uint8_t *Get_Register(uint8_t offset)
-{
-	if (offset == REG_MEMORY)
-	{
-		// TODO
-	}
-
-	uint8_t *adr = (uint8_t *)&state;
-	return adr + offset;
-}
-
-void Get_Register_Pair(uint8_t reg, uint8_t **regs)
-{
-	switch (reg)
-	{
-	case PSW:
-		*regs = Get_Register(PSW); // TODO: Use &(state->psw)
-		*regs++;
-		*regs = Get_Register(REG_A);
-		break;
-
-	case REG_B:
-		*regs = Get_Register(REG_B);
-		*regs++;
-		*regs = Get_Register(REG_C);
-		break;
-
-	case REG_D:
-		*regs = Get_Register(REG_D);
-		*regs++;
-		*regs = Get_Register(REG_E);
-		break;
-
-	case REG_H:
-		*regs = Get_Register(REG_H);
-		*regs++;
-		*regs = Get_Register(REG_L);
-		break;
-	}
-}
-
-uint16_t Get_Register_Pair_Val(uint8_t reg)
-{
-	uint8_t *pair[2];
-	Get_Register_Pair(reg, pair);
-
-	return (*pair[0] << 8) | *pair[1];
-}
-
-void Store_Register_Pair_Val(uint8_t reg, uint16_t val)
-{
-	uint8_t *pair[2];
-
-	Get_Register_Pair(reg, pair);
-
-	// Store most significant byte
-	*pair[0] = val >> 8;
-
-	// Store least significant byte
-	*pair[1] = val & 0x00ff;
-}
-
-void PSW_Update_Zero_Bit(uint8_t opRes)
-{
-	state.psw.z = (opRes == 0)
-		? 1
-		: 0;
-}
-
-void PSW_Update_Sign_Bit(uint8_t opRes)
-{
-	state.psw.s = (opRes & 0b10000000)
-		? 1 
-		: 0;
-}
-
-void PSW_Update_Parity_Bit(uint8_t opRes)
-{
-	// XOR all bits together then invert; if result is 1, bits are even.
-	opRes ^= opRes >> 4;
-	opRes ^= opRes >> 2;
-	opRes ^= opRes >> 1;
-
-	state.psw.p = (~opRes) & 1
-		? 1
-		: 0;
-}
-
-void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand1, uint8_t isAddition)
-{
-	// Addition: carry flag is set if the operation result is smaller than
-	// the first operand's value.
-	if (isAddition)
-	{
-		state.psw.cy = (opRes < operand1) ? 1 : 0;
-		return;
-	}
-
-	// Subtraction: carry flag is set if the operand 2 is greater than operand 1
-	// operand2 = operand1 - result
-	state.psw.cy = ((uint8_t)(operand1 - opRes) > operand1) ? 1 : 0;
-}
-
-void PSW_Update_Carry_Bit_16(uint16_t opRes, uint16_t operand1, uint8_t isAddition)
-{
-	if (isAddition)
-	{
-		state.psw.cy = (opRes < operand1) ? 1 : 0;
-		return;
-	}
-
-	state.psw.cy = ((uint16_t)(operand1 - opRes) > operand1) ? 1 : 0;
-}
-
-void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
-{
-	PSW_Update_Zero_Bit(opRes);
-	PSW_Update_Sign_Bit(opRes);
-	PSW_Update_Parity_Bit(opRes);
-	PSW_Update_Carry_Bit(opRes, operand, valIfOverflow);
-}
-
-uint16_t Get_HL_Address()
-{
-	return ((uint16_t)state.h << 8) + state.l;
-}
 
 #ifdef _DEBUG
 State8080 *Get_State()
