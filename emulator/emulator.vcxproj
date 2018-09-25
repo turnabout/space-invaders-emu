@@ -118,6 +118,9 @@
   <ItemGroup>
     <ClCompile Include="Emulator\Emulator.c" />
     <ClCompile Include="Emulator\Memory.c" />
+    <ClCompile Include="Instructions\Branch\Call.c" />
+    <ClCompile Include="Instructions\Branch\Jump.c" />
+    <ClCompile Include="Instructions\Branch\Return.c" />
     <ClCompile Include="Instructions\Data_Transfer.c" />
     <ClCompile Include="Instructions\Special.c" />
     <ClCompile Include="State_Helpers\PSW_Helpers.c" />

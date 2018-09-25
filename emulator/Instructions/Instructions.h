@@ -152,6 +152,63 @@ EXPORT void LDAX(uint8_t reg);
 
 
 // 
+// Branch
+//
+
+// JMP
+// JMP: Jump to given address
+EXPORT void JMP(uint8_t hi, uint8_t lo);
+
+// JZ: Jump if Zero = 1
+EXPORT void JZ(uint8_t hi, uint8_t lo);
+
+// JNZ: Jump if Zero = 0
+EXPORT void JNZ(uint8_t hi, uint8_t lo);
+
+// JC: Jump if Carry = 1
+EXPORT void JC(uint8_t hi, uint8_t lo);
+
+// JNC: Jump if Carry = 0
+EXPORT void JNC(uint8_t hi, uint8_t lo);
+
+// JPE: Jump if Parity = 1
+EXPORT void JPE(uint8_t hi, uint8_t lo);
+
+// JPO: Jump if Parity = 0
+EXPORT void JPO(uint8_t hi, uint8_t lo);
+
+// JM: Jump if Sign = 1
+EXPORT void JM(uint8_t hi, uint8_t lo);
+
+// JP: Jump if Sign = 0
+EXPORT void JP(uint8_t hi, uint8_t lo);
+
+// CALL
+// CALL: Push contents of PC onto stack, then jump to given address
+EXPORT void CALL(uint8_t hi, uint8_t lo);
+EXPORT void CZ(uint8_t hi, uint8_t lo);
+EXPORT void CNZ(uint8_t hi, uint8_t lo);
+EXPORT void CC(uint8_t hi, uint8_t lo);
+EXPORT void CNC(uint8_t hi, uint8_t lo);
+EXPORT void CPE(uint8_t hi, uint8_t lo);
+EXPORT void CPO(uint8_t hi, uint8_t lo);
+EXPORT void CM(uint8_t hi, uint8_t lo);
+EXPORT void CP(uint8_t hi, uint8_t lo);
+
+// RET
+// RET: Take address on stack & push contents onto PC
+EXPORT void RET(uint8_t hi, uint8_t lo);
+EXPORT void RZ(uint8_t hi, uint8_t lo);
+EXPORT void RNZ(uint8_t hi, uint8_t lo);
+EXPORT void RC(uint8_t hi, uint8_t lo);
+EXPORT void RNC(uint8_t hi, uint8_t lo);
+EXPORT void RPE(uint8_t hi, uint8_t lo);
+EXPORT void RPO(uint8_t hi, uint8_t lo);
+EXPORT void RM(uint8_t hi, uint8_t lo);
+EXPORT void RP(uint8_t hi, uint8_t lo);
+
+
+// 
 // Special
 //
 
