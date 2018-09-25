@@ -10,4 +10,14 @@ TEST(Branch, JMP)
 
 TEST(Branch, JNZ)
 {
+	// Jump to 0x02ff if Zero bit = 0
+	state->pc = 0x0000;
+	state->psw.z = 1;
+	JNZ(0x02, 0xff);
+	EXPECT_EQ(state->pc, 0x0000);
+
+	state->pc = 0x0000;
+	state->psw.z = 0;
+	JNZ(0x03, 0xe3);
+	EXPECT_EQ(state->pc, 0x03e3);
 }

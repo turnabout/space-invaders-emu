@@ -197,15 +197,15 @@ EXPORT void CP(uint8_t hi, uint8_t lo);
 
 // RET
 // RET: Take address on stack & push contents onto PC
-EXPORT void RET(uint8_t hi, uint8_t lo);
-EXPORT void RZ(uint8_t hi, uint8_t lo);
-EXPORT void RNZ(uint8_t hi, uint8_t lo);
-EXPORT void RC(uint8_t hi, uint8_t lo);
-EXPORT void RNC(uint8_t hi, uint8_t lo);
-EXPORT void RPE(uint8_t hi, uint8_t lo);
-EXPORT void RPO(uint8_t hi, uint8_t lo);
-EXPORT void RM(uint8_t hi, uint8_t lo);
-EXPORT void RP(uint8_t hi, uint8_t lo);
+EXPORT void RET();
+EXPORT void RZ();
+EXPORT void RNZ();
+EXPORT void RC();
+EXPORT void RNC();
+EXPORT void RPE();
+EXPORT void RPO();
+EXPORT void RM();
+EXPORT void RP();
 
 
 // 
