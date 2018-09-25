@@ -139,6 +139,9 @@ EXPORT void MVI(uint8_t reg, uint8_t data);
 // to the register specified by the second args.
 EXPORT void MOV(uint8_t regSrc, uint8_t regDst);
 
+// LXI: Load immediate 16-bit value into given register pair
+EXPORT void LXI(uint8_t reg, uint8_t hi, uint8_t lo);
+
 
 // 
 // Special

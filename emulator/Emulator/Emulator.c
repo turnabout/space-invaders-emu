@@ -35,7 +35,7 @@ void Execute_Instruction(Instruction8080 *inst)
 	}
 	else if (inst->size == 3)
 	{
-		// Data stored backwards due to little-endian - least significant 
+		// Data stored backwards due to little-endian - most significant 
 		// byte should be the first argument
 		args[argC++] = *Get_Mem_Byte_P(state.pc + 2);
 		args[argC++] = *Get_Mem_Byte_P(state.pc + 1);

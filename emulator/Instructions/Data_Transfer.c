@@ -22,3 +22,19 @@ void MOV(uint8_t regDst, uint8_t regSrc)
 
 	MVI(regDst, *regDstP);
 }
+
+void LXI(uint8_t reg, uint8_t hi, uint8_t lo)
+{
+	if (reg == SP)
+	{
+		state.sp = (uint16_t)(hi << 8) + lo;
+		return;
+	}
+
+	uint8_t *pair[2];
+
+	Get_Register_Pair(reg, pair);
+
+	*pair[0] = hi;
+	*pair[1] = lo;
+}
