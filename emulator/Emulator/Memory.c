@@ -1,5 +1,6 @@
 #include <stdio.h> 
 #include <stdlib.h>
+#include <string.h>
 
 #include "../Instructions/Instructions.h"
 #include "../State.h"
@@ -7,13 +8,11 @@
 
 // Memory allocation containing our ROM
 static uint8_t *rom;
+static uint8_t *mem;
 
 // Load ROM into memory
 void Load_Rom(char *romPath)
 {
-	// Allocate memory
-	rom = malloc((sizeof(uint8_t)) * ROM_SIZE);
-
 	// Attempt getting file to work with
 	FILE *f;
 
@@ -24,16 +23,21 @@ void Load_Rom(char *romPath)
 	}
 
 	// Gather all data into rom buffer
-	fread(rom, sizeof(uint8_t), ROM_SIZE, f);
+	fread(mem, sizeof(uint8_t), ROM_SIZE, f);
 	fclose(f);
 }
 
 void Init_Memory(char *romPath)
 {
+	mem = malloc(MEM_SIZE);
+
 	Load_Rom(romPath);
+
+	// Zero-out RAM (0x2000 - 0x7fff)
+	memset(mem + ROM_SIZE, 0, MEM_SIZE - ROM_SIZE);
 }
 
-uint8_t Get_Rom_Byte(uint16_t offset)
+uint8_t *Get_Mem_Byte(uint16_t offset)
 {
-	return *(rom + offset);
+	return mem + offset;
 }
