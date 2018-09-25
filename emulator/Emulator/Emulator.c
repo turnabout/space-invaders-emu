@@ -17,10 +17,15 @@ void Execute_Instruction(Instruction8080 *inst)
 	uint8_t args[3];
 	uint8_t argC = 0;
 
-	// Get instruction's argument, if need be
-	if (inst->arg != -1)
+	// Get first argument(s), if need be
+	if (inst->args[0] != -1)
 	{
-		args[argC++] = inst->arg;
+		args[argC++] = inst->args[0];
+
+		if (inst->args[1] != -1)
+		{
+			args[argC++] = inst->args[1];
+		}
 	}
 
 	// Get immediate data argument(s), if need be
@@ -30,14 +35,17 @@ void Execute_Instruction(Instruction8080 *inst)
 	}
 	else if (inst->size == 3)
 	{
-		args[argC++] = *Get_Mem_Byte_P(state.pc + 1);
+		// Data stored backwards due to little-endian - least significant 
+		// byte should be the first argument
 		args[argC++] = *Get_Mem_Byte_P(state.pc + 2);
+		args[argC++] = *Get_Mem_Byte_P(state.pc + 1);
 	}
 
 	// Increment program counter
 	state.pc += inst->size;
 
 	// Execute correct instruction function with collected arguments
+	// Note: Not a single instruction function uses 4 arguments
 	switch (argC)
 	{
 	case 0:

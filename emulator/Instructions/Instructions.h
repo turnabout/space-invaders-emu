@@ -20,14 +20,15 @@ typedef union {
 // Mnemonic is the operation mnemonic only (LXI, MV, RST, etc).
 // Size is how many bytes are taken up by the instruction in total.
 // Func is the function called by the instruction.
-// Arg is an optional, first argument used by the called function, normally 
-// used to specify a register.
-// Note: Arg MUST be set to -1 if no optional arg is included.
+// Args specify one or many optional, first argument(s) used by the called
+// function.
+// Note: Args[0] MUST be set to -1 if no optional args are included.
+//       Args[1] MUST be set to -1 if only the first optional arg is included.
 typedef struct Instruction8080 {
 	char *mnemonic;
 	int size;
 	InstructionFunc8080 func;
-	int8_t arg;
+	int8_t args[2];
 } Instruction8080;
 
 Instruction8080 *Get_Instruction(uint8_t instruction);
@@ -126,6 +127,17 @@ EXPORT void CMC();
 // STC: Set carry flag to 1
 EXPORT void STC();
 
+
+// 
+// Special
+//
+
+// MVI: Move immediate data into register/memory
+void MVI(uint8_t reg);
+
+// MOV: Move one byte of data from the register specified by the first args, 
+// to the register specified by the second args.
+void MOV(uint8_t regSrc, uint8_t regDst);
 
 // 
 // Special

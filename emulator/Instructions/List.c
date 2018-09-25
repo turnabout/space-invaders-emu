@@ -6,9 +6,9 @@
  * (0x00 to 0xff).
  */
 static struct Instruction8080 list[0xff + 1] = {
-	{"NOP", 1, NOP, -1},
-	{"ADD", 1, ADD, REG_B},
-	{"ADI", 2, ADI, -1},
+	{"NOP", 1, NOP, {-1}},
+	{"ADD", 1, ADD, {REG_B, -1}},
+	{"ADI", 2, ADI, {-1}},
 };
 
 // Get instruction with matching opcode (0x00 through 0xff)

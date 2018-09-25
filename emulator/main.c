@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 	// Initialize
 	Init_Memory("../../invaders/invaderstest");
 
+	/*
 	state.b = 0x00;
 
 	state.a = 0x00;
@@ -41,16 +42,18 @@ int main(int argc, char *argv[])
 
 	printf("Should be 0: %d\n", state.psw.z);
 	printf("Should be 1: %d\n", state.psw.cy);
-
-
+	*/
 
 
 	// Fetch/execute instructions
-	/*
+	state.a = 0;
+
 	Execute_Instruction(Fetch_Next_Instruction());
 	printf("%s\n", Fetch_Next_Instruction()->mnemonic);
+
 	printf("a: 0x%02x\n", state.a);
 
+	/*
 	printf("0x%2x\n", *Get_Mem_Byte_P(0x1fff));
 	printf("0x%2x\n", *Get_Mem_Byte_P(0x1ffe));
 
