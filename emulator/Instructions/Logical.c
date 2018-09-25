@@ -50,7 +50,11 @@ void XRA(uint8_t reg)
 
 void CMP(uint8_t reg)
 {
-	uint8_t res = state.a - *Get_Register(reg);
+	uint8_t comparedVal = (reg == REG_M)
+		? *Get_HL_Pointer()
+		: *Get_Register(reg);
+
+	uint8_t res = state.a - comparedVal;
 	PSW_Update_All(res, state.a, 0);
 }
 

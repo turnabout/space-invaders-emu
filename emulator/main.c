@@ -34,9 +34,13 @@ int main(int argc, char *argv[])
 	DCR(REG_M);
 	printf("(hl) (should have 0xaa): 0x%02x\n", *hlP);
 
-	*hlP = 0x00;
-	DCR(REG_M);
-	printf("(hl) (should have 0xff): 0x%02x\n", *hlP);
+	*hlP = 0x01;
+	state.a = 0x00;
+
+	CMP(REG_M);
+
+	printf("Should be 0: %d\n", state.psw.z);
+	printf("Should be 1: %d\n", state.psw.cy);
 
 
 
