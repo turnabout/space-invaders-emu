@@ -142,6 +142,14 @@ EXPORT void MOV(uint8_t regSrc, uint8_t regDst);
 // LXI: Load immediate 16-bit value into given register pair
 EXPORT void LXI(uint8_t reg, uint8_t hi, uint8_t lo);
 
+// STAX (Store Accumulator): The contents of accumulator are stored in the 
+// memory location pointed at by the given register pair
+EXPORT void STAX(uint8_t reg);
+
+// LDAX (Load Accumulator): The contents of accumulator are replaced by the 
+// the contents at the memory location pointed at by the given register pair
+EXPORT void LDAX(uint8_t reg);
+
 
 // 
 // Special

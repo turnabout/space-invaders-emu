@@ -22,9 +22,6 @@ TEST(Data_Transfer, LXI)
 {
 	uint8_t hi, lo;
 
-	// 05 aa
-	// 0xaa05
-
 	// Load 0x2211 into BC, so
 	// B = 0x22 C = 0x11
 	hi = 0x22;

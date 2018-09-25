@@ -34,6 +34,30 @@ int main(int argc, char *argv[])
 	printf("0x%2x\n", *Get_Mem_Byte_P(0x4000));
 	*/
 
+	// Test LDAX/STAX
+	/*
+	// BC = 0x2244 (BC) = 0xaaaa
+	state.b = 0x22;
+	state.c = 0x44;
+
+	uint8_t *adr = Get_Mem_Byte_P(0x2244);
+	*adr = 0xaa;
+
+	LDAX(REG_B);
+
+	printf("Should be 0xaa %02x\n", state.a);
+
+	// Store accumulator value into (DE) -> (0x21ef)
+	state.a = 0x22;
+
+	state.d = 0x21;
+	state.e = 0xef;
+
+	STAX(REG_D);
+
+	printf("Should be 0x22 %02x\n", *Get_Mem_Byte_P(0x21ef));
+	*/
+
 	// MOV/MVI test
 	/*
 	// HL points to 0x2100

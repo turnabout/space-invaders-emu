@@ -3,6 +3,7 @@
 #include "../Export.h"
 #include "../State.h"
 
+
 //
 // Register
 //
@@ -28,9 +29,14 @@ EXPORT uint16_t Get_HL_Address();
 // Get actual pointer in emulated memory, pointed at by (HL)
 EXPORT uint8_t *Get_HL_Pointer();
 
+// Get actual pointer in emulated memory, pointed at by (register pair)
+EXPORT uint8_t *Get_Register_Pair_Pointer(uint8_t reg);
+
+
 //
 // PSW
 //
+
 // Update Sign Bit: sets if instruction result most significant bit is 1
 EXPORT void PSW_Update_Sign_Bit(uint8_t opRes);
 

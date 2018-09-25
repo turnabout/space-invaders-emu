@@ -38,3 +38,14 @@ void LXI(uint8_t reg, uint8_t hi, uint8_t lo)
 	*pair[0] = hi;
 	*pair[1] = lo;
 }
+
+void STAX(uint8_t reg)
+{
+	uint8_t *adr = Get_Register_Pair_Pointer(reg);
+	*adr = state.a;
+}
+
+void LDAX(uint8_t reg)
+{
+	state.a = *Get_Register_Pair_Pointer(reg);
+}
