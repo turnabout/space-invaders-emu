@@ -1,5 +1,6 @@
 #include "Instructions.h"
 #include "../State.h"
+#include "../Emulator/Emulator.h"
 #include "../State_Helpers/State_Helpers.h"
 
 extern State8080 state;
@@ -39,44 +40,45 @@ void Do_Arithmetic_With_CB(uint8_t val, uint8_t isAddition)
 	}
 }
 
+// Get ADD/ADC/SUB/SBB register value
+// If given register is M, return (HL)
+uint8_t Get_Instruction_Reg_Val(uint8_t reg)
+{
+	return (reg == REG_M)
+		? *Get_Mem_Byte_P(Get_HL_Address())
+		: *Get_Register(reg);
+}
+
 void ADD(uint8_t reg)
 {
-	if (reg == REG_M) // TODO
-	{
-		return;
-	}
-
-	Do_Arithmetic(*Get_Register(reg), 1);
+	Do_Arithmetic(
+		Get_Instruction_Reg_Val(reg), 
+		1
+	);
 }
 
 void ADC(uint8_t reg)
 {
-	if (reg == REG_M) // TODO
-	{
-		return;
-	}
-
-	Do_Arithmetic_With_CB(*Get_Register(reg), 1);
+	Do_Arithmetic_With_CB(
+		Get_Instruction_Reg_Val(reg), 
+		1
+	);
 }
 
 void SUB(uint8_t reg)
 {
-	if (reg == REG_M) // TODO
-	{
-		return;
-	}
-
-	Do_Arithmetic(*Get_Register(reg), 0);
+	Do_Arithmetic(
+		Get_Instruction_Reg_Val(reg), 
+		0
+	);
 }
 
 void SBB(uint8_t reg)
 {
-	if (reg == REG_M) // TODO
-	{
-		return;
-	}
-
-	Do_Arithmetic_With_CB(*Get_Register(reg), 0);
+	Do_Arithmetic_With_CB(
+		Get_Instruction_Reg_Val(reg),
+		0
+	);
 }
 
 void INR(uint8_t reg)

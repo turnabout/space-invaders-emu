@@ -1,3 +1,4 @@
+#include "../Export.h"
 #include "../Instructions/Instructions.h"
 
 // Memory
@@ -10,11 +11,11 @@
 #define ROM_SIZE 0x2000
 
 // Initialize all memory
-void Init_Memory(char *romPath);
+EXPORT void Init_Memory(char *romPath);
 
 // Execute a given instruction
 Instruction8080 *Fetch_Next_Instruction();
 void Execute_Instruction(Instruction8080 *inst);
 
 // Get byte pointer at specified offset in memory
-uint8_t *Get_Mem_Byte(uint16_t offset);
+EXPORT uint8_t *Get_Mem_Byte_P(uint16_t offset);

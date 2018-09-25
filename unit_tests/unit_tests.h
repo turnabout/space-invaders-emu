@@ -4,14 +4,13 @@
 # define incl_lib(name) __pragma(comment(lib, name))
 
 extern "C" {
-	// State
+	#include <stdio.h> 
+	#include <stdlib.h>
+	#include <string.h>
 	#include "../emulator/State.h"
-
-	// Helpers
 	#include "../emulator/State_Helpers/State_Helpers.h"
-
-	// Instructions
 	#include "../emulator/Instructions/Instructions.h"
+	#include "../emulator/Emulator/Emulator.h"
 }
 
 incl_lib("../Debug/emulator.lib")

@@ -89,21 +89,6 @@ TEST(Arithmetic, ADD)
 	EXPECT_EQ(state->psw.s, expectedPsw.s);
 	EXPECT_EQ(state->psw.p, expectedPsw.p);
 	EXPECT_EQ(state->psw.cy, expectedPsw.cy);
-
-	// Memory: 10 + 10 = 20
-	fixture = { REG_M, 10, 10, 20 };
-	expectedPsw = { 0, 0, 1, 0 };
-	Prep_Arithmetic_Test(fixture);
-
-	// TODO
-	/*
-	ADD(fixture.reg);
-	EXPECT_EQ(state->a, fixture.expected);
-	EXPECT_EQ(state->psw.z, expectedPsw.z);
-	EXPECT_EQ(state->psw.s, expectedPsw.s);
-	EXPECT_EQ(state->psw.p, expectedPsw.p);
-	EXPECT_EQ(state->psw.cy, expectedPsw.cy);
-	*/
 }
 
 TEST(Arithmetic, SUB)

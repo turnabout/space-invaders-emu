@@ -7,7 +7,6 @@
 #include "Emulator.h"
 
 // Memory allocation containing our ROM
-static uint8_t *rom;
 static uint8_t *mem;
 
 // Load ROM into memory
@@ -37,7 +36,7 @@ void Init_Memory(char *romPath)
 	memset(mem + ROM_SIZE, 0, MEM_SIZE - ROM_SIZE);
 }
 
-uint8_t *Get_Mem_Byte(uint16_t offset)
+uint8_t *Get_Mem_Byte_P(uint16_t offset)
 {
 	return mem + offset;
 }
