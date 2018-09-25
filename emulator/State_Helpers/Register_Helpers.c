@@ -4,7 +4,7 @@ extern State8080 state;
 
 uint8_t *Get_Register(uint8_t offset)
 {
-	if (offset == REG_MEMORY)
+	if (offset == REG_M)
 	{
 		// TODO
 	}
@@ -62,4 +62,9 @@ void Store_Register_Pair_Val(uint8_t reg, uint16_t val)
 
 	// Store least significant byte
 	*pair[1] = val & 0x00ff;
+}
+
+uint16_t Get_HL_Address()
+{
+	return ((uint16_t)state.h << 8) + state.l;
 }

@@ -12,8 +12,7 @@ State8080 state = {
 	{0, 0, 0, 0, 0}, // PSW (Zero, Sign, Parity, Carry, Aux Carry)
 	1,   // Interrupt
 	0x0, // Stack pointer
-	0x0, // Program counter
-	0x0  // Address pointed at by registers h/l
+	0x0  // Program counter
 };
 
 #ifdef _DEBUG
@@ -34,7 +33,6 @@ void Reset_State()
 	state.int_enable = 1;
 	state.sp = 0x00;
 	state.pc = 0x0;
-	state.memory = 0x0;
 
 	state.psw.z = 0;
 	state.psw.s = 0;

@@ -91,7 +91,7 @@ TEST(Arithmetic, ADD)
 	EXPECT_EQ(state->psw.cy, expectedPsw.cy);
 
 	// Memory: 10 + 10 = 20
-	fixture = { REG_MEMORY, 10, 10, 20 };
+	fixture = { REG_M, 10, 10, 20 };
 	expectedPsw = { 0, 0, 1, 0 };
 	Prep_Arithmetic_Test(fixture);
 
@@ -160,7 +160,7 @@ TEST(Arithmetic, SUB)
 	EXPECT_EQ(state->psw.cy, expectedPsw.cy);
 
 	// M: 10 - 100 = 166
-	fixture = { REG_MEMORY, 10, 100, 166 };
+	fixture = { REG_M, 10, 100, 166 };
 	expectedPsw = { 0, 1, 1, 1 };
 	Prep_Arithmetic_Test(fixture);
 

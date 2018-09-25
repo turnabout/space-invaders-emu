@@ -41,7 +41,7 @@ void Do_Arithmetic_With_CB(uint8_t val, uint8_t isAddition)
 
 void ADD(uint8_t reg)
 {
-	if (reg == REG_MEMORY) // TODO
+	if (reg == REG_M) // TODO
 	{
 		return;
 	}
@@ -51,7 +51,7 @@ void ADD(uint8_t reg)
 
 void ADC(uint8_t reg)
 {
-	if (reg == REG_MEMORY) // TODO
+	if (reg == REG_M) // TODO
 	{
 		return;
 	}
@@ -61,7 +61,7 @@ void ADC(uint8_t reg)
 
 void SUB(uint8_t reg)
 {
-	if (reg == REG_MEMORY) // TODO
+	if (reg == REG_M) // TODO
 	{
 		return;
 	}
@@ -71,7 +71,7 @@ void SUB(uint8_t reg)
 
 void SBB(uint8_t reg)
 {
-	if (reg == REG_MEMORY) // TODO
+	if (reg == REG_M) // TODO
 	{
 		return;
 	}

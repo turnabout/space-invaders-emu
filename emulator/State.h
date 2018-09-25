@@ -26,10 +26,10 @@ typedef struct State8080 {
 	uint8_t int_enable; // Interrupt
 	uint16_t sp;        // Stack pointer
 	uint16_t pc;        // Program counter
-	uint8_t *memory;    // Address space?
 } State8080;
 
-// Offset in memory bytes for each of the State8080 struct members
+// Values representing each member of the State8080 struct, with the exception
+// of REG_M, which represents the address pointed by HL
 #define REG_A      0
 #define REG_B      1
 #define REG_C      2
@@ -41,7 +41,7 @@ typedef struct State8080 {
 #define INT_ENABLE 8
 #define SP         9
 #define PC         11
-#define REG_MEMORY 13
+#define REG_M      12 // Address pointed by HL
 
 
 //
