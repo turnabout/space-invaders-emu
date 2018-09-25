@@ -155,4 +155,26 @@ EXPORT void LDAX(uint8_t reg);
 // Special
 //
 
+// EI: Enable interrupts
+void EI();
+
+// DI: Disable interrupts
+void DI();
+
+// NOP: No operation. Used to pad timing (takes 4 CPU cycles to execute)
 void NOP();
+
+// HLT: Program counter gets incremented like usual, then the CPU enters the
+// STOPPED state and no further activity takes place until an interrupt occurs
+void HLT();
+
+// IN: Immediate data byte is read from the given input device number and 
+// replaces the contents of the accumulator.
+void IN(uint8_t deviceN);
+
+// IN: Contents of the accumulator are sent to the given output device number.
+void OUT(uint8_t deviceN);
+
+// Used by instructions whose function is unimplemented.
+// Certain functions unused by space invaders remain unimplemented.
+void NOT_IMPLEMENTED();
