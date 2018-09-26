@@ -9,9 +9,6 @@
 // Memory allocation containing ROM & RAM
 static uint8_t *mem;
 
-// Memory allocation for stack
-static uint8_t *stack;
-
 // Load ROM into memory
 void Load_Rom(char *romPath)
 {
@@ -32,7 +29,6 @@ void Load_Rom(char *romPath)
 void Init_Memory(char *romPath)
 {
 	mem = malloc(MEM_SIZE);
-	stack = malloc(STACK_SIZE);
 
 	Load_Rom(romPath);
 

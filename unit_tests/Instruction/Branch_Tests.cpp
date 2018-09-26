@@ -21,3 +21,18 @@ TEST(Branch, JNZ)
 	JNZ(0x03, 0xe3);
 	EXPECT_EQ(state->pc, 0x03e3);
 }
+
+TEST(Branch, RST)
+{
+	RST(0);
+	EXPECT_EQ(state->pc, 0);
+
+	RST(1);
+	EXPECT_EQ(state->pc, 8);
+
+	RST(2);
+	EXPECT_EQ(state->pc, 16);
+
+	RST(7);
+	EXPECT_EQ(state->pc, 56);
+}

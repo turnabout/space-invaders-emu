@@ -283,7 +283,7 @@ void OUT(uint8_t deviceN);
 
 // RST: Restart instruction; special purpose subroutine jump.
 // "pos" is the 8-byte subroutine's number (0-7)
-void RST(uint8_t pos);
+EXPORT void RST(uint8_t pos);
 
 // Used by instructions whose function is unimplemented.
 // Certain functions unused by space invaders remain unimplemented.
