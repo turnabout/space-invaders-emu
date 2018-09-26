@@ -262,6 +262,10 @@ void IN(uint8_t deviceN);
 // IN: Contents of the accumulator are sent to the given output device number.
 void OUT(uint8_t deviceN);
 
+// RST: Restart instruction; special purpose subroutine jump.
+// "pos" is the 8-byte subroutine's number (0-7)
+void RST(uint8_t pos);
+
 // Used by instructions whose function is unimplemented.
 // Certain functions unused by space invaders remain unimplemented.
 void NOT_IMPLEMENTED();

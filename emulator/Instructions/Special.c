@@ -29,6 +29,10 @@ void OUT(uint8_t deviceN)
 {
 }
 
+void RST(uint8_t pos)
+{
+}
+
 void NOT_IMPLEMENTED()
 {
 }
