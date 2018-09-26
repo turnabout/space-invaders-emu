@@ -54,7 +54,7 @@ static struct Instruction8080 list[0xff + 1] = {
 	{"DCR",  1, DCR,  {REG_L, -1}},
 	{"MVI",  2, MVI,  {REG_L, -1}},
 	{"CMA",  1, CMA,  {-1}},
-	{"SIM",  1, NOT_IMPLEMENTED, {-1}},
+	{"SIM",  1, NOT_IMPLEMENTED, {-1}}, // Serial I/O (unused)
 	{"LXI",  3, LXI,  {SP, -1}},
 	{"STA",  3, STA, {-1}},
 	{"INX",  1, INX,  {SP, -1}},
