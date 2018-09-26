@@ -15,6 +15,7 @@
     <ClCompile Include="Instructions\Branch\Jump.c" />
     <ClCompile Include="Instructions\Branch\Return.c" />
     <ClCompile Include="Instructions\Branch\Call.c" />
+    <ClCompile Include="Instructions\Stack.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h" />

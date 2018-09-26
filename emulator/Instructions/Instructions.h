@@ -209,6 +209,19 @@ EXPORT void RP();
 
 
 // 
+// Stack
+//
+
+// PUSH: Push 16-bit data from given register pair (or PSW) onto stack, where
+// the stack pointer is currently pointing
+EXPORT void PUSH(uint8_t reg);
+
+// POP: Pop 16-bit data from stack where stack pointer is pointing, and the 
+// contents of the given register pair get replaced by it
+EXPORT void POP(uint8_t reg);
+
+
+// 
 // Special
 //
 

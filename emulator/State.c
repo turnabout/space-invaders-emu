@@ -1,4 +1,5 @@
 #include "State.h"
+#include "Emulator/Emulator.h"
 
 // Emulator's global state holding registers, PSW, etc.
 State8080 state = {
@@ -10,9 +11,9 @@ State8080 state = {
 	0x00,
 	0x00,
 	{0, 0, 0, 0, 0}, // PSW (Zero, Sign, Parity, Carry, Aux Carry)
-	1,      // Interrupt
-	0x0000, // Stack pointer
-	0x0000  // Program counter
+	1,               // Interrupt
+	STACK_SIZE - 1,  // Stack pointer
+	0x0000           // Program counter
 };
 
 #ifdef _DEBUG

@@ -5,11 +5,6 @@ extern State8080 state;
 
 uint8_t *Get_Register(uint8_t offset)
 {
-	if (offset == REG_M)
-	{
-		// TODO
-	}
-
 	uint8_t *adr = (uint8_t *)&state;
 	return adr + offset;
 }
@@ -19,7 +14,7 @@ void Get_Register_Pair(uint8_t reg, uint8_t **regs)
 	switch (reg)
 	{
 	case PSW:
-		*regs = Get_Register(PSW); // TODO: Use &(state->psw)
+		*regs = Get_Register(PSW);
 		*regs++;
 		*regs = Get_Register(REG_A);
 		break;

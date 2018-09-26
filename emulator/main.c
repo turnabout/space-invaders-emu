@@ -12,6 +12,63 @@ int main(int argc, char *argv[])
 	// Initialize
 	Init_Memory("../../invaders/invaderstest");
 
+	// Stack tests
+	/*
+	printf("SP: %04x\n", state.sp);
+
+	// Push BC on stack
+	state.b = 0xbb;
+	state.c = 0xcc;
+	PUSH(REG_B);
+
+	// Push DE on stack
+	state.d = 0xdd;
+	state.e = 0xee;
+	PUSH(REG_D);
+
+	// Pop in HL
+	// POP(REG_H);
+	// printf("HL: 0x%02x%02x\n", state.h, state.l);
+	// POP(REG_H);
+	// printf("HL: 0x%02x%02x\n", state.h, state.l);
+
+	// Push PSW/Accumulator on stack
+	state.a = 0xaa;
+
+	state.psw.ac = 1;
+	state.psw.cy = 1;
+	state.psw.s = 1;
+	state.psw.z = 0;
+	state.psw.p = 1;
+
+	PUSH(PSW);
+
+	// Reset PSW/Accumulator 
+	state.a = 0x00;
+	state.psw.ac = 0;
+	state.psw.cy = 0;
+	state.psw.s = 0;
+	state.psw.z = 0;
+	state.psw.p = 0;
+
+	printf("Accumulator: 0x%02x\n", state.a);
+	printf("ac: %02x\n", state.psw.ac);
+	printf("cy: %02x\n", state.psw.cy);
+	printf("s: %02x\n", state.psw.s);
+	printf("z: %02x\n", state.psw.z);
+	printf("p: %02x\n", state.psw.p);
+
+	// Pop back on PSW/Accumulator
+	POP(PSW);
+
+	printf("Accumulator: 0x%02x\n", state.a);
+	printf("ac: %02x\n", state.psw.ac);
+	printf("cy: %02x\n", state.psw.cy);
+	printf("s: %02x\n", state.psw.s);
+	printf("z: %02x\n", state.psw.z);
+	printf("p: %02x\n", state.psw.p);
+	*/
+
 	// Fetch/execute instructions test
 	/*
 	state.a = 0;
