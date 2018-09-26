@@ -48,14 +48,19 @@ void XRA(uint8_t reg)
 	XRI(*Get_Register(reg));
 }
 
+void CPI(uint8_t comparedVal)
+{
+	uint8_t res = state.a - comparedVal;
+	PSW_Update_All(res, state.a, 0);
+}
+
 void CMP(uint8_t reg)
 {
 	uint8_t comparedVal = (reg == REG_M)
 		? *Get_Register_Pair_Pointer(REG_H)
 		: *Get_Register(reg);
 
-	uint8_t res = state.a - comparedVal;
-	PSW_Update_All(res, state.a, 0);
+	CPI(comparedVal);
 }
 
 void CMA()

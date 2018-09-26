@@ -103,6 +103,9 @@ EXPORT void ORI(uint8_t val);
 // XRA: XOR immediate byte with accumulator
 EXPORT void XRI(uint8_t val);
 
+// CPI: Compare immediate 8-bit value with accumulator
+EXPORT void CPI(uint8_t comparedVal);
+
 // CMP: Compare register or memory with accumulator
 EXPORT void CMP(uint8_t reg);
 

@@ -38,6 +38,18 @@ TEST(Logical, ORA)
 	EXPECT_EQ(state->psw.p, 1);
 }
 
+TEST(Logical, CPI)
+{
+	state->a = 0x0a;
+	CPI(0x0a);
+
+	EXPECT_EQ(state->psw.z, 1);
+
+	CPI(0x0b);
+
+	EXPECT_EQ(state->psw.cy, 1);
+}
+
 TEST(Logical, CMP)
 {
 	// a > b
