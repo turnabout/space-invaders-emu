@@ -51,7 +51,7 @@ void XRA(uint8_t reg)
 void CMP(uint8_t reg)
 {
 	uint8_t comparedVal = (reg == REG_M)
-		? *Get_HL_Pointer()
+		? *Get_Register_Pair_Pointer(REG_H)
 		: *Get_Register(reg);
 
 	uint8_t res = state.a - comparedVal;

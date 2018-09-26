@@ -64,14 +64,3 @@ uint8_t *Get_Register_Pair_Pointer(uint8_t reg)
 {
 	return Get_Mem_Byte_P(Get_Register_Pair_Val(reg));
 }
-
-
-uint16_t Get_HL_Address()
-{
-	return ((uint16_t)state.h << 8) + state.l;
-}
-
-uint8_t *Get_HL_Pointer()
-{
-	return Get_Mem_Byte_P(Get_HL_Address());
-}

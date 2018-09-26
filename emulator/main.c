@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 	state.h = 0x21; // hl = 0x2100
 	state.l = 0x00;
 
-	uint8_t *hlP = Get_Mem_Byte_P(Get_HL_Address());
+	uint8_t *hlP = Get_Mem_Byte_P(Get_Register_Pair_Pointer(REG_H));
 
 	*hlP = 0xaa; // (hl) = 0xaa
 

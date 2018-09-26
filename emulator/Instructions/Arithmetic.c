@@ -45,7 +45,7 @@ void Do_Arithmetic_With_CB(uint8_t val, uint8_t isAddition)
 uint8_t Get_Instruction_Reg_Val(uint8_t reg)
 {
 	return (reg == REG_M)
-		? *Get_HL_Pointer()
+		? *Get_Register_Pair_Pointer(REG_H)
 		: *Get_Register(reg);
 }
 
@@ -84,7 +84,7 @@ void SBB(uint8_t reg)
 void INR(uint8_t reg)
 {
 	uint8_t *regP = (reg == REG_M)
-		? Get_HL_Pointer()
+		? Get_Register_Pair_Pointer(REG_H)
 		: Get_Register(reg);
 
 	*regP += 1;
@@ -98,7 +98,7 @@ void INR(uint8_t reg)
 void DCR(uint8_t reg)
 {
 	uint8_t *regP = (reg == REG_M)
-		? Get_HL_Pointer()
+		? Get_Register_Pair_Pointer(REG_H)
 		: Get_Register(reg);
 
 	*regP -= 1;

@@ -249,11 +249,3 @@ TEST(State, PSW_Update_Carry_Bit_16)
 	PSW_Update_Carry_Bit_16(uint16_t(0x9999 + 0x9999), 0x9999, 1);
 	EXPECT_EQ(state->psw.cy, 1);
 }
-
-TEST(State, Get_HL_Address)
-{
-	state->h = 0x10;
-	state->l = 0xba;
-
-	EXPECT_EQ(Get_HL_Address(), 0x10ba);
-}
