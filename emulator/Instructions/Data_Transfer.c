@@ -94,3 +94,9 @@ void STA(uint8_t hi, uint8_t lo)
 	uint8_t *dst = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
 	*dst = state.a;
 }
+
+void LDA(uint8_t hi, uint8_t lo)
+{
+	uint8_t *src = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
+	state.a = *src;
+}

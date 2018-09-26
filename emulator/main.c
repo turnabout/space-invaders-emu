@@ -12,6 +12,16 @@ int main(int argc, char *argv[])
 	// Initialize
 	Init_Memory("../../invaders/invaderstest");
 
+	// LDA test
+	/*
+	uint8_t *src = Get_Mem_Byte_P(0x210a);
+
+	*src = 0xfe;
+	LDA(0x21, 0x0a);
+
+	printf("should be 0xfe: 0x%02x\n", state.a);
+	*/
+
 	// STA test
 	/*
 	state.a = 0xda;

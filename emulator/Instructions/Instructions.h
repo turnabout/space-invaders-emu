@@ -169,8 +169,12 @@ EXPORT void PCHL();
 EXPORT void XCHG();
 
 // STA: Store contents of accumulator at the address pointed at by the 
-// given immediate 16-bits value
+// given immediate 16-bit value
 void STA(uint8_t hi, uint8_t lo);
+
+// LDA: Get value at address pointed at by the given immediate 16-bit value
+// and store it in the accumulator
+void LDA(uint8_t hi, uint8_t lo);
 
 
 // 
