@@ -12,6 +12,23 @@ int main(int argc, char *argv[])
 	// Initialize
 	Init_Memory("../../invaders/invaderstest");
 
+	// SP test
+	/*
+	// Establish stack
+	LXI(SP, 0x24, 0x00);
+
+	// Push BC
+	state.b = 0xbb;
+	state.c = 0xcc;
+	PUSH(REG_B);
+
+	// Pop into DE
+	POP(REG_D);
+
+	printf("Should be 0xbbcc: 0x%02x%02x\n", state.d, state.e);
+	printf("Should be 0x2400: 0x%02x\n", state.sp);
+	*/
+
 	// LDA test
 	/*
 	uint8_t *src = Get_Mem_Byte_P(0x210a);
