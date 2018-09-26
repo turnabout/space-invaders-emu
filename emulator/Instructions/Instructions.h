@@ -160,6 +160,10 @@ void SHLD(uint8_t hi, uint8_t lo);
 // 16-bit address
 void LHLD(uint8_t hi, uint8_t lo);
 
+// PCHL: Transfers HL's 16-bit value into the program counter.
+// PC.hi = H; PC.lo = L;
+EXPORT void PCHL();
+
 
 // 
 // Branch

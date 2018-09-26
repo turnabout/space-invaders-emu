@@ -65,3 +65,8 @@ void LHLD(uint8_t hi, uint8_t lo)
 	state.h = *(adr + 1);
 	state.l = *adr;
 }
+
+void PCHL()
+{
+	state.pc = ((uint16_t)state.h << 8) | state.l;
+}

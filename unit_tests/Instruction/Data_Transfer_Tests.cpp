@@ -47,3 +47,13 @@ TEST(Data_Transfer, LXI)
 
 	EXPECT_EQ(state->sp, 0xe23f);
 }
+
+TEST(Data_Transfer, PCHL)
+{
+	state->h = 0x10;
+	state->l = 0x55;
+
+	PCHL();
+
+	EXPECT_EQ(state->pc, 0x1055);
+}
