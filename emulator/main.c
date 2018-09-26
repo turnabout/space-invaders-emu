@@ -12,6 +12,15 @@ int main(int argc, char *argv[])
 	// Initialize
 	Init_Memory("../../invaders/invaderstest");
 
+	// STA test
+	/*
+	state.a = 0xda;
+
+	STA(0x20, 0xfe);
+
+	printf("should be 0xda: 0x%02x\n", *Get_Mem_Byte_P(0x20fe));
+	*/
+
 	// Call/Return tests
 	/*
 	state.pc = 0x01;

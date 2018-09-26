@@ -88,3 +88,9 @@ void XCHG()
 	*de[0] = temp[0];
 	*de[1] = temp[1];
 }
+
+void STA(uint8_t hi, uint8_t lo)
+{
+	uint8_t *dst = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
+	*dst = state.a;
+}

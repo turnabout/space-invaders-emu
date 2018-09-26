@@ -168,6 +168,10 @@ EXPORT void PCHL();
 // H <-> D; L <-> E;
 EXPORT void XCHG();
 
+// STA: Store contents of accumulator at the address pointed at by the 
+// given immediate 16-bits value
+void STA(uint8_t hi, uint8_t lo);
+
 
 // 
 // Branch

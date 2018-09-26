@@ -56,7 +56,7 @@ static struct Instruction8080 list[0xff + 1] = {
 	{"CMA",  1, CMA,  {-1}},
 	{"SIM",  1, NOT_IMPLEMENTED, {-1}},
 	{"LXI",  3, LXI,  {SP, -1}},
-	{"STA",  3, NOT_IMPLEMENTED, {-1}}, // TODO
+	{"STA",  3, STA, {-1}},
 	{"INX",  1, INX,  {SP, -1}},
 	{"INR",  1, INR,  {REG_M, -1}},
 	{"DCR",  1, DCR,  {REG_M, -1}},
