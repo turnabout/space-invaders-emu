@@ -70,3 +70,21 @@ void PCHL()
 {
 	state.pc = ((uint16_t)state.h << 8) | state.l;
 }
+
+void XCHG()
+{
+	uint8_t *hl[2], *de[2];
+	uint8_t temp[2];
+		
+	Get_Register_Pair(REG_H, hl);
+	Get_Register_Pair(REG_D, de);
+
+	temp[0] = *hl[0];
+	temp[1] = *hl[1];
+
+	*hl[0] = *de[0];
+	*hl[1] = *de[1];
+
+	*de[0] = temp[0];
+	*de[1] = temp[1];
+}

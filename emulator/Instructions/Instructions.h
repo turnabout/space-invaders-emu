@@ -164,6 +164,10 @@ void LHLD(uint8_t hi, uint8_t lo);
 // PC.hi = H; PC.lo = L;
 EXPORT void PCHL();
 
+// XCHG: Swap contents between HL & DE.
+// H <-> D; L <-> E;
+EXPORT void XCHG();
+
 
 // 
 // Branch

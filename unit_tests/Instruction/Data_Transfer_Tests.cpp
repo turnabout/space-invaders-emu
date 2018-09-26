@@ -57,3 +57,19 @@ TEST(Data_Transfer, PCHL)
 
 	EXPECT_EQ(state->pc, 0x1055);
 }
+
+TEST(Data_Transfer, XCHG)
+{
+	state->h = 0x10;
+	state->l = 0x55;
+
+	state->d = 0xdd;
+	state->e = 0xee;
+
+	XCHG();
+
+	EXPECT_EQ(state->h, 0xdd);
+	EXPECT_EQ(state->l, 0xee);
+	EXPECT_EQ(state->d, 0x10);
+	EXPECT_EQ(state->e, 0x55);
+}
