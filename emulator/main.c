@@ -12,6 +12,11 @@ int main(int argc, char *argv[])
 	// Initialize
 	Init_Memory("../../invaders/invaderstest");
 
+	getchar();
+}
+
+void Tests()
+{
 	// SP test
 	/*
 	// Establish stack
@@ -257,5 +262,4 @@ int main(int argc, char *argv[])
 	printf("Should be 1: %d\n", state.psw.cy);
 	*/
 
-	getchar();
 }

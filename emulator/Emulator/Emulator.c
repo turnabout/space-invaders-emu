@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "../Instructions/Instructions.h"
 #include "../State.h"
 #include "Emulator.h"
@@ -62,3 +64,82 @@ void Execute_Instruction(Instruction8080 *inst)
 		break;
 	}
 }
+
+#ifdef _DEBUG
+char *Arg_To_Str(uint8_t val)
+{
+	switch (val)
+	{
+		case REG_A:
+			return "A";
+			break;
+		case REG_B:
+			return "B";
+			break;
+		case REG_C:
+			return "C";
+			break;
+		case REG_D:
+			return "D";
+			break;
+		case REG_E:
+			return "E";
+			break;
+		case REG_H:
+			return "H";
+			break;
+		case REG_L:
+			return "L";
+			break;
+		case PSW:
+			return "PSW";
+			break;
+		case SP:
+			return "SP";
+			break;
+	}
+	return "UNK";
+}
+
+void Print_Instruction(Instruction8080 *inst)
+{
+	// Print PC
+	printf("0x%04x: ", state.pc);
+
+	// Print instruction
+	printf("%5s", inst->mnemonic);
+
+	// Get first argument(s), if need be
+	if (inst->args[0] != -1)
+	{
+		// RST - only instruction that takes a user-defined uint func arg
+		if (inst->mnemonic[0] == 'R' &&
+			inst->mnemonic[1] == 'S' &&
+			inst->mnemonic[2] == 'T')
+		{
+			printf("%d", inst->args[0]);
+		}
+		else
+		{
+			printf("%3s", Arg_To_Str(inst->args[0]));
+
+			if (inst->args[1] != -1)
+			{
+				printf("%3s", Arg_To_Str(inst->args[1]));
+			}
+		}
+	}
+
+	// Get immediate data argument(s), if need be
+	if (inst->size == 2)
+	{
+		printf("0x%02x", *Get_Mem_Byte_P(state.pc + 1));
+	}
+	else if (inst->size == 3)
+	{
+		printf("0x%02x%02x", *Get_Mem_Byte_P(state.pc + 2), *Get_Mem_Byte_P(state.pc + 1));
+	}
+
+	printf("\n");
+}
+#endif
