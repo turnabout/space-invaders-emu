@@ -212,6 +212,10 @@ EXPORT void RP();
 // Stack
 //
 
+// Helper functions to push value to/pull value from the stack
+void Push_Value_On_Stack(uint8_t hi, uint8_t lo);
+void Pull_Value_From_Stack(uint8_t *hi, uint8_t *lo);
+
 // PUSH: Push 16-bit data from given register pair (or PSW) onto stack, where
 // the stack pointer is currently pointing
 void PUSH(uint8_t reg);

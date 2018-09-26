@@ -5,6 +5,8 @@ extern State8080 state;
 
 void CALL(uint8_t hi, uint8_t lo)
 {
+	Push_Value_On_Stack((uint8_t)(state.pc >> 8), (uint8_t)state.pc);
+	JMP(hi, lo);
 }
 
 void CALL_IF(uint8_t cond, uint8_t hi, uint8_t lo)

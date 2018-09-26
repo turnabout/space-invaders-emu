@@ -12,6 +12,17 @@ int main(int argc, char *argv[])
 	// Initialize
 	Init_Memory("../../invaders/invaderstest");
 
+	// Call/Return tests
+	/*
+	state.pc = 0x01;
+	CALL(0x04, 0x10);
+
+	printf("PC, should be 0x0410: 0x%04x\n", state.pc);
+
+	RET();
+	printf("PC, should be 0x0001: 0x%04x\n", state.pc);
+	*/
+
 	// SPHL/XTHL tests
 	/*
 	state.sp = 0x0100;
@@ -53,10 +64,10 @@ int main(int argc, char *argv[])
 	PUSH(REG_D);
 
 	// Pop in HL
-	// POP(REG_H);
-	// printf("HL: 0x%02x%02x\n", state.h, state.l);
-	// POP(REG_H);
-	// printf("HL: 0x%02x%02x\n", state.h, state.l);
+	POP(REG_H);
+	printf("HL (should be 0xddee): 0x%02x%02x\n", state.h, state.l);
+	POP(REG_H);
+	printf("HL (should be 0xbbcc): 0x%02x%02x\n", state.h, state.l);
 
 	// Push PSW/Accumulator on stack
 	state.a = 0xaa;

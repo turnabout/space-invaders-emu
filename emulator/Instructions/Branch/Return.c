@@ -5,6 +5,10 @@ extern State8080 state;
 
 void RET()
 {
+	uint8_t vals[2];
+
+	Pull_Value_From_Stack(&vals[0], &vals[1]);
+	state.pc = (vals[0] << 8) | vals[1];
 }
 
 void RET_IF(uint8_t cond)
