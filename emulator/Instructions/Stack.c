@@ -46,6 +46,17 @@ void SPHL()
 	state.sp = Get_Register_Pair_Val(REG_H);
 }
 
+void SHLD()
+{
+	uint8_t *spPointer = Get_Stack_Byte_P(state.sp);
+	uint8_t *regPair[2];
+
+	Get_Register_Pair(REG_H, regPair);
+
+	*spPointer = *regPair[1];
+	*(spPointer + 1) = *regPair[0];
+}
+
 void XTHL()
 {
 	uint8_t *spPointer = Get_Stack_Byte_P(state.sp);

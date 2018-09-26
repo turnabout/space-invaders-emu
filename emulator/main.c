@@ -23,6 +23,16 @@ int main(int argc, char *argv[])
 	printf("PC, should be 0x0001: 0x%04x\n", state.pc);
 	*/
 
+	// SHLD tests
+	/*
+	LXI(REG_H, 0x11, 0x22);
+	SHLD();
+
+	POP(REG_B);
+
+	printf("Should be 0x1122: 0x%02x%02x", state.b, state.c);
+	*/
+
 	// SPHL/XTHL tests
 	/*
 	state.sp = 0x0100;

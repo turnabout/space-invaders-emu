@@ -231,6 +231,9 @@ void SPHL();
 // L <-> (SP); H <-> (SP+1)
 void XTHL();
 
+// SHLD: Move contents of HL to (SP) and (SP+1)
+void SHLD();
+
 
 // 
 // Special
