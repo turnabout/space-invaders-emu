@@ -150,6 +150,13 @@ EXPORT void STAX(uint8_t reg);
 // the contents at the memory location pointed at by the given register pair
 EXPORT void LDAX(uint8_t reg);
 
+// SHLD: Load 16-bit value pointed at by the given 16-bit address into HL
+void SHLD(uint8_t hi, uint8_t lo);
+
+// LHLD: Load 16-bit value from HL into the address pointed at by the given 
+// 16-bit address
+void LHLD(uint8_t hi, uint8_t lo);
+
 
 // 
 // Branch
@@ -230,10 +237,6 @@ void SPHL();
 // XTHL: Swap the contents of HL with the 16-bit contents pointed at by SP
 // L <-> (SP); H <-> (SP+1)
 void XTHL();
-
-// SHLD: Move contents of HL to (SP) and (SP+1)
-void SHLD();
-
 
 // 
 // Special

@@ -49,3 +49,19 @@ void LDAX(uint8_t reg)
 {
 	state.a = *Get_Register_Pair_Pointer(reg);
 }
+
+void SHLD(uint8_t hi, uint8_t lo)
+{
+	uint8_t *adr = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
+
+	*(adr + 1) = state.h;
+	*adr = state.l;
+}
+
+void LHLD(uint8_t hi, uint8_t lo)
+{
+	uint8_t *adr = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
+
+	state.h = *(adr + 1);
+	state.l = *adr;
+}

@@ -23,14 +23,24 @@ int main(int argc, char *argv[])
 	printf("PC, should be 0x0001: 0x%04x\n", state.pc);
 	*/
 
-	// SHLD tests
+	// SHLD/LHLD tests
 	/*
-	LXI(REG_H, 0x11, 0x22);
-	SHLD();
+	uint8_t *p = Get_Mem_Byte_P(0x1020);
 
-	POP(REG_B);
+	// SHLD
+	state.h = 0xee;
+	state.l = 0xff;
+	SHLD(0x10, 0x20);
 
-	printf("Should be 0x1122: 0x%02x%02x", state.b, state.c);
+	printf("Should be 0xeeff: 0x%02x%02x", *(p + 1), *p);
+
+	*p = 0xbb;
+	*(p + 1) = 0xaa;
+
+	// LHLD
+	LHLD(0x10, 0x20);
+
+	printf("Should be 0xaabb: 0x%02x%02x", state.h, state.l);
 	*/
 
 	// SPHL/XTHL tests
