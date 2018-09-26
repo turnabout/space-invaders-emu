@@ -214,11 +214,18 @@ EXPORT void RP();
 
 // PUSH: Push 16-bit data from given register pair (or PSW) onto stack, where
 // the stack pointer is currently pointing
-EXPORT void PUSH(uint8_t reg);
+void PUSH(uint8_t reg);
 
 // POP: Pop 16-bit data from stack where stack pointer is pointing, and the 
 // contents of the given register pair get replaced by it
-EXPORT void POP(uint8_t reg);
+void POP(uint8_t reg);
+
+// SPHL: Move contents of HL to SP to change its address; SP = HL
+void SPHL();
+
+// XTHL: Swap the contents of HL with the 16-bit contents pointed at by SP
+// L <-> (SP); H <-> (SP+1)
+void XTHL();
 
 
 // 

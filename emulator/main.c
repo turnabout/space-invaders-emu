@@ -12,6 +12,32 @@ int main(int argc, char *argv[])
 	// Initialize
 	Init_Memory("../../invaders/invaderstest");
 
+	// SPHL/XTHL tests
+	/*
+	state.sp = 0x0100;
+
+	// Load 0x0205 in HL, make SP point there
+	LXI(REG_H, 0x02, 0x05);
+	SPHL();
+
+	// Load 0xbbcc in BC, push on SP
+	LXI(REG_B, 0xbb, 0xcc);
+	PUSH(REG_B);
+
+	printf("0x%04x\n", state.sp);
+
+	// Load 0x5577 in HL, swap HL contents for contents SP points at
+	LXI(REG_H, 0x55, 0x77);
+	XTHL();
+
+	printf("0x%02x%02x (should be 0xbbcc)\n", state.h, state.l);
+
+	printf("0x%02x%02x (should be 0x5577)\n", 
+		*Get_Stack_Byte_P(state.sp + 1), 
+		*Get_Stack_Byte_P(state.sp)
+	);
+	*/
+
 	// Stack tests
 	/*
 	printf("SP: %04x\n", state.sp);
