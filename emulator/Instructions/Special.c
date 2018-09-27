@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "Instructions.h"
 #include "../State.h"
 
@@ -19,14 +22,17 @@ void NOP()
 
 void HLT()
 {
+	exit(1);
 }
 
 void IN(uint8_t deviceN)
 {
+	// TODO
 }
 
 void OUT(uint8_t deviceN)
 {
+	// TODO
 }
 
 void RST(uint8_t pos)
@@ -47,4 +53,5 @@ void RST(uint8_t pos)
 
 void NOT_IMPLEMENTED()
 {
+	printf("NOT_IMPLEMENTED\n");
 }

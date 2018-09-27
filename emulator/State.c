@@ -12,7 +12,7 @@ State8080 state = {
 	0x00,
 	{0, 0, 0, 0, 0}, // PSW (Zero, Sign, Parity, Carry, Aux Carry)
 	1,               // Interrupt
-	STACK_SIZE - 2,  // Stack pointer
+	0x0000,          // Stack pointer
 	0x0000           // Program counter
 };
 

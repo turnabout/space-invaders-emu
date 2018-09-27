@@ -9,7 +9,7 @@
 // Memory allocation containing ROM & RAM
 static uint8_t *mem;
 
-// Load ROM into memory
+// Load ROM into allocated memory
 void Load_Rom(char *romPath)
 {
 	// Attempt getting file to work with

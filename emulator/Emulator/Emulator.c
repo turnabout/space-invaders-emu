@@ -7,8 +7,8 @@
 
 extern struct State8080 state;
 
-// Fetch the next instruction in ROM pointed at by current program counter
-Instruction8080 *Fetch_Next_Instruction()
+// Fetch the instruction currently pointed at by program counter
+Instruction8080 *Fetch_Current_Instruction()
 {
 	return Get_Instruction(*Get_Mem_Byte_P(state.pc));
 }
@@ -46,6 +46,12 @@ void Execute_Instruction(Instruction8080 *inst)
 
 	// Increment program counter
 	state.pc += inst->size;
+
+	if (state.pc == 0x1949)
+	{
+		int aaa = 0;
+	}
+
 
 	// Execute correct instruction function with collected arguments
 	// Note: Not a single instruction function uses 4 arguments

@@ -7,6 +7,7 @@
 
 extern State8080 state;
 
+void Interpret_Program_Debug();
 void Interpret_Program();
 
 int main(int argc, char *argv[])
@@ -20,9 +21,19 @@ int main(int argc, char *argv[])
 // Read through ROM, interpreting instructions
 void Interpret_Program()
 {
+	while (1)
+	{
+		Execute_Instruction(Fetch_Current_Instruction());
+	}
+}
+
+// Read through ROM, interpreting instructions
+// Print executed instructions as we go along
+void Interpret_Program_Debug()
+{
 	do
 	{
-		Instruction8080 *inst = Fetch_Next_Instruction();
+		Instruction8080 *inst = Fetch_Current_Instruction();
 		Print_Instruction(inst, 0);
 		Execute_Instruction(inst);
 	} while ((getchar()) != 'q');
@@ -184,8 +195,8 @@ void Tests()
 	/*
 	state.a = 0;
 
-	Execute_Instruction(Fetch_Next_Instruction());
-	printf("%s\n", Fetch_Next_Instruction()->mnemonic);
+	Execute_Instruction(Fetch_Current_Instruction());
+	printf("%s\n", Fetch_Current_Instruction()->mnemonic);
 
 	printf("a: 0x%02x\n", state.a);
 	*/

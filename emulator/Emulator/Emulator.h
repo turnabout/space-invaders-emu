@@ -8,13 +8,12 @@
 
 #define MEM_SIZE   0x8000
 #define ROM_SIZE   0x2000
-#define STACK_SIZE 0x2000
 
 // Initialize all memory
 void Init_Memory(char *romPath);
 
 // Execute a given instruction
-Instruction8080 *Fetch_Next_Instruction();
+Instruction8080 *Fetch_Current_Instruction();
 void Execute_Instruction(Instruction8080 *inst);
 
 // Get byte pointer at specified offset in memory
