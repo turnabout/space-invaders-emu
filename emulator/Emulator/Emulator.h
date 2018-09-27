@@ -25,5 +25,5 @@ uint8_t *Get_Stack_Byte_P(uint16_t offset);
 
 #ifdef _DEBUG
 // Print the given instruction - for testing/debugging purposes
-void Print_Instruction(Instruction8080 *inst);
+void Print_Instruction(Instruction8080 *inst, uint8_t newLine);
 #endif

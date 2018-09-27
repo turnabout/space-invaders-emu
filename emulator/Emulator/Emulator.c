@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "../Instructions/Instructions.h"
 #include "../State.h"
@@ -101,31 +102,29 @@ char *Arg_To_Str(uint8_t val)
 	return "UNK";
 }
 
-void Print_Instruction(Instruction8080 *inst)
+void Print_Instruction(Instruction8080 *inst, uint8_t newLine)
 {
 	// Print PC
-	printf("0x%04x: ", state.pc);
+	printf("%04x:", state.pc);
 
 	// Print instruction
-	printf("%5s", inst->mnemonic);
+	printf("%-5s", inst->mnemonic);
 
 	// Get first argument(s), if need be
 	if (inst->args[0] != -1)
 	{
 		// RST - only instruction that takes a user-defined uint func arg
-		if (inst->mnemonic[0] == 'R' &&
-			inst->mnemonic[1] == 'S' &&
-			inst->mnemonic[2] == 'T')
+		if (strcmp(inst->mnemonic, "RST") == 0)
 		{
 			printf("%d", inst->args[0]);
 		}
 		else
 		{
-			printf("%3s", Arg_To_Str(inst->args[0]));
+			printf("%-3s", Arg_To_Str(inst->args[0]));
 
 			if (inst->args[1] != -1)
 			{
-				printf("%3s", Arg_To_Str(inst->args[1]));
+				printf("%-3s", Arg_To_Str(inst->args[1]));
 			}
 		}
 	}
@@ -139,7 +138,10 @@ void Print_Instruction(Instruction8080 *inst)
 	{
 		printf("0x%02x%02x", *Get_Mem_Byte_P(state.pc + 2), *Get_Mem_Byte_P(state.pc + 1));
 	}
-
-	printf("\n");
+		
+	if (newLine == 1)
+	{
+		printf("\n");
+	}
 }
 #endif

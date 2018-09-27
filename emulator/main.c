@@ -7,12 +7,25 @@
 
 extern State8080 state;
 
+void Interpret_Program();
+
 int main(int argc, char *argv[])
 {
-	// Initialize
 	Init_Memory("../../invaders/invaderstest");
+	Interpret_Program();
 
 	getchar();
+}
+
+// Read through ROM, interpreting instructions
+void Interpret_Program()
+{
+	do
+	{
+		Instruction8080 *inst = Fetch_Next_Instruction();
+		Print_Instruction(inst, 0);
+		Execute_Instruction(inst);
+	} while ((getchar()) != 'q');
 }
 
 void Tests()
