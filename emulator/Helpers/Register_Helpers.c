@@ -1,4 +1,5 @@
 #include "CPU_Helpers.h"
+#include "Number_Helpers.h"
 #include "../Emulator/Emulator.h"
 
 extern State8080 state;
@@ -44,7 +45,7 @@ uint16_t Get_Register_Pair_Val(uint8_t reg)
 	uint8_t *pair[2];
 	Get_Register_Pair(reg, pair);
 
-	return (*pair[0] << 8) | *pair[1];
+	return Bytes_To_Short(*pair[0], *pair[1]);
 }
 
 void Store_Register_Pair_Val(uint8_t reg, uint16_t val)

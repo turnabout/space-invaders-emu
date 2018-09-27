@@ -1,11 +1,12 @@
 #include "../Instructions.h"
 #include "../../State.h"
+#include "../../Helpers/Number_Helpers.h"
 
 extern State8080 state;
 
 void JMP(uint8_t hi, uint8_t lo)
 {
-	state.pc = (uint16_t)(hi << 8) | lo;
+	state.pc = Bytes_To_Short(hi, lo);
 }
 
 void JMP_IF(uint8_t cond, uint8_t hi, uint8_t lo)
