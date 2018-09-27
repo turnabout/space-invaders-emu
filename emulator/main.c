@@ -11,7 +11,7 @@ void Interpret_Program();
 
 int main(int argc, char *argv[])
 {
-	Init_Memory("../../invaders/invaderstest");
+	Init_Memory("../../invaders/invaders");
 	Interpret_Program();
 
 	getchar();

@@ -92,6 +92,9 @@ char *Arg_To_Str(uint8_t val)
 		case REG_L:
 			return "L";
 			break;
+		case REG_M:
+			return "M";
+			break;
 		case PSW:
 			return "PSW";
 			break;
