@@ -23,12 +23,15 @@ void Interpret_Program()
 {
 	while (1)
 	{
-		Execute_Instruction(Fetch_Current_Instruction());
+		Instruction8080 *inst = Fetch_Current_Instruction();
+		Print_Instruction(inst, 1);
+		Execute_Instruction(inst);
 	}
 }
 
 // Read through ROM, interpreting instructions
-// Print executed instructions as we go along
+// Steps through each instruction one by one, executing the next after the user
+// presses enter
 void Interpret_Program_Debug()
 {
 	do

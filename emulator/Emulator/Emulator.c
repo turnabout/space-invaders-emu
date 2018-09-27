@@ -47,12 +47,6 @@ void Execute_Instruction(Instruction8080 *inst)
 	// Increment program counter
 	state.pc += inst->size;
 
-	if (state.pc == 0x1949)
-	{
-		int aaa = 0;
-	}
-
-
 	// Execute correct instruction function with collected arguments
 	// Note: Not a single instruction function uses 4 arguments
 	switch (argC)
