@@ -41,6 +41,7 @@
     <ClCompile Include="Instruction\Branch_Tests.cpp" />
     <ClCompile Include="Instruction\Data_Transfer_Tests.cpp" />
     <ClCompile Include="Instruction\Logical_Tests.cpp" />
+    <ClCompile Include="Number_Helpers_Tests.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="State_Tests.cpp" />
     <ClCompile Include="pch.cpp">

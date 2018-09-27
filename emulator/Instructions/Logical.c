@@ -1,6 +1,6 @@
 #include "Instructions.h"
 #include "../State.h"
-#include "../State_Helpers/State_Helpers.h"
+#include "../Helpers/CPU_Helpers.h"
 
 extern State8080 state;
 

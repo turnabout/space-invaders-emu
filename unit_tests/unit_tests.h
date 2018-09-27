@@ -8,7 +8,8 @@ extern "C" {
 	#include <stdlib.h>
 	#include <string.h>
 	#include "../emulator/State.h"
-	#include "../emulator/State_Helpers/State_Helpers.h"
+	#include "../emulator/Helpers/Number_Helpers.h"
+	#include "../emulator/Helpers/CPU_Helpers.h"
 	#include "../emulator/Instructions/Instructions.h"
 	#include "../emulator/Emulator/Emulator.h"
 }

@@ -1,4 +1,4 @@
-#include "State_Helpers.h"
+#include "CPU_Helpers.h"
 #include "../Emulator/Emulator.h"
 
 extern State8080 state;

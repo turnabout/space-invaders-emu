@@ -3,7 +3,7 @@
 #include "State.h"
 #include "Emulator/Emulator.h"
 #include "Instructions/Instructions.h"
-#include "State_Helpers/State_Helpers.h"
+#include "Helpers/CPU_Helpers.h"
 
 extern State8080 state;
 
