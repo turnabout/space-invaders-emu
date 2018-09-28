@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "../Export.h"
+#include "../../Export.h"
 
 
 //
@@ -276,10 +276,10 @@ void HLT();
 
 // IN: Immediate data byte is read from the given input device number and 
 // replaces the contents of the accumulator.
-void IN(uint8_t deviceN);
+void IN(uint8_t portN);
 
 // IN: Contents of the accumulator are sent to the given output device number.
-void OUT(uint8_t deviceN);
+void OUT(uint8_t portN);
 
 // RST: Restart instruction; special purpose subroutine jump.
 // "pos" is the 8-byte subroutine's number (0-7)

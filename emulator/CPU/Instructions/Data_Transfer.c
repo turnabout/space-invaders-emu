@@ -1,9 +1,11 @@
 #include "Instructions.h"
 #include "../State.h"
-#include "../Emulator/Emulator.h"
+#include "../CPU.h"
 #include "../Helpers/CPU_Helpers.h"
+#include "../../Helpers/Number_Helpers.h"
 
 extern State8080 state;
+extern API8080 externalFuncs;
 
 void MVI(uint8_t reg, uint8_t data)
 {
@@ -27,7 +29,7 @@ void LXI(uint8_t reg, uint8_t hi, uint8_t lo)
 {
 	if (reg == SP)
 	{
-		state.sp = (uint16_t)(hi << 8) + lo;
+		state.sp = Bytes_To_Short(hi, lo);
 		return;
 	}
 
@@ -52,7 +54,7 @@ void LDAX(uint8_t reg)
 
 void SHLD(uint8_t hi, uint8_t lo)
 {
-	uint8_t *adr = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
+	uint8_t *adr = externalFuncs.accessMem(Bytes_To_Short(hi, lo));
 
 	*(adr + 1) = state.h;
 	*adr = state.l;
@@ -60,7 +62,7 @@ void SHLD(uint8_t hi, uint8_t lo)
 
 void LHLD(uint8_t hi, uint8_t lo)
 {
-	uint8_t *adr = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
+	uint8_t *adr = externalFuncs.accessMem(Bytes_To_Short(hi, lo));
 
 	state.h = *(adr + 1);
 	state.l = *adr;
@@ -68,7 +70,7 @@ void LHLD(uint8_t hi, uint8_t lo)
 
 void PCHL()
 {
-	state.pc = ((uint16_t)state.h << 8) | state.l;
+	state.pc = Bytes_To_Short(state.h, state.l);
 }
 
 void XCHG()
@@ -91,12 +93,18 @@ void XCHG()
 
 void STA(uint8_t hi, uint8_t lo)
 {
-	uint8_t *dst = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
+	uint8_t *dst = externalFuncs.accessMem(
+		Bytes_To_Short(hi, lo)
+	);
+
 	*dst = state.a;
 }
 
 void LDA(uint8_t hi, uint8_t lo)
 {
-	uint8_t *src = Get_Mem_Byte_P((uint16_t)hi << 8 | lo);
+	uint8_t *src = externalFuncs.accessMem(
+		Bytes_To_Short(hi, lo)
+	);
+
 	state.a = *src;
 }

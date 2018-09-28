@@ -1,44 +1,40 @@
 #include <stdio.h>
 
-#include "State.h"
-#include "Emulator/Emulator.h"
-#include "Instructions/Instructions.h"
-#include "Helpers/CPU_Helpers.h"
+#include "CPU/External_API.h"
+#include "Memory/External_API.h"
 
-extern State8080 state;
-
-void Interpret_Program_Debug();
-void Interpret_Program();
+void Run();
+void Run_Line_By_Line();
 
 int main(int argc, char *argv[])
 {
 	Init_Memory("../../invaders/invaders");
-	Interpret_Program();
+	Initialize_CPU(Get_Mem_Byte_P);
+
+	Run_Line_By_Line();
+	// Run();
+
 
 	getchar();
 }
 
 // Read through ROM, interpreting instructions
-void Interpret_Program()
+void Run()
 {
 	while (1)
 	{
-		Instruction8080 *inst = Fetch_Current_Instruction();
-		Print_Instruction(inst, 1);
-		Execute_Instruction(inst);
+		Interpret_Next_Instruction(1, 1);
 	}
 }
 
 // Read through ROM, interpreting instructions
 // Steps through each instruction one by one, executing the next after the user
 // presses enter
-void Interpret_Program_Debug()
+void Run_Line_By_Line()
 {
 	do
 	{
-		Instruction8080 *inst = Fetch_Current_Instruction();
-		Print_Instruction(inst, 0);
-		Execute_Instruction(inst);
+		Interpret_Next_Instruction(1, 0);
 	} while ((getchar()) != 'q');
 }
 
@@ -132,8 +128,8 @@ void Tests()
 	printf("0x%02x%02x (should be 0xbbcc)\n", state.h, state.l);
 
 	printf("0x%02x%02x (should be 0x5577)\n", 
-		*Get_Stack_Byte_P(state.sp + 1), 
-		*Get_Stack_Byte_P(state.sp)
+		*Get_Mem_Byte_P(state.sp + 1), 
+		*Get_Mem_Byte_P(state.sp)
 	);
 	*/
 
@@ -198,8 +194,8 @@ void Tests()
 	/*
 	state.a = 0;
 
-	Execute_Instruction(Fetch_Current_Instruction());
-	printf("%s\n", Fetch_Current_Instruction()->mnemonic);
+	Interpret_Instruction(Fetch_Instruction());
+	printf("%s\n", Fetch_Instruction()->mnemonic);
 
 	printf("a: 0x%02x\n", state.a);
 	*/
@@ -288,5 +284,4 @@ void Tests()
 	printf("Should be 0: %d\n", state.psw.z);
 	printf("Should be 1: %d\n", state.psw.cy);
 	*/
-
 }

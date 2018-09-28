@@ -7,11 +7,10 @@ extern "C" {
 	#include <stdio.h> 
 	#include <stdlib.h>
 	#include <string.h>
-	#include "../emulator/State.h"
+	#include "../emulator/CPU/State.h"
 	#include "../emulator/Helpers/Number_Helpers.h"
-	#include "../emulator/Helpers/CPU_Helpers.h"
-	#include "../emulator/Instructions/Instructions.h"
-	#include "../emulator/Emulator/Emulator.h"
+	#include "../emulator/CPU/Helpers/CPU_Helpers.h"
+	#include "../emulator/CPU/Instructions/Instructions.h"
 }
 
 incl_lib("../Debug/emulator.lib")

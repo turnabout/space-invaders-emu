@@ -1,20 +1,52 @@
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
-#include "../Instructions/Instructions.h"
-#include "../State.h"
-#include "Emulator.h"
+#include "Instructions/Instructions.h"
+#include "State.h"
+#include "External_API.h"
+#include "CPU.h"
 
-extern struct State8080 state;
+extern State8080 state;
+
+// CPU's externally defined functions for accessing memory, io, etc.
+API8080 externalFuncs;
 
 // Fetch the instruction currently pointed at by program counter
-Instruction8080 *Fetch_Current_Instruction()
+Instruction8080 *Fetch_Instruction();
+
+// Read and interpret the given instruction
+void Interpret_Instruction(Instruction8080 *inst);
+
+#ifdef _DEBUG
+void Print_Instruction(Instruction8080 *inst, uint8_t newLine);
+#endif
+
+void Initialize_CPU(
+	API_Access_Memory getMemBytePFunc
+)
 {
-	return Get_Instruction(*Get_Mem_Byte_P(state.pc));
+	externalFuncs.accessMem = getMemBytePFunc;
 }
 
-// Read and execute the given instruction
-void Execute_Instruction(Instruction8080 *inst)
+void Interpret_Next_Instruction(uint8_t print, uint8_t newLine)
+{
+	Instruction8080 *inst = Fetch_Instruction();
+
+	if (print)
+	{
+		Print_Instruction(inst, newLine);
+	}
+
+	Interpret_Instruction(inst);
+}
+
+Instruction8080 *Fetch_Instruction()
+{
+	return Get_Instruction(*externalFuncs.accessMem(state.pc));
+}
+
+void Interpret_Instruction(Instruction8080 *inst)
 {
 	// Given args will always be unsigned 8-bit integers
 	uint8_t args[3];
@@ -34,14 +66,14 @@ void Execute_Instruction(Instruction8080 *inst)
 	// Get immediate data argument(s), if need be
 	if (inst->size == 2)
 	{
-		args[argC++] = *Get_Mem_Byte_P(state.pc + 1);
+		args[argC++] = *externalFuncs.accessMem(state.pc + 1);
 	}
 	else if (inst->size == 3)
 	{
 		// Data stored backwards due to little-endian - most significant 
 		// byte should be the first argument
-		args[argC++] = *Get_Mem_Byte_P(state.pc + 2);
-		args[argC++] = *Get_Mem_Byte_P(state.pc + 1);
+		args[argC++] = *externalFuncs.accessMem(state.pc + 2);
+		args[argC++] = *externalFuncs.accessMem(state.pc + 1);
 	}
 
 	// Increment program counter
@@ -65,6 +97,17 @@ void Execute_Instruction(Instruction8080 *inst)
 		break;
 	}
 }
+
+API8080 *Get_API()
+{
+	return &externalFuncs;
+}
+
+
+
+//
+// Debug
+//
 
 #ifdef _DEBUG
 char *Arg_To_Str(uint8_t val)
@@ -135,11 +178,11 @@ void Print_Instruction(Instruction8080 *inst, uint8_t newLine)
 	// Get immediate data argument(s), if need be
 	if (inst->size == 2)
 	{
-		printf("0x%02x", *Get_Mem_Byte_P(state.pc + 1));
+		printf("0x%02x", *externalFuncs.accessMem(state.pc + 1));
 	}
 	else if (inst->size == 3)
 	{
-		printf("0x%02x%02x", *Get_Mem_Byte_P(state.pc + 2), *Get_Mem_Byte_P(state.pc + 1));
+		printf("0x%02x%02x", *externalFuncs.accessMem(state.pc + 2), *externalFuncs.accessMem(state.pc + 1));
 	}
 		
 	if (newLine == 1)

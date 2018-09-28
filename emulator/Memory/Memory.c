@@ -2,9 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../Instructions/Instructions.h"
-#include "../State.h"
-#include "Emulator.h"
+#include "External_API.h"
+
+// Memory
+// ROM: $0000-$1fff
+// RAM: 
+//      work RAM:  $2000-23ff
+//      video RAM: $2400-3fff
+
+#define MEM_SIZE   0x16000
+#define ROM_SIZE   0x2000
 
 // Memory allocation containing ROM & RAM
 static uint8_t *mem;
@@ -37,11 +44,6 @@ void Init_Memory(char *romPath)
 }
 
 uint8_t *Get_Mem_Byte_P(uint16_t offset)
-{
-	return mem + offset;
-}
-
-uint8_t *Get_Stack_Byte_P(uint16_t offset)
 {
 	return mem + offset;
 }

@@ -25,12 +25,12 @@ void HLT()
 	exit(1);
 }
 
-void IN(uint8_t deviceN)
+void IN(uint8_t portN)
 {
 	// TODO
 }
 
-void OUT(uint8_t deviceN)
+void OUT(uint8_t portN)
 {
 	// TODO
 }

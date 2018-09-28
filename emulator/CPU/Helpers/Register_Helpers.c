@@ -1,8 +1,9 @@
 #include "CPU_Helpers.h"
-#include "Number_Helpers.h"
-#include "../Emulator/Emulator.h"
+#include "../../Helpers/Number_Helpers.h"
+#include "../CPU.h"
 
 extern State8080 state;
+extern API8080 externalFuncs;
 
 uint8_t *Get_Register(uint8_t offset)
 {
@@ -63,5 +64,5 @@ void Store_Register_Pair_Val(uint8_t reg, uint16_t val)
 
 uint8_t *Get_Register_Pair_Pointer(uint8_t reg)
 {
-	return Get_Mem_Byte_P(Get_Register_Pair_Val(reg));
+	return externalFuncs.accessMem(Get_Register_Pair_Val(reg));
 }

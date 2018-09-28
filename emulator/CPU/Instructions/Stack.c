@@ -1,13 +1,14 @@
 #include "Instructions.h"
 #include "../State.h"
+#include "../CPU.h"
 #include "../Helpers/CPU_Helpers.h"
-#include "../Emulator/Emulator.h"
 
 extern State8080 state;
+extern API8080 externalFuncs;
 
 void Push_Value_On_Stack(uint8_t hi, uint8_t lo)
 {
-	uint8_t *spPointer = Get_Stack_Byte_P(state.sp);
+	uint8_t *spPointer = externalFuncs.accessMem(state.sp);
 
 	*(spPointer - 1) = hi;
 	*(spPointer - 2) = lo;
@@ -17,7 +18,7 @@ void Push_Value_On_Stack(uint8_t hi, uint8_t lo)
 
 void Pull_Value_From_Stack(uint8_t *hi, uint8_t *lo)
 {
-	uint8_t *spPointer = Get_Stack_Byte_P(state.sp);
+	uint8_t *spPointer = externalFuncs.accessMem(state.sp);
 
 	*hi = *(spPointer + 1);
 	*lo = *spPointer;
@@ -48,7 +49,7 @@ void SPHL()
 
 void XTHL()
 {
-	uint8_t *spPointer = Get_Stack_Byte_P(state.sp);
+	uint8_t *spPointer = externalFuncs.accessMem(state.sp);
 	uint8_t *hl[2];
 	uint8_t temp[2];
 		

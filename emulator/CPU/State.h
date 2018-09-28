@@ -1,7 +1,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "Export.h"
+#include "../Export.h"
 
 // PSW (Program Status Word) condition bits
 typedef struct ConditionBits {
@@ -29,7 +29,9 @@ typedef struct State8080 {
 } State8080;
 
 // Values representing each member of the State8080 struct, with the exception
-// of REG_M, which represents the address pointed by HL
+// of REG_M, which represents the address pointed by HL.
+// Every value (except REG_M) is the member's offset in memory to the State8080 
+// struct's allocated memory
 #define REG_A      0
 #define REG_B      1
 #define REG_C      2

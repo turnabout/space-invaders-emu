@@ -1,7 +1,6 @@
 #include "State.h"
-#include "Emulator/Emulator.h"
 
-// Emulator's global state holding registers, PSW, etc.
+// CPU's global state holding registers, PSW, etc.
 State8080 state = {
 	0x00, // Accumulator
 	0x00, // Other Registers (b-c-d-e-h-l)
