@@ -3,17 +3,18 @@
 #include "CPU/External_API.h"
 #include "Memory/External_API.h"
 
+#include "Devices/Controls/Controls.h"
+
 void Run();
 void Run_Line_By_Line();
 
 int main(int argc, char *argv[])
 {
-	Init_Memory("../../invaders/invaders");
-	Initialize_CPU(Get_Mem_Byte_P);
+	// Init_Memory("../../invaders/invaders");
+	// Initialize_CPU(Get_Mem_Byte_P);
 
-	Run_Line_By_Line();
+	// Run_Line_By_Line();
 	// Run();
-
 
 	getchar();
 }
