@@ -9,6 +9,3 @@
 typedef struct API8080 {
 	API_Access_Memory accessMem;
 } API8080;
-
-// Get access to the CPU's externally-defined API functions
-API8080 *Get_API();

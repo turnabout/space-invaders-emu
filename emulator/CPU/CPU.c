@@ -98,12 +98,6 @@ void Interpret_Instruction(Instruction8080 *inst)
 	}
 }
 
-API8080 *Get_API()
-{
-	return &externalFuncs;
-}
-
-
 
 //
 // Debug
