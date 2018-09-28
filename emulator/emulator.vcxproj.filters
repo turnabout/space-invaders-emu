@@ -17,6 +17,7 @@
     <ClCompile Include="CPU\Helpers\PSW_Helpers.c" />
     <ClCompile Include="CPU\State.c" />
     <ClCompile Include="Memory\Memory.c" />
+    <ClCompile Include="Devices\Shift_Register\Shift_Register.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Export.h" />
@@ -28,5 +29,6 @@
     <ClInclude Include="CPU\Helpers\CPU_Helpers.h" />
     <ClInclude Include="CPU\State.h" />
     <ClInclude Include="Memory\External_API.h" />
+    <ClInclude Include="Devices\Shift_Register\Shift_Register.h" />
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@ extern "C" {
 	#include "../emulator/Helpers/Number_Helpers.h"
 	#include "../emulator/CPU/Helpers/CPU_Helpers.h"
 	#include "../emulator/CPU/Instructions/Instructions.h"
+	#include "../emulator/Devices/Shift_Register/Shift_Register.h"
 }
 
 incl_lib("../Debug/emulator.lib")

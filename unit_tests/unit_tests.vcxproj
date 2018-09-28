@@ -37,6 +37,7 @@
     <ClInclude Include="unit_tests.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Devices_Tests.cpp" />
     <ClCompile Include="Instruction\Arithmetic_Tests.cpp" />
     <ClCompile Include="Instruction\Branch_Tests.cpp" />
     <ClCompile Include="Instruction\Data_Transfer_Tests.cpp" />
