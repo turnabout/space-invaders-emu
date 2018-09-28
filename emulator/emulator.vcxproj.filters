@@ -19,6 +19,7 @@
     <ClCompile Include="Memory\Memory.c" />
     <ClCompile Include="Devices\Shift_Register\Shift_Register.c" />
     <ClCompile Include="Devices\Controls\Controls.c" />
+    <ClCompile Include="Devices\DIP_Switch\DIP_Switch.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Export.h" />
@@ -32,5 +33,6 @@
     <ClInclude Include="Memory\External_API.h" />
     <ClInclude Include="Devices\Shift_Register\Shift_Register.h" />
     <ClInclude Include="Devices\Controls\Controls.h" />
+    <ClInclude Include="Devices\DIP_Switch\DIP_Switch.h" />
   </ItemGroup>
 </Project>

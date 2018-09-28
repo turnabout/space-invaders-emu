@@ -1,6 +1,6 @@
 // 
 // Device representing the user controls
-// Sends back the current state of the controls. Binds to the keyboard state
+// Gets the current state of the controls. Binds to keyboard state.
 // 
 
 #include <stdint.h>

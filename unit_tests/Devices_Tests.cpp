@@ -31,3 +31,16 @@ TEST(Devices, Shift_Register)
 
 	Set_Offset(7);
 }
+
+TEST(Devices, DIP_Switch)
+{
+	// Auto test all 8 switches
+	for (int i = 0; i < 8; i++)
+	{
+		Set_Switch_Val(i, 1);
+		EXPECT_EQ(Get_Switch_Val(i), 1);
+
+		Set_Switch_Val(i, 0);
+		EXPECT_EQ(Get_Switch_Val(i), 0);
+	}
+}

@@ -12,6 +12,7 @@ extern "C" {
 	#include "../emulator/CPU/Helpers/CPU_Helpers.h"
 	#include "../emulator/CPU/Instructions/Instructions.h"
 	#include "../emulator/Devices/Shift_Register/Shift_Register.h"
+	#include "../emulator/Devices/DIP_Switch/DIP_Switch.h"
 }
 
 incl_lib("../Debug/emulator.lib")
