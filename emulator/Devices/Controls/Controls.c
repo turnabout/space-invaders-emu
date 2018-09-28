@@ -1,9 +1,7 @@
 #include <windows.h>
 #include "Controls.h"
 
-#define KEYBINDINGS_AMOUNT 10
-
-static char keyBindings[KEYBINDINGS_AMOUNT] = {
+static char keyBindings[10] = {
 	VK_RETURN, // 1P Start
 	VK_SPACE,  // 1P Shot
 	VK_LEFT,   // 1P Left
@@ -16,18 +14,7 @@ static char keyBindings[KEYBINDINGS_AMOUNT] = {
 	VK_DOWN,   // Credit
 };
 
-uint16_t Get_Controls_State()
+uint8_t Get_Control_State(uint8_t control)
 {
-	uint16_t state = 0x0000;
-
-	// Gather all control states
-	for (int i = 0; i < KEYBINDINGS_AMOUNT; i++)
-	{
-		// Allign key state's "active" bit with currently looped state bit
-		state |= (
-			((uint16_t)GetKeyState(keyBindings[i]) >> 15) << i
-		);
-	}
-
-	return state;
+	return (uint16_t)GetKeyState(keyBindings[control]) >> 15;
 }

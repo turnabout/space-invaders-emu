@@ -6,6 +6,17 @@
 #include <stdint.h>
 #include "../../Export.h"
 
+enum Switches {
+	Switch_Unk0,
+	Switch_Unk1,
+	Switch_Unk2,
+	Switch_Ships_Amount_1,
+	Switch_Unk3,
+	Switch_Ship_Amount_2,
+	Switch_Extra_Ship,
+	Switch_Coin_Info_Display
+};
+
 typedef struct DIP_Switch {
 	uint8_t a: 1; // 0: ?
 	uint8_t b: 1; // 1: ?

@@ -121,6 +121,9 @@
     <ClCompile Include="Devices\Controls\Controls.c" />
     <ClCompile Include="Devices\DIP_Switch\DIP_Switch.c" />
     <ClCompile Include="Devices\Shift_Register\Shift_Register.c" />
+    <ClCompile Include="IO_Handler\Input_Ports.c" />
+    <ClCompile Include="IO_Handler\IO_Handler.c" />
+    <ClCompile Include="IO_Handler\Output_Ports.c" />
     <ClCompile Include="Memory\Memory.c" />
     <ClCompile Include="Helpers\Number_Helpers.c" />
     <ClCompile Include="CPU\Instructions\Branch\Call.c" />
@@ -144,6 +147,8 @@
     <ClInclude Include="Devices\Controls\Controls.h" />
     <ClInclude Include="Devices\DIP_Switch\DIP_Switch.h" />
     <ClInclude Include="Devices\Shift_Register\Shift_Register.h" />
+    <ClInclude Include="IO_Handler\External_API.h" />
+    <ClInclude Include="IO_Handler\IO_Handler.h" />
     <ClInclude Include="Memory\External_API.h" />
     <ClInclude Include="Export.h" />
     <ClInclude Include="CPU\Helpers\CPU_Helpers.h" />

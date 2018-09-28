@@ -6,12 +6,12 @@ static uint16_t registerData = 0x0000;
 // The returned 8-bit result offset
 static uint8_t resultOffset = 0;
 
-uint8_t Read_Data()
+uint8_t Read_Shift_Register_Data()
 {
 	return registerData >> (8 - resultOffset);
 }
 
-void Write_Data(uint8_t newData)
+void Write_Shift_Register_Data(uint8_t newData)
 {
 	registerData >>= 8;
 	registerData = (uint16_t)(newData << 8) | registerData;

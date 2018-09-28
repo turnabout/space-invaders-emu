@@ -3,7 +3,9 @@
 #include "CPU/External_API.h"
 #include "Memory/External_API.h"
 
+#include "Devices/DIP_Switch/DIP_Switch.h"
 #include "Devices/Controls/Controls.h"
+#include "IO_Handler/External_API.h"
 
 void Run();
 void Run_Line_By_Line();
