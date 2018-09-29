@@ -20,6 +20,15 @@ int main(int argc, char *argv[])
 	{
 		Interpret_Next_Instruction(1, 0);
 	}
+
+	Handle_Interrupt(BYTE_RST7);
+	*/
+
+	/*
+	while (getchar() != 'q')
+	{
+		Interpret_Next_Instruction(1, 0);
+	}
 	*/
 
 	// printf("0x%02x\n", state.a);
@@ -203,8 +212,8 @@ void Tests()
 	/*
 	state.a = 0;
 
-	Interpret_Instruction(Fetch_Instruction());
-	printf("%s\n", Fetch_Instruction()->mnemonic);
+	Interpret_Instruction(Fetch_Next_Instruction());
+	printf("%s\n", Fetch_Next_Instruction()->mnemonic);
 
 	printf("a: 0x%02x\n", state.a);
 	*/

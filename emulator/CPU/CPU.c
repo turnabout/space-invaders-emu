@@ -13,10 +13,10 @@ extern State8080 state;
 API8080 externalFuncs;
 
 // Fetch the instruction currently pointed at by program counter
-Instruction8080 *Fetch_Instruction();
+Instruction8080 *Fetch_Next_Instruction();
 
 // Read and interpret the given instruction
-void Interpret_Instruction(Instruction8080 *inst);
+void Interpret_Instruction(Instruction8080 *inst, uint8_t incPc);
 
 #ifdef _DEBUG
 void Print_Instruction(Instruction8080 *inst, uint8_t newLine);
@@ -35,22 +35,22 @@ void Initialize_CPU(
 
 void Interpret_Next_Instruction(uint8_t print, uint8_t newLine)
 {
-	Instruction8080 *inst = Fetch_Instruction();
+	Instruction8080 *inst = Fetch_Next_Instruction();
 
 	if (print)
 	{
 		Print_Instruction(inst, newLine);
 	}
 
-	Interpret_Instruction(inst);
+	Interpret_Instruction(inst, 1);
 }
 
-Instruction8080 *Fetch_Instruction()
+Instruction8080 *Fetch_Next_Instruction()
 {
 	return Get_Instruction(*externalFuncs.accessMem(state.pc));
 }
 
-void Interpret_Instruction(Instruction8080 *inst)
+void Interpret_Instruction(Instruction8080 *inst, uint8_t incPc)
 {
 	// Given args will always be unsigned 8-bit integers
 	uint8_t args[3];
@@ -81,7 +81,10 @@ void Interpret_Instruction(Instruction8080 *inst)
 	}
 
 	// Increment program counter
-	state.pc += inst->size;
+	if (incPc)
+	{
+		state.pc += inst->size;
+	}
 
 	// Execute correct instruction function with collected arguments
 	// Note: Not a single instruction function uses 4 arguments
@@ -102,6 +105,10 @@ void Interpret_Instruction(Instruction8080 *inst)
 	}
 }
 
+void Handle_Interrupt(uint8_t byte)
+{
+	Interpret_Instruction(Get_Instruction(byte), 0);
+}
 
 //
 // Debug

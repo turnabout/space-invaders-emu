@@ -39,7 +39,8 @@ void OUT(uint8_t portN)
 
 void RST(uint8_t pos)
 {
-	state.pc = (uint16_t)(pos * 0x08);
+	uint16_t val = (uint16_t)(pos * 0x08);
+	CALL(val >> 8, val & 0xff);
 	/*
 		ISRs
 		0  - 7
