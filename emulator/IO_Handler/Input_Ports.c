@@ -19,7 +19,7 @@ uint8_t Read_Input_Port_1()
 uint8_t Read_Input_Port_2()
 {
 	return Get_Switch_Val(Switch_Ships_Amount_1) |
-		(Get_Switch_Val(Switch_Ship_Amount_2) << 1) |
+		(Get_Switch_Val(Switch_Ships_Amount_2) << 1) |
 		(Get_Control_State(ControlState_Tilt) << 2) |
 		(Get_Switch_Val(Switch_Extra_Ship) << 3) |
 		(Get_Control_State(ControlState_P2_Shot) << 4) |

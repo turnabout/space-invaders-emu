@@ -17,7 +17,7 @@ void Write_Shift_Register_Data(uint8_t newData)
 	registerData = (uint16_t)(newData << 8) | registerData;
 }
 
-void Set_Offset(uint8_t newOffset)
+void Set_Shift_Register_Offset(uint8_t newOffset)
 {
 	resultOffset = newOffset;
 }

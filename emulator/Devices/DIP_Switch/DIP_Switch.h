@@ -12,7 +12,7 @@ enum Switches {
 	Switch_Unk2,
 	Switch_Ships_Amount_1,
 	Switch_Unk3,
-	Switch_Ship_Amount_2,
+	Switch_Ships_Amount_2,
 	Switch_Extra_Ship,
 	Switch_Coin_Info_Display
 };

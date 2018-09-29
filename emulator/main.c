@@ -12,11 +12,17 @@ void Run_Line_By_Line();
 
 int main(int argc, char *argv[])
 {
-	// Init_Memory("../../invaders/invaders");
+	Init_Memory("../../invaders/invaderstest");
 	Initialize_CPU(Get_Mem_Byte_P, Read_Input_Port, Write_Input_Port);
 
-	// Run_Line_By_Line();
-	// Run();
+	/*
+	while (getchar() != 'q')
+	{
+		Interpret_Next_Instruction(1, 0);
+	}
+	*/
+
+	// printf("0x%02x\n", state.a);
 
 	getchar();
 }

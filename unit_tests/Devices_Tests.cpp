@@ -20,16 +20,16 @@ TEST(Devices, Shift_Register)
 	// Setting offset to 1 changes the result like so:
 	//  rrrrrrrr        
 	// 0000000011111111
-	Set_Offset(1);
+	Set_Shift_Register_Offset(1);
 	EXPECT_EQ(Read_Shift_Register_Data(), 0b00000001);
 
 	// Setting offset to 7:
 	//        rrrrrrrr
 	// 0000000011111111
-	Set_Offset(7);
+	Set_Shift_Register_Offset(7);
 	EXPECT_EQ(Read_Shift_Register_Data(), 0b01111111);
 
-	Set_Offset(7);
+	Set_Shift_Register_Offset(7);
 }
 
 TEST(Devices, DIP_Switch)

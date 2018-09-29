@@ -28,6 +28,9 @@ void Write_Input_Port(uint8_t portN, uint8_t val)
 	case 3:
 		Write_Output_Port_3(val);
 		break;
+	case 4:
+		Write_Output_Port_4(val);
+		break;
 	case 5:
 		Write_Output_Port_5(val);
 		break;

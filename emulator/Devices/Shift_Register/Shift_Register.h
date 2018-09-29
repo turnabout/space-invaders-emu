@@ -18,7 +18,7 @@ EXPORT void Write_Shift_Register_Data(uint8_t newData);
 // Set the register's offset amount. 
 // 0 makes Read_Shift_Register_Data return the most significant byte.
 // 3 would make Read_Shift_Register_Data return the MSB shifted to the left by n amount.
-EXPORT void Set_Offset(uint8_t newOffset);
+EXPORT void Set_Shift_Register_Offset(uint8_t newOffset);
 
 #ifdef _DEBUG
 EXPORT void Reset_Shift_Register();
