@@ -8,4 +8,6 @@
 // etc) from 'Initialize_CPU'.
 typedef struct API8080 {
 	API_Access_Memory accessMem;
+	API_Read_Input_Port readInputPort;
+	API_Write_Input_Port writeInputPort;
 } API8080;

@@ -13,7 +13,7 @@ void Run_Line_By_Line();
 int main(int argc, char *argv[])
 {
 	// Init_Memory("../../invaders/invaders");
-	// Initialize_CPU(Get_Mem_Byte_P);
+	Initialize_CPU(Get_Mem_Byte_P, Read_Input_Port, Write_Input_Port);
 
 	// Run_Line_By_Line();
 	// Run();

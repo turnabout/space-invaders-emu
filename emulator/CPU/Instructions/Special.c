@@ -3,8 +3,10 @@
 
 #include "Instructions.h"
 #include "../State.h"
+#include "../CPU.h"
 
 extern State8080 state;
+extern API8080 externalFuncs;
 
 void EI()
 {
@@ -27,12 +29,12 @@ void HLT()
 
 void IN(uint8_t portN)
 {
-	// TODO
+	state.a = externalFuncs.readInputPort(portN);
 }
 
 void OUT(uint8_t portN)
 {
-	// TODO
+	externalFuncs.writeInputPort(portN, state.a);
 }
 
 void RST(uint8_t pos)

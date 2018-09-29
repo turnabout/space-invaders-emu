@@ -23,10 +23,14 @@ void Print_Instruction(Instruction8080 *inst, uint8_t newLine);
 #endif
 
 void Initialize_CPU(
-	API_Access_Memory getMemBytePFunc
+	API_Access_Memory getMemBytePFunc,
+	API_Read_Input_Port readInputPort,
+	API_Write_Input_Port writeInputPort
 )
 {
 	externalFuncs.accessMem = getMemBytePFunc;
+	externalFuncs.readInputPort = readInputPort;
+	externalFuncs.writeInputPort = writeInputPort;
 }
 
 void Interpret_Next_Instruction(uint8_t print, uint8_t newLine)

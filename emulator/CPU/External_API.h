@@ -13,7 +13,9 @@
 // getMemBytePFunc: Function used by the CPU to access emulated memory.
 // Should return a pointer to the byte at the given offset.
 void Initialize_CPU(
-	API_Access_Memory getMemBytePFunc
+	API_Access_Memory getMemBytePFunc,
+	API_Read_Input_Port readInputPort,
+	API_Write_Input_Port writeInputPort
 );
 
 // Interpret the next instruction in line for the CPU
