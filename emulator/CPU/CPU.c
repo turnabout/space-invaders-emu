@@ -37,10 +37,12 @@ void Interpret_Next_Instruction(uint8_t print, uint8_t newLine)
 {
 	Instruction8080 *inst = Fetch_Next_Instruction();
 
+	#ifdef _DEBUG
 	if (print)
 	{
 		Print_Instruction(inst, newLine);
 	}
+	#endif
 
 	Interpret_Instruction(inst, 1);
 }
