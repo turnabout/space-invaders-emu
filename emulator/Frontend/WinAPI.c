@@ -39,8 +39,9 @@ static int timerUpdateTimeMs = 250; // The interrupt timer's update time, in ms
 
 // Draw support
 static BITMAPINFO *bmInfo;
-static uint8_t *vram;
+static HBITMAP frameBitmap;
 static HDC dc;
+static uint8_t *vram;
 static int displayScale;
 
 void Draw();
@@ -257,7 +258,7 @@ void Draw_Bitmap_To_DC(HBITMAP hBitmap, HDC hdc)
 // Draw the current frame from vram data
 void Draw()
 {
-	HBITMAP frameBitmap = CreateCompatibleBitmap(dc, SCREEN_WIDTH, SCREEN_HEIGHT);
+	frameBitmap = CreateCompatibleBitmap(dc, SCREEN_WIDTH, SCREEN_HEIGHT);
 	SetDIBits(dc, frameBitmap, 0, SCREEN_HEIGHT, vram, bmInfo, DIB_RGB_COLORS);
 
 	Draw_Bitmap_To_DC(frameBitmap, dc);
