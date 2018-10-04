@@ -16,11 +16,14 @@ int main(int argc, char *argv[])
 	Init_Memory("../../invaders/invaders");
 	Initialize_CPU(Get_Mem_Byte_P, Read_Input_Port, Write_Input_Port);
 
-	if (!CreateEmulatorWindow(224, 256))
+	if (!CreateEmulatorWindow(300, 300))
 	{
-		printf("Error occurred\n");
+		printf("Error occurred creating window\n");
 		return 1;
 	}
+
+	// Initialize the display, enabling it to draw
+	Initialize_Display(Get_Mem_Byte_P(VRAM_START));
 
 	return Loop();
 }
@@ -28,14 +31,21 @@ int main(int argc, char *argv[])
 // Main loop: read through ROM, interpreting instructions
 int Loop()
 {
+	uint8_t interrupt = 0;
+
 	while (1)
 	{
-		if (!HandleGUI())
+		if (!Handle_GUI())
 		{
 			break;
 		}
 
-		Interpret_Next_Instruction(1, 1);
+		Interpret_Next_Instruction(0, 1);
+
+		if ((interrupt = Check_Display_Interrupt()) != 0)
+		{
+			Handle_Interrupt(interrupt);
+		}
 	}
 
 	return 0;

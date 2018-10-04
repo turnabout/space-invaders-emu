@@ -107,9 +107,15 @@ void Interpret_Instruction(Instruction8080 *inst, uint8_t incPc)
 	}
 }
 
-void Handle_Interrupt(uint8_t byte)
+int Handle_Interrupt(uint8_t byte)
 {
-	Interpret_Instruction(Get_Instruction(byte), 0);
+	if (state.int_enable)
+	{
+		Interpret_Instruction(Get_Instruction(byte), 0);
+		return 1;
+	}
+
+	return 0;
 }
 
 //

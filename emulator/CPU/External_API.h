@@ -34,4 +34,5 @@ void Initialize_CPU(
 void Interpret_Next_Instruction(uint8_t print, uint8_t newLine);
 
 // Handle an interrupt. Interpret given data byte as an instruction
-void Handle_Interrupt(uint8_t byte);
+// Returns 0 if interrupts were disabled, causing the interrupt to be ignored
+int Handle_Interrupt(uint8_t byte);
