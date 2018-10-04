@@ -9,25 +9,6 @@
 
 #include "Frontend/WinAPI.h"
 
-int Loop();
-
-int main(int argc, char *argv[])
-{
-	Init_Memory("../../invaders/invaders");
-	Initialize_CPU(Get_Mem_Byte_P, Read_Input_Port, Write_Input_Port);
-
-	if (!CreateEmulatorWindow(300, 300))
-	{
-		printf("Error occurred creating window\n");
-		return 1;
-	}
-
-	// Initialize the display, enabling it to draw
-	Initialize_Display(Get_Mem_Byte_P(VRAM_START));
-
-	return Loop();
-}
-
 // Main loop: read through ROM, interpreting instructions
 int Loop()
 {
@@ -42,6 +23,7 @@ int Loop()
 
 		Interpret_Next_Instruction(0, 1);
 
+		// Handle interrupts coming from display when needed
 		if ((interrupt = Check_Display_Interrupt()) != 0)
 		{
 			Handle_Interrupt(interrupt);
@@ -49,4 +31,18 @@ int Loop()
 	}
 
 	return 0;
+}
+
+int main(int argc, char *argv[])
+{
+	Init_Memory("../../invaders/invaders");
+	Initialize_CPU(Get_Mem_Byte_P, Read_Input_Port, Write_Input_Port);
+
+	if (!Create_Emulator_Display(2, Get_Mem_Byte_P(VRAM_START)))
+	{
+		printf("Error occurred creating window\n");
+		return 1;
+	}
+
+	return Loop();
 }

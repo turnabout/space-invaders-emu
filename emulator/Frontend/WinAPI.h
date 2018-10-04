@@ -1,14 +1,18 @@
-#include <windows.h>
+//
+// WinAPI frontend for the emulator.
+// Used to run the emulator in windows.
+//
 
-// Create and display the emulator window
-int CreateEmulatorWindow(int winWidth, int winHeight);
+// Create and display the emulator window.
+// Scale is the display's initial scale.
+// Vram is a pointer to where the video ram begins.
+int Create_Emulator_Display(int scale, uint8_t *vram);
 
-// Handle the GUI, to be used inside the main loop.
+// Handle the GUI. To be used inside the main loop.
 // Returns 0 when the main window is closed.
 int Handle_GUI();
 
 // Initialize the display, making it usable for drawing.
-void Initialize_Display(uint8_t *vram);
 
 // Update the display as necessary.
 // Returns the number of the generated interrupt, if there was one.

@@ -1,11 +1,11 @@
 #include <windows.h>
 #include <tchar.h>
 #include <stdint.h>
+#include <math.h>
 
 #include "WinAPI.h"
 
-#define BYTES_PER_ROW  32
-#define TOTAL_ROWS     224
+#define M_PI 3.14159265358979323846
 
 // Pixels color when on/off
 //                        rrggbb
@@ -16,6 +16,16 @@
 #define BYTE_RST1 0xcf
 #define BYTE_RST2 0xd7
 
+// When the interrupt was generated (one is sent when the "beam" is supposed
+// to be at half screen, the other is sent at the start of VBLANK when the 
+// beam is supposed to be at the bottom of the screen).
+#define HALF_SCREEN   0
+#define BOTTOM_SCREEN 1
+
+// Original (un-rotated) screen dimensions
+#define SCREEN_WIDTH  256
+#define SCREEN_HEIGHT 224
+
 // Window support
 static TCHAR szWindowClass[] = _T("EmuApp");
 static TCHAR szTitle[]       = _T("Emulator");
@@ -23,25 +33,35 @@ static MSG msg;
 static HWND window;
 
 // Interrupt support
-static uint8_t interruptToSend = 0x00;
-static uint8_t interruptN = 0;
+static uint8_t interruptToSend = 0x00; // Current interrupt we're sending
+static uint8_t interruptN = HALF_SCREEN; // Interrupt number (0/1)
 static int timerUpdateTimeMs = 250; // The interrupt timer's update time, in ms
 
 // Draw support
 static BITMAPINFO *bmInfo;
 static uint8_t *vram;
-static uint8_t *vramRotated;
+static HDC dc;
+static int displayScale;
 
 void Draw();
 
+// When the interrupt timer goes off, set appropriate interrupt to be sent & 
+// draw the current frame when necessary
 void CALLBACK Timer_Callback(HWND hwnd, UINT uMsg, UINT timerId, DWORD dwTime)
 {
-	// Draw screen when timer goes off and set interrupt to be sent
-	Draw();
+	// Set interrupt to be sent, draw when VBLANK (bottom of screen) reached
+	if (interruptN == HALF_SCREEN)
+	{
+		interruptToSend = BYTE_RST1;
+	}
+	else
+	{
+		interruptToSend = BYTE_RST2;
+		Draw();
+	}
 	
-	// Set interrupt to be sent
-	interruptToSend = (interruptN) ? BYTE_RST1 : BYTE_RST2;
-	interruptN ^= 1;
+	// Toggle interruptN between HALF_SCREEN & BOTTOM_SCREEN
+	interruptN ^= BOTTOM_SCREEN;
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -59,8 +79,80 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
-int CreateEmulatorWindow(int winWidth, int winHeight)
+// Adjust DC scale
+void Adjust_Scale(int scale)
 {
+	XFORM xform;
+
+	xform.eM11 = (FLOAT) scale;
+	xform.eM12 = (FLOAT) 0.0;
+	xform.eM21 = (FLOAT) 0.0;
+	xform.eM22 = (FLOAT) scale;
+	xform.eDx = (FLOAT) 0.0;
+	xform.eDy = (FLOAT) 0.0;
+
+	ModifyWorldTransform(dc, &xform, MWT_RIGHTMULTIPLY);
+}
+
+// Adjust DC rotation, rotating to show the display right-side up
+void Adjust_Rotation()
+{
+	SetGraphicsMode(dc, GM_ADVANCED);
+
+	// Rotate
+	XFORM xform;
+	double angle = -90 * (M_PI / 180);
+
+	xform.eM11 = (FLOAT)cos(angle);
+	xform.eM12 = (FLOAT)(-sin(angle));
+	xform.eM21 = (FLOAT)sin(angle);
+	xform.eM22 = (FLOAT)cos(angle);
+	xform.eDx = SCREEN_HEIGHT;
+	xform.eDy = 0.0;
+	SetWorldTransform(dc, &xform);
+}
+
+void Initialize_Display(uint8_t *vramParam)
+{
+	// Store vram
+	vram = vramParam;
+
+	// Store bitmap info
+	WORD bmInfoSize = sizeof(BITMAPINFOHEADER) + (2 * sizeof(RGBQUAD));
+	bmInfo = (BITMAPINFO *)malloc(bmInfoSize);
+
+    ZeroMemory(bmInfo, sizeof(bmInfoSize));
+
+    bmInfo->bmiHeader.biBitCount    = 1;
+    bmInfo->bmiHeader.biWidth       = SCREEN_WIDTH;
+    bmInfo->bmiHeader.biHeight      = SCREEN_HEIGHT;
+    bmInfo->bmiHeader.biPlanes      = 1;
+    bmInfo->bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
+    bmInfo->bmiHeader.biCompression = BI_RGB;
+
+	// Set bmi colors
+	bmInfo->bmiColors[0].rgbRed   = (PIXEL_OFF_COLOR >> 16) & 0xff;
+	bmInfo->bmiColors[0].rgbGreen = (PIXEL_OFF_COLOR >> 8) & 0xff;
+	bmInfo->bmiColors[0].rgbBlue  = PIXEL_OFF_COLOR & 0xff;
+
+	bmInfo->bmiColors[1].rgbRed   = (PIXEL_ON_COLOR >> 16) & 0xff;
+	bmInfo->bmiColors[1].rgbGreen = (PIXEL_ON_COLOR >> 8) & 0xff;
+	bmInfo->bmiColors[1].rgbBlue  = PIXEL_ON_COLOR & 0xff;
+
+    dc = GetDC(window);
+
+	Adjust_Rotation();
+	Adjust_Scale(displayScale);
+
+	// Display to screen immediately
+	Draw();
+}
+
+
+int Create_Emulator_Display(int scale, uint8_t *vram)
+{
+	displayScale = scale;
+
 	WNDCLASSEX wcex;
 
 	wcex.cbSize        = sizeof(WNDCLASSEX);
@@ -89,7 +181,7 @@ int CreateEmulatorWindow(int winWidth, int winHeight)
 		szTitle,
 		WS_SYSMENU | WS_CAPTION | WS_MINIMIZEBOX,
 		CW_USEDEFAULT, CW_USEDEFAULT,
-		winWidth, winHeight,
+		(scale * SCREEN_HEIGHT) + 16, (scale * SCREEN_WIDTH) + 38,
 		NULL,
 		NULL,
 		GetModuleHandle(0),
@@ -108,6 +200,8 @@ int CreateEmulatorWindow(int winWidth, int winHeight)
 
 	// Set the timer deciding when to draw & send interrupts
 	SetTimer(NULL, 0, timerUpdateTimeMs, (TIMERPROC) &Timer_Callback);
+
+	Initialize_Display(vram);
 
 	return 1;
 }
@@ -137,40 +231,6 @@ void EndGUI()
 	DestroyWindow(window);
 }
 
-void Initialize_Display(uint8_t *vramParam)
-{
-	// Store vram
-	vram = vramParam;
-
-	// Store bitmap info
-	WORD bmInfoSize = sizeof(BITMAPINFOHEADER) + (2 * sizeof(RGBQUAD));
-	bmInfo = (BITMAPINFO *)malloc(bmInfoSize);
-
-    ZeroMemory(bmInfo, sizeof(bmInfoSize));
-
-    bmInfo->bmiHeader.biBitCount    = 1;
-     bmInfo->bmiHeader.biWidth       = 256;  // TODO: un-hardcode
-     bmInfo->bmiHeader.biHeight      = 224; // TODO: un-hardcode
-    //bmInfo->bmiHeader.biWidth       = 224;     // TODO: un-hardcode
-    //bmInfo->bmiHeader.biHeight      = -256;    // TODO: un-hardcode
-
-    bmInfo->bmiHeader.biPlanes      = 1;
-    bmInfo->bmiHeader.biSize        = sizeof(BITMAPINFOHEADER);
-    bmInfo->bmiHeader.biCompression = BI_RGB;
-
-	// Set bmi colors
-	bmInfo->bmiColors[0].rgbRed   = (PIXEL_OFF_COLOR >> 16) & 0xff;
-	bmInfo->bmiColors[0].rgbGreen = (PIXEL_OFF_COLOR >> 8) & 0xff;
-	bmInfo->bmiColors[0].rgbBlue  = PIXEL_OFF_COLOR & 0xff;
-
-	bmInfo->bmiColors[1].rgbRed   = (PIXEL_ON_COLOR >> 16) & 0xff;
-	bmInfo->bmiColors[1].rgbGreen = (PIXEL_ON_COLOR >> 8) & 0xff;
-	bmInfo->bmiColors[1].rgbBlue  = PIXEL_ON_COLOR & 0xff;
-
-	// Display to screen immediately
-	Draw();
-}
-
 uint8_t Check_Display_Interrupt()
 {
 	if (interruptToSend)
@@ -183,20 +243,22 @@ uint8_t Check_Display_Interrupt()
 	return 0;
 }
 
+// Draw bitmap to dc
+void Draw_Bitmap_To_DC(HBITMAP hBitmap, HDC hdc)
+{
+    BITMAP bm;
+    HDC MemDCExercising = CreateCompatibleDC(hdc);
+    SelectObject(MemDCExercising, hBitmap);
+    GetObject(hBitmap, sizeof(bm), &bm);
+    BitBlt(hdc, 0, 0, bm.bmWidth, bm.bmHeight, MemDCExercising, 0, 0, SRCCOPY);
+    DeleteDC(MemDCExercising);
+}
+
+// Draw the current frame from vram data
 void Draw()
 {
-    HDC dc = GetDC(window);
+	HBITMAP frameBitmap = CreateCompatibleBitmap(dc, SCREEN_WIDTH, SCREEN_HEIGHT);
+	SetDIBits(dc, frameBitmap, 0, SCREEN_HEIGHT, vram, bmInfo, DIB_RGB_COLORS);
 
-	// 32 bytes (256 bits/pixels) per row
-    StretchDIBits(
-        dc,
-        0, 0, 256, 224, // Destination (x, y, w, h)
-        0, 0, 256, 224, // Source (x, y, w, h)
-        vram, // VRAM to read from
-        bmInfo,
-        DIB_RGB_COLORS,
-        SRCCOPY
-    );
-
-    ReleaseDC(window, dc);
+	Draw_Bitmap_To_DC(frameBitmap, dc);
 }
