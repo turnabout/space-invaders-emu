@@ -4,17 +4,9 @@
 #include <math.h>
 
 #include "WinAPI.h"
+#include "Display_Helpers.h"
 
 #define M_PI 3.14159265358979323846
-
-static unsigned char lookup[16] = {
-0x0, 0x8, 0x4, 0xc, 0x2, 0xa, 0x6, 0xe,
-0x1, 0x9, 0x5, 0xd, 0x3, 0xb, 0x7, 0xf, };
-
-uint8_t reverse(uint8_t n) {
-   // Reverse the top and bottom nibble then swap them.
-   return (lookup[n&0b1111] << 4) | lookup[n>>4];
-}
 
 // Pixels color when on/off
 //                        rrggbb
@@ -34,10 +26,11 @@ uint8_t reverse(uint8_t n) {
 // Original (un-rotated) screen dimensions
 #define SCREEN_WIDTH  256
 #define SCREEN_HEIGHT 224
+#define VRAM_SIZE SCREEN_WIDTH * SCREEN_HEIGHT / 8
 
 // Window support
-static TCHAR szWindowClass[] = _T("EmuApp");
-static TCHAR szTitle[]       = _T("Emulator");
+static TCHAR szWindowClass[] = _T("SpaceInvadersEmu");
+static TCHAR szTitle[]       = _T("Space Invaders Emu");
 static MSG msg;
 static HWND window;
 
@@ -51,6 +44,7 @@ static BITMAPINFO *bmInfo;
 static HBITMAP frameBitmap;
 static HDC dc;
 static uint8_t *vram;
+static uint8_t *vramInverted;
 static int displayScale;
 
 // When the interrupt timer goes off, set appropriate interrupt to be sent & 
@@ -149,8 +143,12 @@ void Initialize_Display(uint8_t *vramParam)
 
     dc = GetDC(window);
 
-	// Adjust_Rotation();
-	// Adjust_Scale(displayScale);
+	// Adjust screen
+	Adjust_Rotation();
+	Adjust_Scale(displayScale);
+
+	// VRAM copy, holds vram with its bits inverted
+	vramInverted = (uint8_t *)malloc((sizeof(uint8_t) * VRAM_SIZE) + 1);
 
 	// Display to screen immediately
 	Draw();
@@ -269,37 +267,30 @@ void Draw_Bitmap_To_DC(HBITMAP hBitmap, HDC hdc)
     DeleteDC(MemDC);
 }
 
-void Invert_Vram_Bits(uint8_t *p)
+// Invert bits from vram. "from" is from where to invert all the bits, "to" is 
+// where to store them.
+void Invert_Vram(uint8_t *from, uint8_t *to)
 {
-	int bytesAmount = (SCREEN_WIDTH / 8) * (SCREEN_HEIGHT / 8);
+	int i = VRAM_SIZE;
 
-	while (bytesAmount-- > 0)
+	while (i-- > 0)
 	{
-		*p = reverse(*p);
-		p++;
+		*to = Invert_Bits(*from);
+		from++;
+		to++;
 	}
 }
 
 // Draw the current frame from vram data
 void Draw()
 {
-	uint8_t firstByte = *vram;
-
-	// Invert all bits in vram's bytes
-	Invert_Vram_Bits(vram);
-
-
+	// Invert all vram bits, store in vram copy
+	// We need to invert because Windows API interprets them backwards to the 
+	// way they are stored by the Space Invaders program
+	Invert_Vram(vram, vramInverted);
 
 	frameBitmap = CreateCompatibleBitmap(dc, SCREEN_WIDTH, SCREEN_HEIGHT);
-	SetDIBits(
-		dc, 
-		frameBitmap, 
-		0,  // Starting scan line for color data in vram array
-		SCREEN_HEIGHT, // Number of lines found in color data (vram array)
-		vram, 
-		bmInfo, 
-		DIB_RGB_COLORS
-	);
 
+	SetDIBits(dc, frameBitmap, 0,SCREEN_HEIGHT,vramInverted,bmInfo, DIB_RGB_COLORS);
 	Draw_Bitmap_To_DC(frameBitmap, dc);
 }

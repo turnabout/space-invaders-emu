@@ -7,7 +7,7 @@
 #include "Devices/DIP_Switch/DIP_Switch.h"
 #include "Devices/Controls/Controls.h"
 
-#include "Frontend/WinAPI.h"
+#include "Display/WinAPI.h"
 
 // Main loop: read through ROM, interpreting instructions
 int Loop()
