@@ -1,6 +1,5 @@
 #include "Instructions.h"
 #include "../State.h"
-// #include "../Emulator/Emulator.h"
 #include "../Helpers/CPU_Helpers.h"
 
 extern State8080 state;
@@ -38,15 +37,6 @@ void Do_Arithmetic_With_CB(uint8_t val, uint8_t isAddition)
 			state.psw.cy = 1;
 		}
 	}
-}
-
-// Get ADD/ADC/SUB/SBB register value
-// If given register is M, return (HL)
-uint8_t Get_Instruction_Reg_Val(uint8_t reg)
-{
-	return (reg == REG_M)
-		? *Get_Register_Pair_Pointer(REG_H)
-		: *Get_Register(reg);
 }
 
 void ADD(uint8_t reg)

@@ -26,6 +26,11 @@ EXPORT void Store_Register_Pair_Val(uint8_t reg, uint16_t val);
 // Get actual pointer in emulated memory, pointed at by (register pair)
 EXPORT uint8_t *Get_Register_Pair_Pointer(uint8_t reg);
 
+// Get a given register's value for instructions.
+// Takes in a register (REG_B, REG_C, etc) and returns the value held by it.
+// If the given register is REG_M, returns (HL)
+uint8_t Get_Instruction_Reg_Val(uint8_t reg);
+
 
 //
 // PSW

@@ -35,17 +35,17 @@ void XRI(uint8_t val)
 
 void ANA(uint8_t reg)
 {
-	ANI(*Get_Register(reg));
+	ANI(Get_Instruction_Reg_Val(reg));
 }
 
 void ORA(uint8_t reg)
 {
-	ORI(*Get_Register(reg));
+	ORI(Get_Instruction_Reg_Val(reg));
 }
 
 void XRA(uint8_t reg)
 {
-	XRI(*Get_Register(reg));
+	XRI(Get_Instruction_Reg_Val(reg));
 }
 
 void CPI(uint8_t comparedVal)

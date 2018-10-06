@@ -66,3 +66,10 @@ uint8_t *Get_Register_Pair_Pointer(uint8_t reg)
 {
 	return externalFuncs.accessMem(Get_Register_Pair_Val(reg));
 }
+
+uint8_t Get_Instruction_Reg_Val(uint8_t reg)
+{
+	return (reg == REG_M)
+		? *Get_Register_Pair_Pointer(REG_H)
+		: *Get_Register(reg);
+}
