@@ -427,3 +427,11 @@ TEST(Arithmetic, DAD)
 	EXPECT_EQ(state->l, 0x32);
 	EXPECT_EQ(state->psw.cy, 1);
 }
+
+TEST(Arithmetic, DAA)
+{
+	state->a = 0b10011011;
+	DAA();
+	EXPECT_EQ(state->psw.cy, 1);
+	EXPECT_EQ(state->psw.ac, 1);
+}

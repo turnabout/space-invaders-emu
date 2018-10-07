@@ -171,6 +171,25 @@ void DAD(uint8_t reg)
 
 void DAA()
 {
-	// TODO
-	// PSW_Update_Auxiliary_Carry_Bit();
+	uint8_t startVal = state.a;
+
+	// Adjust 4 LSB
+	if ((state.a & 0x0f) > 9 || state.psw.ac == 1)
+	{
+		state.a += 6;
+	}
+	PSW_Update_Auxiliary_Carry_Bit(state.a, startVal);
+	startVal = state.a;
+
+	// Adjust 4 MSB
+	if ((state.a >> 4) > 9 || state.psw.cy == 1)
+	{
+		state.a += 0b01100000; // Add 6 to 4 MSB
+	}
+	PSW_Update_Carry_Bit(state.a, startVal, 1);
+
+	// Update other PSW bits with final result
+	PSW_Update_Zero_Bit(state.a);
+	PSW_Update_Sign_Bit(state.a);
+	PSW_Update_Parity_Bit(state.a);
 }
