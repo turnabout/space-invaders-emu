@@ -38,8 +38,7 @@ void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand1, uint8_t isAddition)
 		return;
 	}
 
-	// Subtraction: carry flag is set if the operand 2 is greater than operand 1
-	// operand2 = operand1 - result
+	// Subtraction
 	state.psw.cy = ((uint8_t)(operand1 - opRes) > operand1) ? 1 : 0;
 }
 
@@ -54,10 +53,15 @@ void PSW_Update_Carry_Bit_16(uint16_t opRes, uint16_t operand1, uint8_t isAdditi
 	state.psw.cy = ((uint16_t)(operand1 - opRes) > operand1) ? 1 : 0;
 }
 
-void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow)
+void PSW_Update_Auxiliary_Carry_Bit(uint8_t opRes, uint8_t operand1)
+{
+	state.psw.ac = ((opRes & 0x0f) < (operand1 & 0x0f)) ? 1 : 0;
+}
+
+void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t isAddition)
 {
 	PSW_Update_Zero_Bit(opRes);
 	PSW_Update_Sign_Bit(opRes);
 	PSW_Update_Parity_Bit(opRes);
-	PSW_Update_Carry_Bit(opRes, operand, valIfOverflow);
+	PSW_Update_Carry_Bit(opRes, operand, isAddition);
 }

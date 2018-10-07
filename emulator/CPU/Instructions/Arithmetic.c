@@ -79,10 +79,12 @@ void INR(uint8_t reg)
 
 	*regP += 1;
 
-	// Does not update carry
+	// Does not update normal carry
 	PSW_Update_Zero_Bit(*regP);
 	PSW_Update_Sign_Bit(*regP);
 	PSW_Update_Parity_Bit(*regP);
+
+	// TODO: Update auxiliary carry
 }
 
 void DCR(uint8_t reg)
@@ -163,4 +165,9 @@ void DAD(uint8_t reg)
 
 	Store_Register_Pair_Val(REG_H, hlVal + addedVal);
 	PSW_Update_Carry_Bit_16(hlVal + addedVal, hlVal, 1);
+}
+
+void DAA()
+{
+	// TODO: Update auxiliary carry
 }

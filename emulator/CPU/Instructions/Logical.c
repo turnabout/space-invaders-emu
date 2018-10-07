@@ -46,6 +46,8 @@ void ORA(uint8_t reg)
 void XRA(uint8_t reg)
 {
 	XRI(Get_Instruction_Reg_Val(reg));
+
+	// TODO: PSW_Update_Auxiliary_Carry_Bit
 }
 
 void CPI(uint8_t comparedVal)

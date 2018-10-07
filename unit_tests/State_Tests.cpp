@@ -249,3 +249,26 @@ TEST(State, PSW_Update_Carry_Bit_16)
 	PSW_Update_Carry_Bit_16(uint16_t(0x9999 + 0x9999), 0x9999, 1);
 	EXPECT_EQ(state->psw.cy, 1);
 }
+
+TEST(State, PSW_Update_Auxiliary_Carry_Bit)
+{
+	uint8_t op1 = 0b00001111;
+	uint8_t op2 = 0b00000001;
+	PSW_Update_Auxiliary_Carry_Bit(op1 + op2, op1);
+	EXPECT_EQ(state->psw.ac, 1);
+
+	op1 = 0b00010100;
+	op2 = 0b01000010;
+	PSW_Update_Auxiliary_Carry_Bit(op1 + op2, op1);
+	EXPECT_EQ(state->psw.ac, 0);
+
+	op1 = 0b00000100;
+	op2 = 0b00000011;
+	PSW_Update_Auxiliary_Carry_Bit(op1 - op2, op1);
+	EXPECT_EQ(state->psw.ac, 1);
+
+	op1 = 0b00101110;
+	op2 = 0b10100010;
+	PSW_Update_Auxiliary_Carry_Bit(op1 + op2, op1);
+	EXPECT_EQ(state->psw.ac, 1);
+}

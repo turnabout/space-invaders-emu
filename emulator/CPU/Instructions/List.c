@@ -45,7 +45,7 @@ static struct Instruction8080 list[0xff + 1] = {
 	{"INR",  1, INR,  {REG_H, -1}},
 	{"DCR",  1, DCR,  {REG_H, -1}},
 	{"MVI",  2, MVI,  {REG_H, -1}},
-	{"DAA",  1, NOT_IMPLEMENTED, {-1}}, // Decimal Adjust Accumulator (unused)
+	{"DAA",  1, DAA, {-1}},
 	{"-",    1, NOT_IMPLEMENTED, {-1}},
 	{"DAD",  1, DAD,  {REG_H, -1}},
 	{"LHLD", 3, LHLD, {-1}},

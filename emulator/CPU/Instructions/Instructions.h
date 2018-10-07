@@ -80,6 +80,19 @@ EXPORT void DCX(uint8_t reg);
 // 16-bit number in HL
 EXPORT void DAD(uint8_t reg);
 
+// DAA: Decimal Adjust Accumulator
+// The 8-bit hex number in the accumulator is adjusted to form two four-bit
+// binary-coded-decimal digits with this process:
+// (1) If the LEAST significant 4 bits represent a number greater than 9,
+//     or if the AUXILIARY Carry Bit is set, the accumulator is 
+//     incremented by six. Else, no incrementing.
+// (2) If the MOST significant 4 bits represent a number greater than 9, or if 
+//     the NORMAL Carry Bit is set, the most significant four bits of the 
+//     accumulator are incremented by six. Else, no incrementing.
+//
+// A carry out the least significant 4 bits during step 1 sets the ACY bit.
+// A carry out of the most significant 4 bits during step 2 sets the CY bit.
+EXPORT void DAA();
 
 //
 // Logical

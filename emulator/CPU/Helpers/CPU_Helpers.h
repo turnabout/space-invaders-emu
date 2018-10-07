@@ -48,13 +48,15 @@ EXPORT void PSW_Update_Parity_Bit(uint8_t opRes);
 // Update Carry Bit: sets if instruction result has resulted in a carry out or 
 // borrow into the most significant bit.
 // operand: The first operand of the additon/subtraction that led to the opRes.
-// valIfOverflow: The value to update the carry bit with if there was an 
-// overflow. Additions use 1, subtractions use 0.
-EXPORT void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow);
+// isAddition: Whether the operation that produced the opRes is an addition
+EXPORT void PSW_Update_Carry_Bit(uint8_t opRes, uint8_t operand, uint8_t isAddition);
 
 // Update Carry Bit 16: same as PSW_Update_Carry_Bit, but checks the result
 // of a 16-bit operation.
-EXPORT void PSW_Update_Carry_Bit_16(uint16_t opRes, uint16_t operand, uint8_t valIfOverflow);
+EXPORT void PSW_Update_Carry_Bit_16(uint16_t opRes, uint16_t operand, uint8_t isAddition);
 
 // Update all PSW bits
-EXPORT void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t valIfOverflow);
+EXPORT void PSW_Update_All(uint8_t opRes, uint8_t operand, uint8_t isAddition);
+
+// Update the Auxiliary Carry Bit, which is set if there was a carry out of bit 3
+EXPORT void PSW_Update_Auxiliary_Carry_Bit(uint8_t opRes, uint8_t operand1);
