@@ -45,9 +45,10 @@ void ORA(uint8_t reg)
 
 void XRA(uint8_t reg)
 {
+	uint8_t valBefore = state.a;
 	XRI(Get_Instruction_Reg_Val(reg));
 
-	// TODO: PSW_Update_Auxiliary_Carry_Bit
+	PSW_Update_Auxiliary_Carry_Bit(state.a, valBefore);
 }
 
 void CPI(uint8_t comparedVal)

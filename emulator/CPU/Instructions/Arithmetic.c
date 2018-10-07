@@ -76,6 +76,7 @@ void INR(uint8_t reg)
 	uint8_t *regP = (reg == REG_M)
 		? Get_Register_Pair_Pointer(REG_H)
 		: Get_Register(reg);
+	uint8_t valBefore = *regP;
 
 	*regP += 1;
 
@@ -83,8 +84,7 @@ void INR(uint8_t reg)
 	PSW_Update_Zero_Bit(*regP);
 	PSW_Update_Sign_Bit(*regP);
 	PSW_Update_Parity_Bit(*regP);
-
-	// TODO: Update auxiliary carry
+	PSW_Update_Auxiliary_Carry_Bit(*regP, valBefore);
 }
 
 void DCR(uint8_t reg)
@@ -92,6 +92,7 @@ void DCR(uint8_t reg)
 	uint8_t *regP = (reg == REG_M)
 		? Get_Register_Pair_Pointer(REG_H)
 		: Get_Register(reg);
+	uint8_t valBefore = *regP;
 
 	*regP -= 1;
 
@@ -99,6 +100,7 @@ void DCR(uint8_t reg)
 	PSW_Update_Zero_Bit(*regP);
 	PSW_Update_Sign_Bit(*regP);
 	PSW_Update_Parity_Bit(*regP);
+	PSW_Update_Auxiliary_Carry_Bit(*regP, valBefore);
 }
 
 void ADI(uint8_t val)
@@ -169,5 +171,6 @@ void DAD(uint8_t reg)
 
 void DAA()
 {
-	// TODO: Update auxiliary carry
+	// TODO
+	// PSW_Update_Auxiliary_Carry_Bit();
 }
