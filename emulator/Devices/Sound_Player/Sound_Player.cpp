@@ -44,6 +44,7 @@ IXAudio2SourceVoice *pSourceVoices[SFX_AMOUNT];
 
 void Play_Sound(uint8_t sfxN)
 {
+	Stop_Sound(sfxN);
 	pSourceVoices[sfxN]->Start();
 }
 

@@ -34,6 +34,7 @@ int Loop()
 	return 0;
 }
 
+#include <windows.h>
 int main(int argc, char *argv[])
 {
 	Init_Memory("../../invaders/invaders");
