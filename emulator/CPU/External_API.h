@@ -1,7 +1,7 @@
 //
 // CPU's interface to the outside world
 // Used to:
-// * Initialize_CPU the CPU's internal API, giving it external functions to access
+// * Init_CPU the CPU's internal API, giving it external functions to access
 // * Interpret or fetch the CPU's next instruction
 //
 
@@ -18,11 +18,11 @@
 #define BYTE_RST6 0xf7
 #define BYTE_RST7 0xff
 
-// Initialize_CPU the CPU's internal API, giving it access to functions for it to
+// Init_CPU the CPU's internal API, giving it access to functions for it to
 // communicate with the outside world
 // getMemBytePFunc: Function used by the CPU to access emulated memory.
 // Should return a pointer to the byte at the given offset.
-void Initialize_CPU(
+void Init_CPU(
 	API_Access_Memory getMemBytePFunc,
 	API_Read_Input_Port readInputPort,
 	API_Write_Input_Port writeInputPort

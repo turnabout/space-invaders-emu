@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <math.h>
 
-#include "WinAPI.h"
+#include "Display.h"
 #include "Display_Helpers.h"
 
 #define M_PI 3.14159265358979323846
@@ -155,7 +155,7 @@ void Initialize_Display(uint8_t *vramParam)
 }
 
 
-int Create_Emulator_Display(int scale, uint8_t *vram)
+int Init_Emulator_Display(int scale, uint8_t *vram)
 {
 	displayScale = scale;
 

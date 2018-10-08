@@ -6,7 +6,7 @@
 // Create and display the emulator window.
 // Scale is the display's initial scale.
 // Vram is a pointer to where the video ram begins.
-int Create_Emulator_Display(int scale, uint8_t *vram);
+int Init_Emulator_Display(int scale, uint8_t *vram);
 
 // Handle the GUI. To be used inside the main loop.
 // Returns 0 when the main window is closed.

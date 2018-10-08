@@ -22,7 +22,7 @@ void Interpret_Instruction(Instruction8080 *inst, uint8_t incPc);
 void Print_Instruction(Instruction8080 *inst, uint8_t newLine);
 #endif
 
-void Initialize_CPU(
+void Init_CPU(
 	API_Access_Memory getMemBytePFunc,
 	API_Read_Input_Port readInputPort,
 	API_Write_Input_Port writeInputPort

@@ -7,8 +7,25 @@
 #include "Devices/DIP_Switch/DIP_Switch.h"
 #include "Devices/Controls/Controls.h"
 #include "Devices/Sound_Player/Sound_Player.h"
+#include "Display/Display.h"
 
-#include "Display/WinAPI.h"
+int Loop();
+
+int main(int argc, char *argv[])
+{
+	Init_Memory("../../invaders/invaders");
+	Init_CPU(Get_Mem_Byte_P, Read_Input_Port, Write_Input_Port);
+
+	if (!Init_Emulator_Display(2, Get_Mem_Byte_P(VRAM_START)))
+	{
+		printf("Error occurred while creating window\n");
+		return 1;
+	}
+
+	Init_Sound_Player();
+
+	return Loop();
+}
 
 // Main loop: read through ROM, interpreting instructions
 int Loop()
@@ -32,21 +49,4 @@ int Loop()
 	}
 
 	return 0;
-}
-
-#include <windows.h>
-int main(int argc, char *argv[])
-{
-	Init_Memory("../../invaders/invaders");
-	Initialize_CPU(Get_Mem_Byte_P, Read_Input_Port, Write_Input_Port);
-
-	if (!Create_Emulator_Display(2, Get_Mem_Byte_P(VRAM_START)))
-	{
-		printf("Error occurred creating window\n");
-		return 1;
-	}
-
-	Init_Sound_Player();
-
-	return Loop();
 }

@@ -127,7 +127,7 @@
     <ClCompile Include="Devices\DIP_Switch\DIP_Switch.c" />
     <ClCompile Include="Devices\Shift_Register\Shift_Register.c" />
     <ClCompile Include="Display\Display_Helpers.c" />
-    <ClCompile Include="Display\WinAPI.c" />
+    <ClCompile Include="Display\Display.c" />
     <ClCompile Include="IO_Handler\Input_Ports.c" />
     <ClCompile Include="IO_Handler\IO_Handler.c" />
     <ClCompile Include="IO_Handler\Output_Ports.c" />
@@ -156,7 +156,7 @@
     <ClInclude Include="Devices\DIP_Switch\DIP_Switch.h" />
     <ClInclude Include="Devices\Shift_Register\Shift_Register.h" />
     <ClInclude Include="Display\Display_Helpers.h" />
-    <ClInclude Include="Display\WinAPI.h" />
+    <ClInclude Include="Display\Display.h" />
     <ClInclude Include="IO_Handler\External_API.h" />
     <ClInclude Include="IO_Handler\IO_Handler.h" />
     <ClInclude Include="Memory\External_API.h" />
