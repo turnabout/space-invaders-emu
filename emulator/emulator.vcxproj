@@ -78,6 +78,9 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -119,6 +122,7 @@
   <ItemGroup>
     <ClCompile Include="CPU\CPU.c" />
     <ClCompile Include="CPU\State.c" />
+    <ClCompile Include="Devices\Sound_Player\Sound_Player.cpp" />
     <ClCompile Include="Devices\Controls\Controls.c" />
     <ClCompile Include="Devices\DIP_Switch\DIP_Switch.c" />
     <ClCompile Include="Devices\Shift_Register\Shift_Register.c" />
@@ -147,6 +151,7 @@
     <ClInclude Include="CPU\External_API.h" />
     <ClInclude Include="CPU\State.h" />
     <ClInclude Include="CPU\typedefs.h" />
+    <ClInclude Include="Devices\Sound_Player\Sound_Player.h" />
     <ClInclude Include="Devices\Controls\Controls.h" />
     <ClInclude Include="Devices\DIP_Switch\DIP_Switch.h" />
     <ClInclude Include="Devices\Shift_Register\Shift_Register.h" />

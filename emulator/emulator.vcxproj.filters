@@ -25,6 +25,7 @@
     <ClCompile Include="IO_Handler\Output_Ports.c" />
     <ClCompile Include="Display\WinAPI.c" />
     <ClCompile Include="Display\Display_Helpers.c" />
+    <ClCompile Include="Devices\Sound_Player\Sound_Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Export.h" />
@@ -43,5 +44,6 @@
     <ClInclude Include="IO_Handler\IO_Handler.h" />
     <ClInclude Include="Display\WinAPI.h" />
     <ClInclude Include="Display\Display_Helpers.h" />
+    <ClInclude Include="Devices\Sound_Player\Sound_Player.h" />
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 
 #include "Devices/DIP_Switch/DIP_Switch.h"
 #include "Devices/Controls/Controls.h"
+#include "Devices/Sound_Player/Sound_Player.h"
 
 #include "Display/WinAPI.h"
 
@@ -43,6 +44,8 @@ int main(int argc, char *argv[])
 		printf("Error occurred creating window\n");
 		return 1;
 	}
+
+	Init_Sound_Player();
 
 	return Loop();
 }
