@@ -11,13 +11,10 @@ extern "C" {
 #define fourccRIFF 'FFIR'
 #define fourccDATA 'atad'
 #define fourccFMT ' tmf'
-#define fourccWAVE 'EVAW'
-#define fourccXWMA 'AMWX'
-#define fourccDPDS 'sdpd'
 
 HRESULT FindChunk(HANDLE hFile, DWORD fourcc, DWORD & dwChunkSize, DWORD & dwChunkDataPosition);
 HRESULT ReadChunkData(HANDLE hFile, void * buffer, DWORD buffersize, DWORD bufferoffset);
-void Init_Source_Voice(uint8_t sfxN);
+void Init_Lists(uint8_t sfxN);
 
 // Base sfxN file path - # is replaced by audio num
 static char soundFilePath[] = "SI_Audio/#.wav";
@@ -25,26 +22,27 @@ static char soundFilePath[] = "SI_Audio/#.wav";
 // Index in soundFilePath that represents audio num
 static const uint8_t pathNumIndex = 9;
 
-
-static HANDLE hFile;
-
-static WAVEFORMATEXTENSIBLE wfx = { 0 };
-static XAUDIO2_BUFFER buffer = { 0 };
-
-
 // XAudio2 engine instance
-IXAudio2 *pXAudio2 = NULL;
+static IXAudio2 *pXAudio2 = NULL;
 
-// Mastering voice
-IXAudio2MasteringVoice *pMasterVoice = NULL;
+// Master/Source Voices
+static IXAudio2MasteringVoice *pMasterVoice = NULL;
+static IXAudio2SourceVoice *pSourceVoices[SFX_AMOUNT];
 
-// Source voice
-IXAudio2SourceVoice *pSourceVoice;
-IXAudio2SourceVoice *pSourceVoices[SFX_AMOUNT];
+// Lists of XAUDIO2_BUFFERs and WAVEFORMATEXTENSIBLEs for each sound
+XAUDIO2_BUFFER bufferList[SFX_AMOUNT];
 
 void Play_Sound(uint8_t sfxN)
 {
 	Stop_Sound(sfxN);
+
+	// Submit appropriate XAUDIO2_BUFFER structure to the source voice
+	if (FAILED(pSourceVoices[sfxN]->SubmitSourceBuffer(&bufferList[sfxN])))
+	{
+		printf("Submitting source buffer failed!\n");
+	}
+
+	// Actually play the sound
 	pSourceVoices[sfxN]->Start();
 }
 
@@ -61,20 +59,19 @@ void Init_Sound_Player()
 	// Master voice instance
 	pXAudio2->CreateMasteringVoice(&pMasterVoice);
 
-	// Source voice instances
+	// Populate SFX XAUDIO2_BUFFER and Source Voice lists
 	for (int i = 0; i < SFX_AMOUNT; i++)
 	{
-		Init_Source_Voice(i);
+		Init_Lists(i);
 	}
 }
 
-void Init_Source_Voice(uint8_t sfxN)
+void Init_Lists(uint8_t sfxN)
 {
 	HANDLE hFile;
 	DWORD dwChunkPos = 0;
 	DWORD dwChunkSize;
 	WAVEFORMATEXTENSIBLE wfx = { 0 };
-	XAUDIO2_BUFFER buffer = { 0 };
 
 	// Set audio file path number
 	soundFilePath[pathNumIndex] = (char)('0' + sfxN);
@@ -95,11 +92,7 @@ void Init_Source_Voice(uint8_t sfxN)
 		printf("INVALID HANDLE VALUE\n");
 	}
 
-	// Finding a 'RIFF' and whole data size
-	// TODO: Might not need eh
-	FindChunk(hFile, fourccRIFF, dwChunkSize, dwChunkPos);
-
-	// Locate fmt chunk, and fill out WAVEFORMATEXTENSIBLE structure
+	// Locate fmt chunk and fill out WAVEFORMATEXTENSIBLE structure
 	FindChunk(hFile, fourccFMT, dwChunkSize, dwChunkPos);
 	ReadChunkData(hFile, &wfx, dwChunkSize, dwChunkPos);
 
@@ -108,27 +101,21 @@ void Init_Source_Voice(uint8_t sfxN)
 	BYTE *pDataBuffer = new BYTE[dwChunkSize];
 	ReadChunkData(hFile, pDataBuffer, dwChunkSize, dwChunkPos);
 
-	// Populate XAUDIO2 BUFFER structure
-	buffer.AudioBytes = dwChunkSize;
-	buffer.pAudioData = pDataBuffer;
-	buffer.Flags = XAUDIO2_END_OF_STREAM;
+	// Populate this SFX's XAUDIO2_BUFFER structure
+	bufferList[sfxN].AudioBytes = dwChunkSize;
+	bufferList[sfxN].pAudioData = pDataBuffer;
+	bufferList[sfxN].Flags = XAUDIO2_END_OF_STREAM;
 
 	// Make SFX UFO loop until stopped
 	if (sfxN == SFX_UFO)
 	{
-		buffer.LoopCount = XAUDIO2_LOOP_INFINITE;
+		bufferList[sfxN].LoopCount = XAUDIO2_LOOP_INFINITE;
 	}
 
 	// Create source voice
 	if (FAILED(pXAudio2->CreateSourceVoice(&pSourceVoices[sfxN], (WAVEFORMATEX*)&wfx)))
 	{
 		printf("Creating source voice failed!\n");
-	}
-
-	// Submit XAUDIO2 BUFFER structure to the source voice
-	if (FAILED(pSourceVoices[sfxN]->SubmitSourceBuffer(&buffer)))
-	{
-		printf("Submitting source buffer failed!\n");
 	}
 }
 

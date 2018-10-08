@@ -54,11 +54,11 @@ uint8_t Write_Audio_Output(uint8_t prevVal, uint8_t newVal, uint8_t offset)
 		// Different value detected at bit i
 		if ((newBit = ((newVal >> i) & 1)) != ((prevVal >> i) & 1))
 		{
-			if (newBit)
+			if (newBit) // Bit toggled on
 			{
 				Play_Sound(i + offset);
 			}
-			else
+			else // Bit toggled off
 			{
 				Stop_Sound(i + offset);
 			}
