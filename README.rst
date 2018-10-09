@@ -1,6 +1,9 @@
 =======================
 Space Invaders Emulator
 =======================
+
+.. image:: screenshot.jpg
+
 Space Invaders arcade game emulator written in C.
 
 Works only for Windows. The Windows API is used to implement display, audio 
@@ -11,8 +14,6 @@ purposes and can be improved later, so I am happy with it.
 
 The rest of this README outlines how the different components of this emulator 
 were implemented.
-
-.. image:: screenshot.jpg
 
 CPU
 ===
