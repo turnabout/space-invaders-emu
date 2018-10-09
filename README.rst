@@ -12,6 +12,8 @@ purposes and can be improved later, so I am happy with it.
 The rest of this README outlines how the different components of this emulator 
 were implemented.
 
+.. image:: screenshot.jpg
+
 CPU
 ===
 
