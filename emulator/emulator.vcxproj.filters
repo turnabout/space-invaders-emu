@@ -46,4 +46,15 @@
     <ClInclude Include="Devices\Sound_Player\Sound_Player.h" />
     <ClInclude Include="Display\Display.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="SI_Audio\0.wav" />
+    <Media Include="SI_Audio\1.wav" />
+    <Media Include="SI_Audio\2.wav" />
+    <Media Include="SI_Audio\3.wav" />
+    <Media Include="SI_Audio\4.wav" />
+    <Media Include="SI_Audio\5.wav" />
+    <Media Include="SI_Audio\6.wav" />
+    <Media Include="SI_Audio\7.wav" />
+    <Media Include="SI_Audio\8.wav" />
+  </ItemGroup>
 </Project>

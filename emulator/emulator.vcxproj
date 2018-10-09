@@ -165,6 +165,28 @@
     <ClInclude Include="Helpers\Number_Helpers.h" />
     <ClInclude Include="CPU\Instructions\Instructions.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="SI_Audio\0.wav" />
+    <Media Include="SI_Audio\1.wav" />
+    <Media Include="SI_Audio\2.wav" />
+    <Media Include="SI_Audio\3.wav" />
+    <Media Include="SI_Audio\4.wav" />
+    <Media Include="SI_Audio\5.wav" />
+    <Media Include="SI_Audio\6.wav" />
+    <Media Include="SI_Audio\7.wav" />
+    <Media Include="SI_Audio\8.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SI_Audio\0.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="SI_Audio\1.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="SI_Audio\2.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="SI_Audio\3.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="SI_Audio\4.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="SI_Audio\5.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="SI_Audio\6.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="SI_Audio\7.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="SI_Audio\8.wav"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
